@@ -22,7 +22,7 @@ positiveStein <- function(X, y, H, h, q) {
   r_est <- restricted(X, y, H, h)
   test_stat <- test_statistics(X, y, H, h, q)
   threshold <- qf(1 - alpha, q, n - p)
-  r_est + (1 - d / test_stat) * int(test_stat > d) * (u_est - r_est)
+  return(r_est + (1 - d / test_stat) * int(test_stat > d) * (u_est - r_est))
 }
 
 
