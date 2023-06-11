@@ -7,8 +7,7 @@ Stein <- function(X,y, H, h, q){
     r_est <- restricted(X, y, H, h)
     test_stat <- test_statistics(X, y, H, h, q)
     threshold <- qf(1-alpha,q, n-p)
-
-    return u_est - d * (u_est-r_est) / test_stat
+    u_est - d * (u_est-r_est) / test_stat
 }
 
 
