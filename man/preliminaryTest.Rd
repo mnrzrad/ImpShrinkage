@@ -7,27 +7,27 @@
 preliminaryTest(X, y, H, h, alpha)
 }
 \arguments{
-\item{X}{Input matrix, of dimension nobs x nvars; each row is an observation vector.}
+\item{X}{Matrix with input observations, of dimension n_obs x p_vars; each row is an observation vector.}
 
-\item{y}{Qunatitavie response variable.}
+\item{y}{Univariate quantitative response variable with dimension n_obs}
 
-\item{H}{A given q x p matrix.}
+\item{H}{A given q_restr x p_vars matrix.}
 
-\item{h}{A given q x 1 vector.}
+\item{h}{A given q_restr x 1 vector.}
 
 \item{alpha}{A given significance level}
 }
 \value{
-A vector of coefficients
+A vector of regression coefficients
 }
 \description{
-This function calculates the preliminary test estimator
+This function calculates the improved estimator after performing the preliminary test for the null hipothesis: H.beta = h
 }
 \examples{
-n <- 100
-p <- 5
+n_obs <- 100
+p_vars <- 5
 beta <- c(2, 1, 3, 0, 5)
-simulated_data <- simdata(n, p, beta)
+simulated_data <- simdata(n = n_obs, p = p_vars, beta)
 X <- simulated_data$X
 y <- simulated_data$y
 # H beta = h
