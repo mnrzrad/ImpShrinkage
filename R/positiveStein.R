@@ -19,8 +19,8 @@
 #' simulated_data <- simdata(n = n_obs, p = p_vars, beta)
 #' X <- simulated_data$X
 #' y <- simulated_data$y
-#' # H beta = h
 #' p <- ncol(X)
+#' # H beta = h
 #' H <- matrix(c(1,1,-1,0,0,1,0,1,0,-1,0,0,0,1,0), nr = 3, nc = p, byrow = TRUE)
 #' h <- rep(0, nrow(H))
 #' positiveStein(X, y, H, h)
