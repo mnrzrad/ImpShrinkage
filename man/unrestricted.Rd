@@ -7,27 +7,26 @@
 unrestricted(X, y)
 }
 \arguments{
-\item{x}{scaler.}
+\item{X}{Input matrix, of dimension nobs x nvars; each row is an observation vector.}
 
-\item{q}{scaler.}
-
-\item{n}{number.}
-
-\item{alpha}{float.}
+\item{y}{Quantitative response variable.}
+}
+\value{
+A vector of coefficients
 }
 \description{
-positiveStein
+This function calculates the unrestricted estimator
 }
 \examples{
 n <- 100
 p <- 5
 beta <- c(2, 1, 3, 0, 5)
-simulated_data <- simulate_data(n, p, beta)
+simulated_data <- simdata(n, p, beta)
 X <- simulated_data$X
 y <- simulated_data$y
 unrestricted(X,y)
 
 }
 \references{
-ref
+Saleh, A. K. Md. Ehsanes. (2006). \emph{Theory of Preliminary Test and Stein‐Type Estimation With Applications}, Wiley.
 }

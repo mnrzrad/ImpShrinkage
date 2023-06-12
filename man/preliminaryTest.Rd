@@ -7,22 +7,25 @@
 preliminaryTest(X, y, H, h, alpha)
 }
 \arguments{
-\item{alpha}{float.}
+\item{X}{Input matrix, of dimension nobs x nvars; each row is an observation vector.}
 
-\item{x}{scaler.}
+\item{y}{Qunatitavie response variable.}
 
-\item{q}{scaler.}
+\item{H}{A given q x p matrix.}
 
-\item{n}{number.}
+\item{h}{A given q x 1 vector.}
+}
+\value{
+A vector of coefficients
 }
 \description{
-positiveStein
+This function calculates the preliminary test estimator
 }
 \examples{
 n <- 100
 p <- 5
 beta <- c(2, 1, 3, 0, 5)
-simulated_data <- simulate_data(n, p, beta)
+simulated_data <- simdata(n, p, beta)
 X <- simulated_data$X
 y <- simulated_data$y
 # H beta = h
@@ -37,5 +40,5 @@ preliminaryTest(X, y, H, h, alpha = 0.05)
 
 }
 \references{
-ref
+Saleh, A. K. Md. Ehsanes. (2006). \emph{Theory of Preliminary Test and Stein‐Type Estimation With Applications}, Wiley.
 }

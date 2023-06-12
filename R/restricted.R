@@ -1,18 +1,22 @@
 #' The restricted estimator
 #'
-#' positiveStein
+#' This function calculates the restricted estimator
 #'
-#' @param x scaler.
-#' @param q scaler.
-#' @param n number.
-#' @param alpha float.
+#' @param X Input matrix, of dimension nobs x nvars; each row is an observation vector.
+#' @param y Quantitative response variable.
+#' @param H A given q x p matrix.
+#' @param h A given q x 1 vector.
 #'
-#' @references ref
+#' @return A vector of coefficients
+#'
+#' @references
+#'  Saleh, A. K. Md. Ehsanes. (2006). \emph{Theory of Preliminary Test and Stein‐Type Estimation With Applications}, Wiley.
+#'
 #' @examples
 #' n <- 100
 #' p <- 5
 #' beta <- c(2, 1, 3, 0, 5)
-#' simulated_data <- simulate_data(n, p, beta)
+#' simulated_data <- simdata(n, p, beta)
 #' X <- simulated_data$X
 #' y <- simulated_data$y
 #' # H beta = h

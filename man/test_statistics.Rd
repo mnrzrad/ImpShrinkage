@@ -7,22 +7,22 @@
 test_statistics(X, y, H, h)
 }
 \arguments{
-\item{x}{scaler.}
+\item{X}{Input matrix, of dimension nobs x nvars; each row is an observation vector.}
 
-\item{q}{scaler.}
+\item{y}{Quantitative response variable.}
 
-\item{n}{number.}
+\item{H}{A given q x p matrix.}
 
-\item{G}{scaler.}
+\item{h}{A given q x 1 vector.}
 }
 \description{
-Stein
+This function calculates the test statistics
 }
 \examples{
 n <- 100
 p <- 5
 beta <- c(2, 1, 3, 0, 5)
-simulated_data <- simulate_data(n, p, beta)
+simulated_data <- simdata(n, p, beta)
 X <- simulated_data$X
 y <- simulated_data$y
 # H beta = h
@@ -36,5 +36,5 @@ h <- rep(1, q)
 test_statistics(X, y, H, h)
 }
 \references{
-ref
+Saleh, A. K. Md. Ehsanes. (2006). \emph{Theory of Preliminary Test and Stein‐Type Estimation With Applications}, Wiley.
 }
