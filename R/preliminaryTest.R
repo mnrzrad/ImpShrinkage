@@ -14,10 +14,10 @@
 #'  Saleh, A. K. Md. Ehsanes. (2006). \emph{Theory of Preliminary Test and Stein‐Type Estimation With Applications}, Wiley.
 #'
 #' @examples
-#' n <- 100
-#' p <- 5
+#' n_obs <- 100
+#' p_vars <- 5
 #' beta <- c(2, 1, 3, 0, 5)
-#' simulated_data <- simdata(n, p, beta)
+#' simulated_data <- simdata(n = n_obs, p = p_vars, beta)
 #' X <- simulated_data$X
 #' y <- simulated_data$y
 #' # H beta = h
