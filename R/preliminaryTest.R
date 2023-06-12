@@ -1,14 +1,14 @@
 #' The preliminary test estimator
 #'
-#' This function calculates the preliminary test estimator
+#' This function calculates the improved estimator after performing the preliminary test for the null hipothesis: H.beta = h
 #'
-#' @param X Input matrix, of dimension nobs x nvars; each row is an observation vector.
-#' @param y Qunatitavie response variable.
-#' @param H A given q x p matrix.
-#' @param h A given q x 1 vector.
-#' @param alpha A given significance level
+#' @param X  Matrix with input observations, of dimension n_obs x p_vars; each row is an observation vector.
+#' @param y  Univariate quantitative response variable with dimension n_obs
+#' @param H  A given q_restr x p_vars matrix.
+#' @param h  A given q_restr x 1 vector.
+#' @param alpha  A given significance level
 #'
-#' @return A vector of coefficients
+#' @return  A vector of regression coefficients
 #'
 #' @references
 #'  Saleh, A. K. Md. Ehsanes. (2006). \emph{Theory of Preliminary Test and Stein‐Type Estimation With Applications}, Wiley.
@@ -44,5 +44,3 @@ preliminaryTest <- function(X, y, H, h, alpha) {
   threshold <- stats::qf(1 - alpha, q, n - p)
   u_est - (u_est - r_est) * as.integer(test_stat < threshold)
 }
-
-
