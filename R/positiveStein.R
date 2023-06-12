@@ -34,7 +34,6 @@ positiveStein <- function(X, y, H, h) {
   n <- dim(X)[1]
   p <- dim(X)[2]
   q <- nrow(H)
-
   m <- n - p
   d <- ((q - 2) * m) / (q * (m + 2))
   u_est <- unrestricted(X, y)

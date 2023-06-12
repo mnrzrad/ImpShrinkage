@@ -27,18 +27,14 @@
 #' h <- rep(1, nrow(H))
 #' test_statistics(X, y, H, h)
 #' @export
-
-
-
-
-test_statistics <- function(X, y, H, h){
-    n <- dim(X)[1]
-    p <- dim(X)[2]
-    m <- n - p
-    q <- nrow(H)
-    u_est <- unrestricted(X, y) #unrestricted estimator
-    s2 <- (t(y - X %*% u_est) %*% (y - X %*% u_est))/m
-    C <- t(X) %*% X
-    diff <- (H %*% u_est - h)
-    as.numeric((t(diff) %*% solve(H %*% solve(C) %*% t(H)) %*% diff) / (q * s2))
+test_statistics <- function(X, y, H, h) {
+  n <- dim(X)[1]
+  p <- dim(X)[2]
+  m <- n - p
+  q <- nrow(H)
+  u_est <- unrestricted(X, y) # unrestricted estimator
+  s2 <- (t(y - X %*% u_est) %*% (y - X %*% u_est)) / m
+  C <- t(X) %*% X
+  diff <- (H %*% u_est - h)
+  as.numeric((t(diff) %*% solve(H %*% solve(C) %*% t(H)) %*% diff) / (q * s2))
 }
