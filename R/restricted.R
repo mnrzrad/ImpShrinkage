@@ -21,12 +21,12 @@
 #' y <- simulated_data$y
 #' # H beta = h
 #' H <- matrix(c(1,1,-1,0,0,1,0,1,0,-1,0,0,0,1,0), nrow = 3, ncol = p, byrow = TRUE)
-#' h <- rep(0, q)
+#' h <- rep(0, nrow(H))
 #' restricted(X, y, H, h)
 #'
 #' # H beta != h
 #' H <- matrix(c(1,1,-1,0,0,1,0,1,0,-1,0,0,0,1,0), nrow = 3, ncol = p, byrow = TRUE)
-#' h <- rep(1, q)
+#' h <- rep(1, nrow(H))
 #' restricted(X, y, H, h)
 #'
 #' @export

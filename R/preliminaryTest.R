@@ -6,6 +6,7 @@
 #' @param y Qunatitavie response variable.
 #' @param H A given q x p matrix.
 #' @param h A given q x 1 vector.
+#' @param alpha A given significance level
 #'
 #' @return A vector of coefficients
 #'
@@ -21,14 +22,15 @@
 #' y <- simulated_data$y
 #' # H beta = h
 #' H <- matrix(c(1,1,-1,0,0,1,0,1,0,-1,0,0,0,1,0), nrow = 3, ncol = p, byrow = TRUE)
-#' h <- rep(0, q)
+#' h <- rep(0, nrow(H))
 #' preliminaryTest(X, y, H, h, alpha = 0.05)
 #'
 #' # H beta != h
 #' H <- matrix(c(1,1,-1,0,0,1,0,1,0,-1,0,0,0,1,0), nrow = 3, ncol = p, byrow = TRUE)
-#' h <- rep(1, q)
+#' h <- rep(1, nrow(H))
 #' preliminaryTest(X, y, H, h, alpha = 0.05)
 #'
+#' @importFrom stats qf
 #' @export
 
 preliminaryTest <- function(X, y, H, h, alpha) {
@@ -38,8 +40,8 @@ preliminaryTest <- function(X, y, H, h, alpha) {
 
   u_est <- unrestricted(X, y)
   r_est <- restricted(X, y, H, h)
-  test_stat <- test_statistics(X, y, H, h, q)
-  threshold <- qf(1 - alpha, q, n - p)
+  test_stat <- test_statistics(X, y, H, h)
+  threshold <- stats::qf(1 - alpha, q, n - p)
   u_est - (u_est - r_est) * as.integer(test_stat < threshold)
 }
 

@@ -21,12 +21,12 @@
 #' y <- simulated_data$y
 #' # H beta = h
 #' H <- matrix(c(1,1,-1,0,0,1,0,1,0,-1,0,0,0,1,0), nr = 3, nc = p, byrow = TRUE)
-#' h <- rep(0, q)
+#' h <- rep(0, nrow(H))
 #' positiveStein(X, y, H, h)
 #'
 #' # H beta != h
 #' H <- matrix(c(1,1,-1,0,0,1,0,1,0,-1,0,0,0,1,0), nr = 3, nc = p, byrow = TRUE)
-#' h <- rep(1, q)
+#' h <- rep(1, nrow(H))
 #' positiveStein(X, y, H, h)
 #' @export
 
@@ -39,7 +39,7 @@ positiveStein <- function(X, y, H, h) {
   d <- ((q - 2) * m) / (q * (m + 2))
   u_est <- unrestricted(X, y)
   r_est <- restricted(X, y, H, h)
-  test_stat <- test_statistics(X, y, H, h, q)
+  test_stat <- test_statistics(X, y, H, h)
   return(r_est + as.numeric(1 - d / test_stat) * as.integer(test_stat > d) * (u_est - r_est))
 }
 

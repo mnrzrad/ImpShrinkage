@@ -26,16 +26,12 @@ A list containing the following components:
 This function generates simulated data from a standard normal distribution as an example.
 }
 \examples{
-simulated_data <- simdata(n = 100, p = 5)
-X <- simulated_data$X
-y <- simulated_data$y
-X
-y
 simulated_data <- simdata(n = 100, p = 5, beta = c(2, 1, 3, 0, 5))
 X <- simulated_data$X
 y <- simulated_data$y
 X
 y
+
 }
 \references{
 Saleh, A. K. Md. Ehsanes. (2006). \emph{Theory of Preliminary Test and Stein‐Type Estimation With Applications}, Wiley.
