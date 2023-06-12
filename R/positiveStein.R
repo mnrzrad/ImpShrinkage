@@ -20,6 +20,7 @@
 #' X <- simulated_data$X
 #' y <- simulated_data$y
 #' # H beta = h
+#' p <- ncol(X)
 #' H <- matrix(c(1,1,-1,0,0,1,0,1,0,-1,0,0,0,1,0), nr = 3, nc = p, byrow = TRUE)
 #' h <- rep(0, nrow(H))
 #' positiveStein(X, y, H, h)

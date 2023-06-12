@@ -29,6 +29,7 @@ simulated_data <- simdata(n = n_obs,  p = p_vars, beta)
 X <- simulated_data$X
 y <- simulated_data$y
 # H beta = h
+p <- ncol(X)
 H <- matrix(c(1,1,-1,0,0,1,0,1,0,-1,0,0,0,1,0), nrow = 3, ncol = p, byrow = TRUE)
 h <- rep(0, nrow(H))
 Stein(X, y, H, h)
