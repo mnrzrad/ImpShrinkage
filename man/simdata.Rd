@@ -4,26 +4,16 @@
 \alias{simdata}
 \title{Simulation data}
 \usage{
-simdata(n, p, beta = rep(1, p), seed = NULL)
+simdata(n, p, beta, seed = NULL)
 }
 \arguments{
-\item{n}{Number of observations.
-An integer value specifying the total number of observations in the dataset.
-The function expects a positive integer greater than zero.}
+\item{n}{Number of observations.}
 
-\item{p}{Number of variables.
-An integer value indicating the number of predictor variables in the regression model.
-The function expects a positive integer greater than zero and more than \code{n}.}
+\item{p}{Number of variables.}
 
-\item{beta}{Regression parameter.
-A numeric vector of length p representing the regression coefficients for the predictor variables.
-Each element in the vector corresponds to the coefficient for a specific predictor variable.
-The function uses these coefficients to estimate the relationship between the predictor variables and the response variable.
-The length of the vector must be equal to the value specified in the \code{p} parameter.
-If not provided, default values may be used.}
+\item{beta}{Regression parameter.}
 
-\item{seed}{(Optional) The random seed for reproducibility.
-An integer value representing the seed for the random number generator. Default is NULL.}
+\item{seed}{(Optional) The random seed for reproducibility. Default is NULL.}
 }
 \value{
 A list containing the following components:
