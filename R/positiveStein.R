@@ -30,7 +30,6 @@
 #' h <- rep(1, nrow(H))
 #' positiveStein(X, y, H, h)
 #' @export
-
 positiveStein <- function(X, y, H, h) {
   n <- dim(X)[1]
   p <- dim(X)[2]
@@ -40,7 +39,8 @@ positiveStein <- function(X, y, H, h) {
   u_est <- unrestricted(X, y)
   r_est <- restricted(X, y, H, h)
   test_stat <- test_statistics(X, y, H, h)
-  return(r_est + as.numeric(1 - d / test_stat) * as.integer(test_stat > d) * (u_est - r_est))
+  beta <- r_est + as.numeric(1 - d / test_stat) * as.integer(test_stat > d) * (u_est - r_est)
+  fit <- structure(list(beta=beta), class = c("positiveStein"))
+  fit
 }
-
 
