@@ -41,7 +41,7 @@ positiveStein <- function(X, y, H, h) {
   test_stat <- test_statistics(X, y, H, h)
   beta <- r_est + as.numeric(1 - d / test_stat) * as.integer(test_stat > d) * (u_est - r_est)
   residuals <- y - X %*% beta
-  fit <- structure(list(coefficients = beta, residuals = residuals), class = c("positiveStein"))
+  fit <- structure(list(coef = beta, residuals = residuals), class = c("positiveStein"))
   fit
 }
 
@@ -78,7 +78,7 @@ positiveStein <- function(X, y, H, h) {
 #' fitted(model, X)
 #' @export
 fitted.positiveStein <- function(object, newdata, ...) {
-  return(newdata %*% object$coefficients)
+  return(newdata %*% object$coef)
 }
 
 #' @rdname fitted.positiveStein
@@ -98,7 +98,7 @@ fitted.positiveStein <- function(object, newdata, ...) {
 #' predict(model, X)
 #' @export
 predict.positiveStein <- function(object, newdata, ...) {
-  return(newdata %*% object$coefficients)
+  return(newdata %*% object$coef)
 }
 
 #' residuals method for Model Fits
@@ -162,7 +162,7 @@ residuals.positiveStein <- function(object, ...) {
 #' @export
 
 coefficients.positiveStein <- function(object, ...) {
-  return(object$coefficients)
+  return(object$coef)
 }
 
 #' @rdname coefficients.positiveStein
@@ -182,6 +182,6 @@ coefficients.positiveStein <- function(object, ...) {
 #' coef(model)
 #' @export
 
-coef.positiveStein <- function(object) {
-  return(object$coefficients)
+coef.positiveStein <- function(object, ...) {
+  return(object$coef)
 }

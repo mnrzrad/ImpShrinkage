@@ -7,7 +7,7 @@
 \usage{
 \method{coefficients}{positiveStein}(object, ...)
 
-\method{coef}{positiveStein}(object)
+\method{coef}{positiveStein}(object, ...)
 }
 \arguments{
 \item{object}{An object of class "\code{positiveStein}", "\code{preliminaryTest}",
