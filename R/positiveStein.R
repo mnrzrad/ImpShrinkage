@@ -166,7 +166,7 @@ coefficients.positiveStein <- function(object, ...) {
 }
 
 #' @rdname coefficients.positiveStein
-#' @importFrom stats coefficients
+#' @importFrom stats coef
 #' @examples
 #' n_obs <- 100
 #' p_vars <- 5
