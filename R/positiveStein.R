@@ -21,12 +21,12 @@
 #' y <- simulated_data$y
 #' p <- ncol(X)
 #' # H beta = h
-#' H <- matrix(c(1,1,-1,0,0,1,0,1,0,-1,0,0,0,1,0), nr = 3, nc = p, byrow = TRUE)
+#' H <- matrix(c(1, 1, -1, 0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 1, 0), nr = 3, nc = p, byrow = TRUE)
 #' h <- rep(0, nrow(H))
 #' positiveStein(X, y, H, h)
 #'
 #' # H beta != h
-#' H <- matrix(c(1,1,-1,0,0,1,0,1,0,-1,0,0,0,1,0), nr = 3, nc = p, byrow = TRUE)
+#' H <- matrix(c(1, 1, -1, 0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 1, 0), nr = 3, nc = p, byrow = TRUE)
 #' h <- rep(1, nrow(H))
 #' positiveStein(X, y, H, h)
 #' @export
@@ -40,28 +40,28 @@ positiveStein <- function(X, y, H, h) {
   r_est <- restricted(X, y, H, h)
   test_stat <- test_statistics(X, y, H, h)
   beta <- r_est + as.numeric(1 - d / test_stat) * as.integer(test_stat > d) * (u_est - r_est)
-  residuals <- y-X%*%beta
-  fit <- structure(list(coefficients=beta,residuals=residuals), class = c("positiveStein"))
+  residuals <- y - X %*% beta
+  fit <- structure(list(coefficients = beta, residuals = residuals), class = c("positiveStein"))
   fit
 }
 
 
 
-#'Predict method for Linear Model Fits
+#' Predict method for Model Fits
 #'
-#'Predicted values based on linear model object.
+#' Predicted values based on model object.
 #'
 #' @param object An object of class "\code{positiveStein}", "\code{preliminaryTest}",
 #' "\code{restricted}", "\code{Stein}" or "\code{unrestricted}".
 #' @param newdata An optional data frame in which to look for variables with which to predict.
 #'  If omitted, the fitted values are used.
 #'
-#' @seealso \code{\link{predict.Arima}}, \code{\link{predict.bats}},
-#' \code{\link{predict.tbats}}, \code{\link{predict.ets}},
-#' \code{\link{predict.nnetar}}
-#' \code{\link{fitted.Arima}}, \code{\link{fitted.bats}},
-#' \code{\link{fitted.tbats}}, \code{\link{fitted.ets}},
-#' \code{\link{fitted.nnetar}}.
+#' @seealso \code{\link{predict.positiveStein}}, \code{\link{predict.preliminaryTest}},
+#' \code{\link{predict.restricted}}, \code{\link{predict.Stein}},
+#' \code{\link{predict.unrestricted}}
+#' \code{\link{fitted.positiveStein}}, \code{\link{fitted.preliminaryTest}},
+#' \code{\link{fitted.restricted}}, \code{\link{fitted.Stein}},
+#' \code{\link{fitted.unrestricted}}.
 #'
 #' @examples
 #' n_obs <- 100
@@ -72,25 +72,115 @@ positiveStein <- function(X, y, H, h) {
 #' y <- simulated_data$y
 #' p <- ncol(X)
 #' # H beta = h
-#' H <- matrix(c(1,1,-1,0,0,1,0,1,0,-1,0,0,0,1,0), nr = 3, nc = p, byrow = TRUE)
+#' H <- matrix(c(1, 1, -1, 0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 1, 0), nr = 3, nc = p, byrow = TRUE)
 #' h <- rep(0, nrow(H))
-#' model<-positiveStein(X, y, H, h)
+#' model <- positiveStein(X, y, H, h)
 #' fitted(model)
 #' @export
-fitted.positiveStein <- function(object,newdata){
-    return(newdata%*%object$beta)
+fitted.positiveStein <- function(object, newdata) {
+  return(newdata %*% object$beta)
 }
 
-
-residuals.positiveStein <- function(object){
-    return(object$residuals)
+#' @rdname fitted.positiveStein
+#' @examples
+#' n_obs <- 100
+#' p_vars <- 5
+#' beta <- c(2, 1, 3, 0, 5)
+#' simulated_data <- simdata(n = n_obs, p = p_vars, beta)
+#' X <- simulated_data$X
+#' y <- simulated_data$y
+#' p <- ncol(X)
+#' # H beta = h
+#' H <- matrix(c(1, 1, -1, 0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 1, 0), nr = 3, nc = p, byrow = TRUE)
+#' h <- rep(0, nrow(H))
+#' model <- positiveStein(X, y, H, h)
+#' predict(model)
+#' @export
+predict.positiveStein <- function(object, newdata) {
+  return(newdata %*% object$beta)
 }
 
+#' residuals method for Model Fits
+#'
+#' residuals values based on model object.
+#'
+#' @param object An object of class "\code{positiveStein}", "\code{preliminaryTest}",
+#' "\code{restricted}", "\code{Stein}" or "\code{unrestricted}".
+#'
+#' @seealso \code{\link{residuals.positiveStein}}, \code{\link{residuals.preliminaryTest}},
+#' \code{\link{residuals.restricted}}, \code{\link{residuals.Stein}},
+#' \code{\link{residuals.unrestricted}}.
+#'
+#' @examples
+#' n_obs <- 100
+#' p_vars <- 5
+#' beta <- c(2, 1, 3, 0, 5)
+#' simulated_data <- simdata(n = n_obs, p = p_vars, beta)
+#' X <- simulated_data$X
+#' y <- simulated_data$y
+#' p <- ncol(X)
+#' # H beta = h
+#' H <- matrix(c(1, 1, -1, 0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 1, 0), nr = 3, nc = p, byrow = TRUE)
+#' h <- rep(0, nrow(H))
+#' model <- positiveStein(X, y, H, h)
+#' residuals(model)
+#' @export
 
-coefficients.positiveStein <- function(object){
-    return(object$coefficients)
+residuals.positiveStein <- function(object) {
+  return(object$residuals)
 }
 
+#' Extract Model Coefficients
+#'
+#' coef is a generic function which extracts model
+#' coefficients from objects returned by modeling functions.coefficients is an alias for it.
+#'
+#' @param object An object of class "\code{positiveStein}", "\code{preliminaryTest}",
+#' "\code{restricted}", "\code{Stein}" or "\code{unrestricted}".
+#'
+#' @seealso \code{\link{coefficients.positiveStein}}, \code{\link{coefficients.preliminaryTest}},
+#' \code{\link{coefficients.restricted}}, \code{\link{coefficients.Stein}},
+#' \code{\link{coefficients.unrestricted}}
+#' \code{\link{coef.positiveStein}}, \code{\link{coef.preliminaryTest}},
+#' \code{\link{coef.restricted}}, \code{\link{coef.Stein}},
+#' \code{\link{coef.unrestricted}}.
+#'
+#' @examples
+#' n_obs <- 100
+#' p_vars <- 5
+#' beta <- c(2, 1, 3, 0, 5)
+#' simulated_data <- simdata(n = n_obs, p = p_vars, beta)
+#' X <- simulated_data$X
+#' y <- simulated_data$y
+#' p <- ncol(X)
+#' # H beta = h
+#' H <- matrix(c(1, 1, -1, 0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 1, 0), nr = 3, nc = p, byrow = TRUE)
+#' h <- rep(0, nrow(H))
+#' model <- positiveStein(X, y, H, h)
+#' coefficients(model)
+#' @export
 
+coefficients.positiveStein <- function(object) {
+  return(object$coefficients)
+}
 
+#' @rdname coefficients.positiveStein
+#'
+#' @examples
+#' n_obs <- 100
+#' p_vars <- 5
+#' beta <- c(2, 1, 3, 0, 5)
+#' simulated_data <- simdata(n = n_obs, p = p_vars, beta)
+#' X <- simulated_data$X
+#' y <- simulated_data$y
+#' p <- ncol(X)
+#' # H beta = h
+#' H <- matrix(c(1, 1, -1, 0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 1, 0), nrow = 3, ncol = p, byrow = TRUE)
+#' h <- rep(0, nrow(H))
+#' model <- positiveStein(X, y, H, h)
+#' coef(model)
+#' @export
 
+coef.positiveStein <- function(object) {
+  return(object$coefficients)
+}

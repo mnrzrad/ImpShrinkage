@@ -2,9 +2,12 @@
 % Please edit documentation in R/positiveStein.R
 \name{fitted.positiveStein}
 \alias{fitted.positiveStein}
-\title{Predict method for Linear Model Fits}
+\alias{predict.positiveStein}
+\title{Predict method for Model Fits}
 \usage{
 \method{fitted}{positiveStein}(object, newdata)
+
+\method{predict}{positiveStein}(object, newdata)
 }
 \arguments{
 \item{object}{An object of class "\code{positiveStein}", "\code{preliminaryTest}",
@@ -14,7 +17,7 @@
 If omitted, the fitted values are used.}
 }
 \description{
-Predicted values based on linear model object.
+Predicted values based on model object.
 }
 \examples{
 n_obs <- 100
@@ -25,16 +28,28 @@ X <- simulated_data$X
 y <- simulated_data$y
 p <- ncol(X)
 # H beta = h
-H <- matrix(c(1,1,-1,0,0,1,0,1,0,-1,0,0,0,1,0), nr = 3, nc = p, byrow = TRUE)
+H <- matrix(c(1, 1, -1, 0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 1, 0), nr = 3, nc = p, byrow = TRUE)
 h <- rep(0, nrow(H))
-model<-positiveStein(X, y, H, h)
+model <- positiveStein(X, y, H, h)
 fitted(model)
+n_obs <- 100
+p_vars <- 5
+beta <- c(2, 1, 3, 0, 5)
+simulated_data <- simdata(n = n_obs, p = p_vars, beta)
+X <- simulated_data$X
+y <- simulated_data$y
+p <- ncol(X)
+# H beta = h
+H <- matrix(c(1, 1, -1, 0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 1, 0), nr = 3, nc = p, byrow = TRUE)
+h <- rep(0, nrow(H))
+model <- positiveStein(X, y, H, h)
+predict(model)
 }
 \seealso{
-\code{\link{predict.Arima}}, \code{\link{predict.bats}},
-\code{\link{predict.tbats}}, \code{\link{predict.ets}},
-\code{\link{predict.nnetar}}
-\code{\link{fitted.Arima}}, \code{\link{fitted.bats}},
-\code{\link{fitted.tbats}}, \code{\link{fitted.ets}},
-\code{\link{fitted.nnetar}}.
+\code{\link{predict.positiveStein}}, \code{\link{predict.preliminaryTest}},
+\code{\link{predict.restricted}}, \code{\link{predict.Stein}},
+\code{\link{predict.unrestricted}}
+\code{\link{fitted.positiveStein}}, \code{\link{fitted.preliminaryTest}},
+\code{\link{fitted.restricted}}, \code{\link{fitted.Stein}},
+\code{\link{fitted.unrestricted}}.
 }
