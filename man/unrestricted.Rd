@@ -24,7 +24,7 @@ beta <- c(2, 1, 3, 0, 5)
 simulated_data <- simdata(n = n_obs, p = p_vars, beta)
 X <- simulated_data$X
 y <- simulated_data$y
-unrestricted(X,y)
+unrestricted(X, y)
 
 }
 \references{

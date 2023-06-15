@@ -32,13 +32,13 @@ X <- simulated_data$X
 y <- simulated_data$y
 p <- ncol(X)
 # H beta = h
-H <- matrix(c(1,1,-1,0,0,1,0,1,0,-1,0,0,0,1,0), nrow = 3, ncol = p, byrow = TRUE)
+H <- matrix(c(1, 1, -1, 0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 1, 0), nrow = 3, ncol = p, byrow = TRUE)
 h <- rep(0, nrow(H))
 preliminaryTest(X, y, H, h, alpha = 0.05)
 
 # H beta != h
 p <- ncol(X)
-H <- matrix(c(1,1,-1,0,0,1,0,1,0,-1,0,0,0,1,0), nrow = 3, ncol = p, byrow = TRUE)
+H <- matrix(c(1, 1, -1, 0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 1, 0), nrow = 3, ncol = p, byrow = TRUE)
 h <- rep(1, nrow(H))
 preliminaryTest(X, y, H, h, alpha = 0.05)
 

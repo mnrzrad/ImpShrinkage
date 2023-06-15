@@ -30,12 +30,12 @@ X <- simulated_data$X
 y <- simulated_data$y
 p <- ncol(X)
 # H beta = h
-H <- matrix(c(1,1,-1,0,0,1,0,1,0,-1,0,0,0,1,0), nrow = 3, ncol = p, byrow = TRUE)
+H <- matrix(c(1, 1, -1, 0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 1, 0), nrow = 3, ncol = p, byrow = TRUE)
 h <- rep(0, nrow(H))
 test_statistics(X, y, H, h)
 
 # H beta != h
-H <- matrix(c(1,1,-1,0,0,1,0,1,0,-1,0,0,0,1,0), nrow = 3, ncol = p, byrow = TRUE)
+H <- matrix(c(1, 1, -1, 0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 1, 0), nrow = 3, ncol = p, byrow = TRUE)
 h <- rep(1, nrow(H))
 test_statistics(X, y, H, h)
 }

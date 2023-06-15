@@ -25,17 +25,17 @@ This function can be used to calculate the Stein estimator
 n_obs <- 100
 p_vars <- 5
 beta <- c(2, 1, 3, 0, 5)
-simulated_data <- simdata(n = n_obs,  p = p_vars, beta)
+simulated_data <- simdata(n = n_obs, p = p_vars, beta)
 X <- simulated_data$X
 y <- simulated_data$y
 p <- ncol(X)
 # H beta = h
-H <- matrix(c(1,1,-1,0,0,1,0,1,0,-1,0,0,0,1,0), nrow = 3, ncol = p, byrow = TRUE)
+H <- matrix(c(1, 1, -1, 0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 1, 0), nrow = 3, ncol = p, byrow = TRUE)
 h <- rep(0, nrow(H))
 Stein(X, y, H, h)
 
 # H beta != h
-H <- matrix(c(1,1,-1,0,0,1,0,1,0,-1,0,0,0,1,0), nrow = 3, ncol = p, byrow = TRUE)
+H <- matrix(c(1, 1, -1, 0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 1, 0), nrow = 3, ncol = p, byrow = TRUE)
 h <- rep(1, nrow(H))
 Stein(X, y, H, h)
 }
