@@ -5,9 +5,9 @@
 \alias{predict.positiveStein}
 \title{Predict method for Model Fits}
 \usage{
-\method{fitted}{positiveStein}(object, newdata)
+\method{fitted}{positiveStein}(object, newdata, ...)
 
-\method{predict}{positiveStein}(object, newdata)
+\method{predict}{positiveStein}(object, newdata, ...)
 }
 \arguments{
 \item{object}{An object of class "\code{positiveStein}", "\code{preliminaryTest}",
@@ -15,6 +15,8 @@
 
 \item{newdata}{An optional data frame in which to look for variables with which to predict.
 If omitted, the fitted values are used.}
+
+\item{...}{Other.}
 }
 \description{
 Predicted values based on model object.
@@ -31,7 +33,7 @@ p <- ncol(X)
 H <- matrix(c(1, 1, -1, 0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 1, 0), nr = 3, nc = p, byrow = TRUE)
 h <- rep(0, nrow(H))
 model <- positiveStein(X, y, H, h)
-fitted(model)
+fitted(model, X)
 n_obs <- 100
 p_vars <- 5
 beta <- c(2, 1, 3, 0, 5)
@@ -43,7 +45,7 @@ p <- ncol(X)
 H <- matrix(c(1, 1, -1, 0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 1, 0), nr = 3, nc = p, byrow = TRUE)
 h <- rep(0, nrow(H))
 model <- positiveStein(X, y, H, h)
-predict(model)
+predict(model, X)
 }
 \seealso{
 \code{\link{predict.positiveStein}}, \code{\link{predict.preliminaryTest}},

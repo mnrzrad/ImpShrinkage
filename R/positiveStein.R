@@ -55,14 +55,14 @@ positiveStein <- function(X, y, H, h) {
 #' "\code{restricted}", "\code{Stein}" or "\code{unrestricted}".
 #' @param newdata An optional data frame in which to look for variables with which to predict.
 #'  If omitted, the fitted values are used.
-#'
+#' @param ... Other.
 #' @seealso \code{\link{predict.positiveStein}}, \code{\link{predict.preliminaryTest}},
 #' \code{\link{predict.restricted}}, \code{\link{predict.Stein}},
 #' \code{\link{predict.unrestricted}}
 #' \code{\link{fitted.positiveStein}}, \code{\link{fitted.preliminaryTest}},
 #' \code{\link{fitted.restricted}}, \code{\link{fitted.Stein}},
 #' \code{\link{fitted.unrestricted}}.
-#'
+#' @importFrom stats predict
 #' @examples
 #' n_obs <- 100
 #' p_vars <- 5
@@ -75,13 +75,14 @@ positiveStein <- function(X, y, H, h) {
 #' H <- matrix(c(1, 1, -1, 0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 1, 0), nr = 3, nc = p, byrow = TRUE)
 #' h <- rep(0, nrow(H))
 #' model <- positiveStein(X, y, H, h)
-#' fitted(model)
+#' fitted(model, X)
 #' @export
-fitted.positiveStein <- function(object, newdata) {
-  return(newdata %*% object$beta)
+fitted.positiveStein <- function(object, newdata, ...) {
+  return(newdata %*% object$coefficients)
 }
 
 #' @rdname fitted.positiveStein
+#' @importFrom stats fitted
 #' @examples
 #' n_obs <- 100
 #' p_vars <- 5
@@ -94,10 +95,10 @@ fitted.positiveStein <- function(object, newdata) {
 #' H <- matrix(c(1, 1, -1, 0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 1, 0), nr = 3, nc = p, byrow = TRUE)
 #' h <- rep(0, nrow(H))
 #' model <- positiveStein(X, y, H, h)
-#' predict(model)
+#' predict(model, X)
 #' @export
-predict.positiveStein <- function(object, newdata) {
-  return(newdata %*% object$beta)
+predict.positiveStein <- function(object, newdata, ...) {
+  return(newdata %*% object$coefficients)
 }
 
 #' residuals method for Model Fits
@@ -106,11 +107,11 @@ predict.positiveStein <- function(object, newdata) {
 #'
 #' @param object An object of class "\code{positiveStein}", "\code{preliminaryTest}",
 #' "\code{restricted}", "\code{Stein}" or "\code{unrestricted}".
-#'
+#' @param ... Other.
 #' @seealso \code{\link{residuals.positiveStein}}, \code{\link{residuals.preliminaryTest}},
 #' \code{\link{residuals.restricted}}, \code{\link{residuals.Stein}},
 #' \code{\link{residuals.unrestricted}}.
-#'
+#' @importFrom stats residuals
 #' @examples
 #' n_obs <- 100
 #' p_vars <- 5
@@ -126,7 +127,7 @@ predict.positiveStein <- function(object, newdata) {
 #' residuals(model)
 #' @export
 
-residuals.positiveStein <- function(object) {
+residuals.positiveStein <- function(object, ...) {
   return(object$residuals)
 }
 
@@ -137,14 +138,14 @@ residuals.positiveStein <- function(object) {
 #'
 #' @param object An object of class "\code{positiveStein}", "\code{preliminaryTest}",
 #' "\code{restricted}", "\code{Stein}" or "\code{unrestricted}".
-#'
+#' @param ... Other.
 #' @seealso \code{\link{coefficients.positiveStein}}, \code{\link{coefficients.preliminaryTest}},
 #' \code{\link{coefficients.restricted}}, \code{\link{coefficients.Stein}},
 #' \code{\link{coefficients.unrestricted}}
 #' \code{\link{coef.positiveStein}}, \code{\link{coef.preliminaryTest}},
 #' \code{\link{coef.restricted}}, \code{\link{coef.Stein}},
 #' \code{\link{coef.unrestricted}}.
-#'
+#' @importFrom stats coefficients
 #' @examples
 #' n_obs <- 100
 #' p_vars <- 5
@@ -160,12 +161,12 @@ residuals.positiveStein <- function(object) {
 #' coefficients(model)
 #' @export
 
-coefficients.positiveStein <- function(object) {
+coefficients.positiveStein <- function(object, ...) {
   return(object$coefficients)
 }
 
 #' @rdname coefficients.positiveStein
-#'
+#' @importFrom stats coefficients
 #' @examples
 #' n_obs <- 100
 #' p_vars <- 5

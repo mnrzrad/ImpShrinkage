@@ -4,11 +4,13 @@
 \alias{residuals.positiveStein}
 \title{residuals method for Model Fits}
 \usage{
-\method{residuals}{positiveStein}(object)
+\method{residuals}{positiveStein}(object, ...)
 }
 \arguments{
 \item{object}{An object of class "\code{positiveStein}", "\code{preliminaryTest}",
 "\code{restricted}", "\code{Stein}" or "\code{unrestricted}".}
+
+\item{...}{Other.}
 }
 \description{
 residuals values based on model object.

@@ -5,13 +5,15 @@
 \alias{coef.positiveStein}
 \title{Extract Model Coefficients}
 \usage{
-\method{coefficients}{positiveStein}(object)
+\method{coefficients}{positiveStein}(object, ...)
 
 \method{coef}{positiveStein}(object)
 }
 \arguments{
 \item{object}{An object of class "\code{positiveStein}", "\code{preliminaryTest}",
 "\code{restricted}", "\code{Stein}" or "\code{unrestricted}".}
+
+\item{...}{Other.}
 }
 \description{
 coef is a generic function which extracts model
