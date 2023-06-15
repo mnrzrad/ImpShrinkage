@@ -40,7 +40,57 @@ positiveStein <- function(X, y, H, h) {
   r_est <- restricted(X, y, H, h)
   test_stat <- test_statistics(X, y, H, h)
   beta <- r_est + as.numeric(1 - d / test_stat) * as.integer(test_stat > d) * (u_est - r_est)
-  fit <- structure(list(beta=beta), class = c("positiveStein"))
+  residuals <- y-X%*%beta
+  fit <- structure(list(coefficients=beta,residuals=residuals), class = c("positiveStein"))
   fit
 }
+
+
+
+#'Predict method for Linear Model Fits
+#'
+#'Predicted values based on linear model object.
+#'
+#' @param object An object of class "\code{positiveStein}", "\code{preliminaryTest}",
+#' "\code{restricted}", "\code{Stein}" or "\code{unrestricted}".
+#' @param newdata An optional data frame in which to look for variables with which to predict.
+#'  If omitted, the fitted values are used.
+#'
+#' @seealso \code{\link{predict.Arima}}, \code{\link{predict.bats}},
+#' \code{\link{predict.tbats}}, \code{\link{predict.ets}},
+#' \code{\link{predict.nnetar}}
+#' \code{\link{fitted.Arima}}, \code{\link{fitted.bats}},
+#' \code{\link{fitted.tbats}}, \code{\link{fitted.ets}},
+#' \code{\link{fitted.nnetar}}.
+#'
+#' @examples
+#' n_obs <- 100
+#' p_vars <- 5
+#' beta <- c(2, 1, 3, 0, 5)
+#' simulated_data <- simdata(n = n_obs, p = p_vars, beta)
+#' X <- simulated_data$X
+#' y <- simulated_data$y
+#' p <- ncol(X)
+#' # H beta = h
+#' H <- matrix(c(1,1,-1,0,0,1,0,1,0,-1,0,0,0,1,0), nr = 3, nc = p, byrow = TRUE)
+#' h <- rep(0, nrow(H))
+#' model<-positiveStein(X, y, H, h)
+#' fitted(model)
+#' @export
+fitted.positiveStein <- function(object,newdata){
+    return(newdata%*%object$beta)
+}
+
+
+residuals.positiveStein <- function(object){
+    return(object$residuals)
+}
+
+
+coefficients.positiveStein <- function(object){
+    return(object$coefficients)
+}
+
+
+
 
