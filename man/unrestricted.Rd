@@ -15,7 +15,7 @@ unrestricted(X, y)
 A vector of regression coefficients
 }
 \description{
-This function calculates the unrestricted estimator that may also be used in the preliminaryTest.R
+This function calculates the unrestricted estimator that may also be used in the "\code{preliminaryTest}".
 }
 \examples{
 n_obs <- 100
