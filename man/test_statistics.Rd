@@ -19,7 +19,7 @@ test_statistics(X, y, H, h)
 A numerical value of the test statistic
 }
 \description{
-This function calculates the test statistics used in the preliminaryTest.R
+This function calculates the test statistics used in the "\code{preliminaryTest}".
 }
 \examples{
 n_obs <- 100
