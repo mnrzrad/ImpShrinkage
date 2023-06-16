@@ -45,7 +45,7 @@ preliminaryTest <- function(X, y, H, h, alpha) {
   test_stat <- test_statistics(X, y, H, h)
   threshold <- stats::qf(1 - alpha, q, n - p)
   beta <- u_est - (u_est - r_est) * as.integer(test_stat < threshold)
-  residuals <- y - X %*% beta
+  residuals <- (y - X %*% beta)[, 1]
   fit <- structure(list(coef = beta, residuals = residuals), class = c("preliminaryTest"))
   fit
 }
@@ -53,7 +53,7 @@ preliminaryTest <- function(X, y, H, h, alpha) {
 
 
 
-#' @rdname fitted.positiveStein
+#' @rdname fitted.stein
 #' @importFrom stats predict
 #' @examples
 #' n_obs <- 100
@@ -70,10 +70,10 @@ preliminaryTest <- function(X, y, H, h, alpha) {
 #' fitted(model, X)
 #' @export
 fitted.preliminaryTest <- function(object, newdata, ...) {
-    return(newdata %*% object$coef)
+  return((newdata %*% object$coef)[, 1])
 }
 
-#' @rdname fitted.positiveStein
+#' @rdname fitted.stein
 #' @importFrom stats fitted
 #' @examples
 #' n_obs <- 100
@@ -90,10 +90,10 @@ fitted.preliminaryTest <- function(object, newdata, ...) {
 #' predict(model, X)
 #' @export
 predict.preliminaryTest <- function(object, newdata, ...) {
-    return(newdata %*% object$coef)
+  return((newdata %*% object$coef)[, 1])
 }
 
-#' @rdname residuals.positiveStein
+#' @rdname residuals.stein
 #' @importFrom stats residuals
 #' @examples
 #' n_obs <- 100
@@ -111,10 +111,10 @@ predict.preliminaryTest <- function(object, newdata, ...) {
 #' @export
 
 residuals.preliminaryTest <- function(object, ...) {
-    return(object$residuals)
+  return(object$residuals)
 }
 
-#' @rdname coefficients.positiveStein
+#' @rdname coefficients.stein
 #' @importFrom stats coefficients
 #' @examples
 #' n_obs <- 100
@@ -132,10 +132,10 @@ residuals.preliminaryTest <- function(object, ...) {
 #' @export
 
 coefficients.preliminaryTest <- function(object, ...) {
-    return(object$coef)
+  return(object$coef)
 }
 
-#' @rdname coefficients.positiveStein
+#' @rdname coefficients.stein
 #' @importFrom stats coef
 #' @examples
 #' n_obs <- 100
@@ -153,5 +153,5 @@ coefficients.preliminaryTest <- function(object, ...) {
 #' @export
 
 coef.preliminaryTest <- function(object, ...) {
-    return(object$coef)
+  return(object$coef)
 }
