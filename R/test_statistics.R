@@ -1,6 +1,6 @@
 #' Test-Statistics
 #'
-#' This function calculates the test statistics used in the "\code{preliminaryTest}".
+#' This function calculates the test statistics used in the "\code{\link{preliminaryTest}}".
 #'
 #' @param X Matrix with input observations, of dimension n_obs x p_vars; each row is an observation vector.
 #' @param y Univariate quantitative response variable with dimension n_obs.

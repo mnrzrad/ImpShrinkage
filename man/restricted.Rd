@@ -19,7 +19,7 @@ restricted(X, y, H, h)
 A vector of regression coefficients
 }
 \description{
-This function calculates the restricted estimator that may also be used in the "\code{preliminaryTest}".
+This function calculates the restricted estimator that may also be used in the "\code{\link{preliminaryTest}}".
 }
 \examples{
 n_obs <- 100
