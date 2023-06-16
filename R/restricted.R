@@ -35,7 +35,7 @@
 restricted <- function(X, y, H, h) {
   u_est <- unrestricted(X, y) # unrestricted estimator
   C <- t(X) %*% X
-  beta <- u_est - solve(C) %*% t(H) %*% solve(H %*% solve(C) %*% t(H)) %*% (H %*% u_est - h)
+  beta <- u_est$coef - solve(C) %*% t(H) %*% solve(H %*% solve(C) %*% t(H)) %*% (H %*% u_est$coef - h)
   residuals <- (y - X %*% beta)[, 1]
   fit <- structure(list(coef = beta, residuals = residuals), class = c("restricted"))
   fit

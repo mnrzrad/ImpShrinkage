@@ -40,7 +40,7 @@ stein <- function(X, y, H, h) {
   u_est <- unrestricted(X, y)
   r_est <- restricted(X, y, H, h)
   test_stat <- test_statistics(X, y, H, h)
-  beta <- u_est - d * (u_est$coef - r_est$coef) / test_stat
+  beta <- u_est$coef - d * (u_est$coef - r_est$coef) / test_stat
   residuals <- (y - X %*% beta)[, 1]
   fit <- structure(list(coef = beta, residuals = residuals), class = c("stein"))
   fit

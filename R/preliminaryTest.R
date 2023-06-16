@@ -39,12 +39,11 @@ preliminaryTest <- function(X, y, H, h, alpha) {
   n <- dim(X)[1]
   p <- dim(X)[2]
   q <- nrow(H)
-
   u_est <- unrestricted(X, y)
   r_est <- restricted(X, y, H, h)
   test_stat <- test_statistics(X, y, H, h)
   threshold <- stats::qf(1 - alpha, q, n - p)
-  beta <- u_est - (u_est - r_est) * as.integer(test_stat < threshold)
+  beta <- u_est$coef - (u_est$coef - r_est$coef) * as.integer(test_stat < threshold)
   residuals <- (y - X %*% beta)[, 1]
   fit <- structure(list(coef = beta, residuals = residuals), class = c("preliminaryTest"))
   fit

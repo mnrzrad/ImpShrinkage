@@ -36,8 +36,8 @@ test_statistics <- function(X, y, H, h) {
   m <- n - p
   q <- nrow(H)
   u_est <- unrestricted(X, y) # unrestricted estimator
-  s2 <- (t(y - X %*% u_est) %*% (y - X %*% u_est)) / m
+  s2 <- (t(y - X %*% u_est$coef) %*% (y - X %*% u_est$coef)) / m
   C <- t(X) %*% X
-  diff <- (H %*% u_est - h)
+  diff <- (H %*% u_est$coef - h)
   as.numeric((t(diff) %*% solve(H %*% solve(C) %*% t(H)) %*% diff) / (q * s2))
 }
