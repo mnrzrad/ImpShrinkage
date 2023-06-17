@@ -42,7 +42,8 @@ stein <- function(X, y, H, h) {
   test_stat <- test_statistics(X, y, H, h)
   beta <- u_est$coef - d * (u_est$coef - r_est$coef) / test_stat
   residuals <- (y - X %*% beta)[, 1]
-  fit <- structure(list(coef = beta, residuals = residuals), class = c("stein"))
+  s2 <- sum(residuals^2) / (n - p)
+  fit <- structure(list(coef = beta, residuals = residuals, s2 = s2), class = c("stein"))
   fit
 }
 

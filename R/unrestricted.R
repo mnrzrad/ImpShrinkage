@@ -22,10 +22,12 @@
 #' @export
 #'
 unrestricted <- function(X, y) {
-    beta <- solve(t(X) %*% X) %*% t(X) %*% y
-    residuals <- (y - X %*% beta)[, 1]
-    fit <- structure(list(coef = beta, residuals = residuals), class = c("unrestricted"))
-    fit
+  beta <- solve(t(X) %*% X) %*% t(X) %*% y
+  residuals <- (y - X %*% beta)[, 1]
+  d <- dim(X)
+  s2 <- sum(residuals^2) / (d[1] - d[2])
+  fit <- structure(list(coef = beta, residuals = residuals, s2 = s2), class = c("unrestricted"))
+  fit
 }
 
 
@@ -42,7 +44,7 @@ unrestricted <- function(X, y) {
 #' fitted(model, X)
 #' @export
 fitted.unrestricted <- function(object, newdata, ...) {
-    return((newdata %*% object$coef)[, 1])
+  return((newdata %*% object$coef)[, 1])
 }
 
 #' @rdname fitted.stein
@@ -58,7 +60,7 @@ fitted.unrestricted <- function(object, newdata, ...) {
 #' predict(model, X)
 #' @export
 predict.unrestricted <- function(object, newdata, ...) {
-    return((newdata %*% object$coef)[, 1])
+  return((newdata %*% object$coef)[, 1])
 }
 
 #' @rdname residuals.stein
@@ -75,7 +77,7 @@ predict.unrestricted <- function(object, newdata, ...) {
 #' @export
 
 residuals.unrestricted <- function(object, ...) {
-    return(object$residuals)
+  return(object$residuals)
 }
 
 #' @rdname coefficients.stein
@@ -92,7 +94,7 @@ residuals.unrestricted <- function(object, ...) {
 #' @export
 
 coefficients.unrestricted <- function(object, ...) {
-    return(object$coef)
+  return(object$coef)
 }
 
 #' @rdname coefficients.stein
@@ -109,5 +111,5 @@ coefficients.unrestricted <- function(object, ...) {
 #' @export
 
 coef.unrestricted <- function(object, ...) {
-    return(object$coef)
+  return(object$coef)
 }

@@ -33,11 +33,13 @@
 #' @export
 
 restricted <- function(X, y, H, h) {
+  d <- dim(X)
   u_est <- unrestricted(X, y) # unrestricted estimator
   C <- t(X) %*% X
   beta <- u_est$coef - solve(C) %*% t(H) %*% solve(H %*% solve(C) %*% t(H)) %*% (H %*% u_est$coef - h)
   residuals <- (y - X %*% beta)[, 1]
-  fit <- structure(list(coef = beta, residuals = residuals), class = c("restricted"))
+  s2 <- sum(residuals^2) / (d[1] - d[2])
+  fit <- structure(list(coef = beta, residuals = residuals, s2 = s2), class = c("restricted"))
   fit
 }
 
