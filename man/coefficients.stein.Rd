@@ -42,7 +42,7 @@
 }
 \arguments{
 \item{object}{An object of class "\code{positivestein}", "\code{preliminaryTest}",
-"\code{restricted}", "\code{stein}" or "\code{unrestricted}".}
+"\code{restricted}", "\code{stein}", "\code{unrestricted}" or "\code{improvedpreliminaryTest}".}
 
 \item{...}{Other.}
 }
@@ -191,8 +191,8 @@ coef(model)
 \seealso{
 \code{\link{coefficients.positivestein}}, \code{\link{coefficients.preliminaryTest}},
 \code{\link{coefficients.restricted}}, \code{\link{coefficients.stein}},
-\code{\link{coefficients.unrestricted}}
+\code{\link{coefficients.unrestricted}}, \code{\link{coefficients.improvedpreliminaryTest}},
 \code{\link{coef.positivestein}}, \code{\link{coef.preliminaryTest}},
 \code{\link{coef.restricted}}, \code{\link{coef.stein}},
-\code{\link{coef.unrestricted}}.
+\code{\link{coef.unrestricted}}, \code{\link{coef.improvedpreliminaryTest}}.
 }

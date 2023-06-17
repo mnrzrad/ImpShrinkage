@@ -41,8 +41,8 @@
 \method{predict}{unrestricted}(object, newdata, ...)
 }
 \arguments{
-\item{object}{An object of class "\code{stein}, "\code{preliminaryTest}",
-"\code{restricted}", "\code{positivestein}"" or "\code{unrestricted}".}
+\item{object}{An object of class "\code{stein}", "\code{preliminaryTest}",
+"\code{restricted}", "\code{positivestein}","\code{unrestricted}" or "\code{improvedpreliminaryTest}".}
 
 \item{newdata}{An optional data frame in which to look for variables with which to predict.
 If omitted, the fitted values are used.}
@@ -193,8 +193,8 @@ predict(model, X)
 \seealso{
 \code{\link{predict.positivestein}}, \code{\link{predict.preliminaryTest}},
 \code{\link{predict.restricted}}, \code{\link{predict.stein}},
-\code{\link{predict.unrestricted}}
+\code{\link{predict.unrestricted}}, \code{\link{predict.improvedpreliminaryTest}},
 \code{\link{fitted.positivestein}}, \code{\link{fitted.preliminaryTest}},
 \code{\link{fitted.restricted}}, \code{\link{fitted.stein}},
-\code{\link{fitted.unrestricted}}.
+\code{\link{fitted.unrestricted}}, \code{\link{fitted.improvedpreliminaryTest}}.
 }

@@ -58,17 +58,17 @@ stein <- function(X, y, H, h, normal_error = FALSE) {
 #'
 #' Predicted values based on model object.
 #'
-#' @param object An object of class "\code{stein}, "\code{preliminaryTest}",
-#' "\code{restricted}", "\code{positivestein}"" or "\code{unrestricted}".
+#' @param object An object of class "\code{stein}", "\code{preliminaryTest}",
+#' "\code{restricted}", "\code{positivestein}","\code{unrestricted}" or "\code{improvedpreliminaryTest}".
 #' @param newdata An optional data frame in which to look for variables with which to predict.
 #'  If omitted, the fitted values are used.
 #' @param ... Other.
 #' @seealso \code{\link{predict.positivestein}}, \code{\link{predict.preliminaryTest}},
 #' \code{\link{predict.restricted}}, \code{\link{predict.stein}},
-#' \code{\link{predict.unrestricted}}
+#' \code{\link{predict.unrestricted}}, \code{\link{predict.improvedpreliminaryTest}},
 #' \code{\link{fitted.positivestein}}, \code{\link{fitted.preliminaryTest}},
 #' \code{\link{fitted.restricted}}, \code{\link{fitted.stein}},
-#' \code{\link{fitted.unrestricted}}.
+#' \code{\link{fitted.unrestricted}}, \code{\link{fitted.improvedpreliminaryTest}}.
 #' @importFrom stats predict
 #' @examples
 #' n_obs <- 100
@@ -113,11 +113,11 @@ predict.stein <- function(object, newdata, ...) {
 #' residuals values based on model object.
 #'
 #' @param object An object of class "\code{positivestein}", "\code{preliminaryTest}",
-#' "\code{restricted}", "\code{stein}" or "\code{unrestricted}".
+#' "\code{restricted}", "\code{stein}", "\code{unrestricted}" or "\code{improvedpreliminaryTest}".
 #' @param ... Other.
 #' @seealso \code{\link{residuals.positivestein}}, \code{\link{residuals.preliminaryTest}},
 #' \code{\link{residuals.restricted}}, \code{\link{residuals.stein}},
-#' \code{\link{residuals.unrestricted}}.
+#' \code{\link{residuals.unrestricted}}, \code{\link{residuals.improvedpreliminaryTest}}.
 #' @importFrom stats residuals
 #' @examples
 #' n_obs <- 100
@@ -144,14 +144,14 @@ residuals.stein <- function(object, ...) {
 #' coefficients from objects returned by modeling functions.coefficients is an alias for it.
 #'
 #' @param object An object of class "\code{positivestein}", "\code{preliminaryTest}",
-#' "\code{restricted}", "\code{stein}" or "\code{unrestricted}".
+#' "\code{restricted}", "\code{stein}", "\code{unrestricted}" or "\code{improvedpreliminaryTest}".
 #' @param ... Other.
 #' @seealso \code{\link{coefficients.positivestein}}, \code{\link{coefficients.preliminaryTest}},
 #' \code{\link{coefficients.restricted}}, \code{\link{coefficients.stein}},
-#' \code{\link{coefficients.unrestricted}}
+#' \code{\link{coefficients.unrestricted}}, \code{\link{coefficients.improvedpreliminaryTest}},
 #' \code{\link{coef.positivestein}}, \code{\link{coef.preliminaryTest}},
 #' \code{\link{coef.restricted}}, \code{\link{coef.stein}},
-#' \code{\link{coef.unrestricted}}.
+#' \code{\link{coef.unrestricted}}, \code{\link{coef.improvedpreliminaryTest}}.
 #' @importFrom stats coefficients
 #' @examples
 #' n_obs <- 100

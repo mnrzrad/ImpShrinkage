@@ -24,7 +24,7 @@
 }
 \arguments{
 \item{object}{An object of class "\code{positivestein}", "\code{preliminaryTest}",
-"\code{restricted}", "\code{stein}" or "\code{unrestricted}".}
+"\code{restricted}", "\code{stein}", "\code{unrestricted}" or "\code{improvedpreliminaryTest}".}
 
 \item{...}{Other.}
 }
@@ -104,5 +104,5 @@ residuals(model)
 \seealso{
 \code{\link{residuals.positivestein}}, \code{\link{residuals.preliminaryTest}},
 \code{\link{residuals.restricted}}, \code{\link{residuals.stein}},
-\code{\link{residuals.unrestricted}}.
+\code{\link{residuals.unrestricted}}, \code{\link{residuals.improvedpreliminaryTest}}.
 }
