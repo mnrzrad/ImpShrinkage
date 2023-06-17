@@ -6,6 +6,7 @@
 #' @param y Univariate quantitative response variable with dimension n_obs.
 #' @param H A given q_restr x p_vars matrix.
 #' @param h A given q_restr x 1 vector.
+#' @param normal_error is .............
 #'
 #' @return A vector of regression coefficients
 #'
@@ -30,7 +31,7 @@
 #' h <- rep(1, nrow(H))
 #' positivestein(X, y, H, h)
 #' @export
-positivestein <- function(X, y, H, h) {
+positivestein <- function(X, y, H, h, normal_error = FALSE) {
   n <- dim(X)[1]
   p <- dim(X)[2]
   q <- nrow(H)
@@ -38,14 +39,17 @@ positivestein <- function(X, y, H, h) {
   d <- ((q - 2) * m) / (q * (m + 2))
   u_est <- unrestricted(X, y)
   r_est <- restricted(X, y, H, h)
-  test_stat <- test_statistics(X, y, H, h)
+  if (!normal_error) {
+    test_stat <- test_statistics(X, y, H, h)
+  } else {
+    test_stat <- q * test_statistics(X, y, H, h)
+  }
   beta <- r_est$coef + as.numeric(1 - d / test_stat) * as.integer(test_stat > d) * (u_est$coef - r_est$coef)
   residuals <- (y - X %*% beta)[, 1]
   s2 <- sum(residuals^2) / (n - p)
   fit <- structure(list(coef = beta, residuals = residuals, s2 = s2), class = c("positivestein"))
   fit
 }
-
 
 
 #' @rdname fitted.stein

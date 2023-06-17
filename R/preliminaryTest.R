@@ -7,6 +7,7 @@
 #' @param H  A given q_restr x p_vars matrix.
 #' @param h  A given q_restr x 1 vector.
 #' @param alpha  A given significance level
+#' @param normal_error is .............
 #'
 #' @return  A vector of regression coefficients
 #'
@@ -35,14 +36,18 @@
 #' @importFrom stats qf
 #' @export
 
-preliminaryTest <- function(X, y, H, h, alpha) {
+preliminaryTest <- function(X, y, H, h, alpha, normal_error = FALSE) {
   n <- dim(X)[1]
   p <- dim(X)[2]
   q <- nrow(H)
   u_est <- unrestricted(X, y)
   r_est <- restricted(X, y, H, h)
   test_stat <- test_statistics(X, y, H, h)
-  threshold <- stats::qf(1 - alpha, q, n - p)
+  if (!normal_error) {
+    threshold <- stats::qchisq(1 - alpha, q)
+  } else {
+    threshold <- stats::qf(1 - alpha, q, n - p)
+  }
   beta <- u_est$coef - (u_est$coef - r_est$coef) * as.integer(test_stat < threshold)
   residuals <- (y - X %*% beta)[, 1]
   s2 <- sum(residuals^2) / (n - p)

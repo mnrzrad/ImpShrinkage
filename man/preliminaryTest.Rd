@@ -4,7 +4,7 @@
 \alias{preliminaryTest}
 \title{The preliminary test estimator}
 \usage{
-preliminaryTest(X, y, H, h, alpha)
+preliminaryTest(X, y, H, h, alpha, normal_error = FALSE)
 }
 \arguments{
 \item{X}{Matrix with input observations, of dimension n_obs x p_vars; each row is an observation vector.}
@@ -16,6 +16,8 @@ preliminaryTest(X, y, H, h, alpha)
 \item{h}{A given q_restr x 1 vector.}
 
 \item{alpha}{A given significance level}
+
+\item{normal_error}{is .............}
 }
 \value{
 A vector of regression coefficients

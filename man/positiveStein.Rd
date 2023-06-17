@@ -4,7 +4,7 @@
 \alias{positivestein}
 \title{The positive rule Stein estimator}
 \usage{
-positivestein(X, y, H, h)
+positivestein(X, y, H, h, normal_error = FALSE)
 }
 \arguments{
 \item{X}{Matrix with input observations, of dimension n_obs x p_vars; each row is an observation vector.}
@@ -14,6 +14,8 @@ positivestein(X, y, H, h)
 \item{H}{A given q_restr x p_vars matrix.}
 
 \item{h}{A given q_restr x 1 vector.}
+
+\item{normal_error}{is .............}
 }
 \value{
 A vector of regression coefficients
