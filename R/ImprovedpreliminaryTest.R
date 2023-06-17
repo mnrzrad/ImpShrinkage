@@ -73,10 +73,10 @@ improvedpreliminaryTest <- function(X, y, H, h, alpha, d = NULL) {
 #' # H beta = h
 #' H <- matrix(c(1, 1, -1, 0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 1, 0), nrow = 3, ncol = p, byrow = TRUE)
 #' h <- rep(0, nrow(H))
-#' model <- improvecpreliminaryTest(X, y, H, h, alpha = 0.05)
+#' model <- improvedpreliminaryTest(X, y, H, h, alpha = 0.05)
 #' fitted(model, X)
 #' @export
-fitted.preliminaryTest <- function(object, newdata, ...) {
+fitted.improvedpreliminaryTest <- function(object, newdata, ...) {
   return((newdata %*% object$coef)[, 1])
 }
 
@@ -93,7 +93,7 @@ fitted.preliminaryTest <- function(object, newdata, ...) {
 #' # H beta = h
 #' H <- matrix(c(1, 1, -1, 0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 1, 0), nrow = 3, ncol = p, byrow = TRUE)
 #' h <- rep(0, nrow(H))
-#' model <- imrpovedpreliminaryTest(X, y, H, h, alpha = 0.05)
+#' model <- improvedpreliminaryTest(X, y, H, h, alpha = 0.05)
 #' predict(model, X)
 #' @export
 predict.improvedpreliminaryTest <- function(object, newdata, ...) {
@@ -117,7 +117,7 @@ predict.improvedpreliminaryTest <- function(object, newdata, ...) {
 #' residuals(model)
 #' @export
 
-residuals.preliminaryTest <- function(object, ...) {
+residuals.improvedpreliminaryTest <- function(object, ...) {
   return(object$residuals)
 }
 
@@ -134,11 +134,11 @@ residuals.preliminaryTest <- function(object, ...) {
 #' # H beta = h
 #' H <- matrix(c(1, 1, -1, 0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 1, 0), nrow = 3, ncol = p, byrow = TRUE)
 #' h <- rep(0, nrow(H))
-#' model <- preliminaryTest(X, y, H, h, alpha = 0.05)
+#' model <- improvedpreliminaryTest(X, y, H, h, alpha = 0.05)
 #' coefficients(model)
 #' @export
 
-coefficients.preliminaryTest <- function(object, ...) {
+coefficients.improvedpreliminaryTest <- function(object, ...) {
   return(object$coef)
 }
 
@@ -155,10 +155,10 @@ coefficients.preliminaryTest <- function(object, ...) {
 #' # H beta = h
 #' H <- matrix(c(1, 1, -1, 0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 1, 0), nrow = 3, ncol = p, byrow = TRUE)
 #' h <- rep(0, nrow(H))
-#' model <- preliminaryTest(X, y, H, h, alpha = 0.05)
+#' model <- improvedpreliminaryTest(X, y, H, h, alpha = 0.05)
 #' coef(model)
 #' @export
 
-coef.preliminaryTest <- function(object, ...) {
+coef.improvedpreliminaryTest <- function(object, ...) {
   return(object$coef)
 }
