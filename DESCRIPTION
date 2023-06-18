@@ -10,7 +10,7 @@ Maintainer: Mina Norouzirad <mina.norouzirad@gmail.com>
 Description: This package provides various functions for calculating improved estimators, including unrestricted, restricted, preliminary test, improved preliminary test, Stein, and positive-rule Stein estimators.
 Funding: This work is funded by national funds through the FCT - Fundação para a Ciência e a Tecnologia, I.P., under the scope of the projects UIDB/00297/2020 and UIDP/00297/2020 (Center for Mathematics and Applications)
 License: GPL (>= 2)
-URL: https://github.com/mnrzrad/shrinkage
+URL: https://github.com/mnrzrad/ImpShrinkage
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.2.3
