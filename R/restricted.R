@@ -23,6 +23,7 @@
 #'  Saleh, A. K. Md. Ehsanes. (2006). \emph{Theory of Preliminary Test and
 #'  Stein‐Type Estimation With Applications}, Wiley.
 #'
+#'  ref
 #' @examples
 #' n_obs <- 100
 #' p_vars <- 5
