@@ -6,7 +6,7 @@
 #' \itemize{
 #'   \item \eqn{\hat{\beta}^{U}}: the \code{\link{unrestricted}} estimator
 #'   \item \eqn{\hat{\beta}^{R}}: the \code{\link{restricted}} estimator
-#'   \item \eqn{\mathcal{L}}: the \code{\link{test_staistics}}
+#'   \item \eqn{\mathcal{L}}: the \code{\link{test_statistics}}
 #'   \item \eqn{d}: the shrinkage factor
 #' }
 #'
@@ -22,9 +22,9 @@
 #' calculated using \eqn{\frac{{(q - 2) \cdot (n - p}}{{q \cdot (n - p + 2)}}}
 #' @param normal_error logical value indicating whether the errors follow a
 #' normal distribution. #'If \code{normal_error} is \code{TRUE}, the distribution
-#' of the test statistics for the null hypothesis is \code{\link{stats::FDist}}.
+#' of the test statistics for the null hypothesis is \code{\link[stats]{FDist}}.
 #'  On the other hand, if the errors have a non-normal distribution, the
-#'  asymptotic distribution of the test statistics is \code{\link{Chisquare}}.
+#'  asymptotic distribution of the test statistics is \code{\link[stats]{Chisquare}}.
 #'  By default, \code{normal_error} is set to \code{FALSE}
 #'
 #' @return A vector of regression coefficients
