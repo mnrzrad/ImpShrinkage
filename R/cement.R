@@ -26,5 +26,6 @@
 #' Draper, N.R. and Smith, H. (1998) Applied Regression Analysis. Wiley. Page 630.
 #'
 #' Roderick J.A. Little and Donald B. Rubin (2002). Statistical Analysis with Missing Data, Second Edition. Wilely. Page 154.
-#'
+#' @examples
+#' data("cement")
 NULL

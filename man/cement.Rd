@@ -25,6 +25,9 @@ Statistical Analysis with Missing Data (2002), pp.~154,
 for demonstrating estimation of multivariate means and variances
 when the missing data pattern is monotone.
 }
+\examples{
+data("cement")
+}
 \references{
 Davison, A. C. (2003) Statistical Models. Cambridge University Press. Page 355.
 
