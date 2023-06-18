@@ -6,7 +6,7 @@
 #' \deqn{\hat{\beta}^{ipt}= \hat{\beta}^{PT} - d (\hat{\beta}^{U} - \hat{\beta}^{R}) \mathcal{L}^{-1} I(\mathcal{L} > F_{q,m}(\alpha)) }
 # If the error has a non-normal distribution:
 #' \deqn{\hat{\beta}^{ipt}= \hat{\beta}^{PT} - d (\hat{\beta}^{U} - \hat{\beta}^{R}) \mathcal{L}^{-1} I(\mathcal{L} > \chi^2_{q}(\alpha)) }
-#``
+# ``
 #' where \eqn{I(A)} denotes an indicator function and
 #' \itemize{
 #'   \item \eqn{\hat{\beta}^{PT}}: the \code{\link{preliminaryTest}} estimator
@@ -20,7 +20,7 @@
 #' }
 #'
 #'
-#' #'The corresponding unrestricted estimator of \eqn{\sigma^2} is
+#' The corresponding unrestricted estimator of \eqn{\sigma^2} is
 #' \deqn{s^2 = \frac{1}{n-p}(y-X\hat{\beta}^{iPT})^{\top}(y - X\hat{\beta}^{iPT})}
 #'
 #' @param X Matrix with input observations, of dimension \code{n} x \code{p};

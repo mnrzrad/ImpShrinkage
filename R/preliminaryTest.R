@@ -5,8 +5,8 @@
 #' \deqn{\hat{\beta}^{PT}=\hat{\beta}^{U} - (\hat{\beta}^{U} - \hat{\beta}^{R}) I(\mathcal{L} \le F_{q,m}(\alpha))}
 #' If the error has a non-normal distribution:
 #' \deqn{\hat{\beta}^{PT}=\hat{\beta}^{U} - (\hat{\beta}^{U} - \hat{\beta}^{R}) I(\mathcal{L} \le \chi^2_{q}(\alpha))}
-#' #' where \eqn{I(A)} denotes an indicator function and
-#'\itemize{
+#' where \eqn{I(A)} denotes an indicator function and
+#' \itemize{
 #'   \item \eqn{\hat{\beta}^{U}}: the \code{\link{unrestricted}} estimator.
 #'   \item \eqn{\hat{\beta}^{R}}: the \code{\link{restricted}} estimator.
 #'   \item \eqn{\mathcal{L}}: the \code{\link{test_statistics}}.

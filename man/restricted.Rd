@@ -28,7 +28,7 @@ by the non-sample information. Here, \eqn{H} is a known \eqn{q \times p}
 matrix, and \eqn{h} is a known \eqn{q}-vector.
 }
 \details{
-#'The corresponding unrestricted estimator of \eqn{\sigma^2} is
+The corresponding unrestricted estimator of \eqn{\sigma^2} is
 \deqn{s^2 = \frac{1}{n-p}(y-X\hat{\beta}^{R})^{\top}(y - X\hat{\beta}^{R})}
 }
 \examples{
@@ -40,14 +40,18 @@ X <- simulated_data$X
 y <- simulated_data$y
 p <- ncol(X)
 # H beta = h
-H <- matrix(c(1, 1, -1, 0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 1, 0), nrow = 3,
-ncol = p, byrow = TRUE)
+H <- matrix(c(1, 1, -1, 0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 1, 0),
+  nrow = 3,
+  ncol = p, byrow = TRUE
+)
 h <- rep(0, nrow(H))
 restricted(X, y, H, h)
 
 # H beta != h
-H <- matrix(c(1, 1, -1, 0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 1, 0), nrow = 3,
-ncol = p, byrow = TRUE)
+H <- matrix(c(1, 1, -1, 0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 1, 0),
+  nrow = 3,
+  ncol = p, byrow = TRUE
+)
 h <- rep(1, nrow(H))
 restricted(X, y, H, h)
 

@@ -13,7 +13,7 @@
 #'   \item \eqn{d}: the shrinkage factor
 #' }
 #'
-#' #'The corresponding unrestricted estimator of \eqn{\sigma^2} is
+#' The corresponding unrestricted estimator of \eqn{\sigma^2} is
 #' \deqn{s^2 = \frac{1}{n-p}(y-X\hat{\beta}^{S+})^{\top}(y - X\hat{\beta}^{S+})}
 #'
 #' @param X Matrix with input observations, of dimension \code{n} x \code{p};

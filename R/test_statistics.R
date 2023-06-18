@@ -8,8 +8,8 @@
 #' If the error has a non-normal distribution:
 #' \deqn{\mathcal{L} = \frac{(H\hat{\beta}^{U}-h)^{\top}(H(X^{\top}X)^{-1}
 #' H^{\top})^{-1}(H\hat{\beta}^{U}-h) }{s^2_{unrestricted}}}
-#' #' where
-#'\itemize{
+#' where
+#' \itemize{
 #'   \item \eqn{\hat{\beta}^{U}}: the \code{\link{unrestricted}} estimator.
 #'   \item \eqn{\hat{\beta}^{R}}: the \code{\link{restricted}} estimator.
 #'   \item \eqn{q}: the number of restrictions, i.e., the number of rows of
@@ -47,14 +47,18 @@
 #' y <- simulated_data$y
 #' p <- ncol(X)
 #' # H beta = h
-#' H <- matrix(c(1, 1, -1, 0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 1, 0), nrow = 3,
-#' ncol = p, byrow = TRUE)
+#' H <- matrix(c(1, 1, -1, 0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 1, 0),
+#'   nrow = 3,
+#'   ncol = p, byrow = TRUE
+#' )
 #' h <- rep(0, nrow(H))
 #' test_statistics(X, y, H, h)
 #'
 #' # H beta != h
-#' H <- matrix(c(1, 1, -1, 0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 1, 0), nrow = 3,
-#' ncol = p, byrow = TRUE)
+#' H <- matrix(c(1, 1, -1, 0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 1, 0),
+#'   nrow = 3,
+#'   ncol = p, byrow = TRUE
+#' )
 #' h <- rep(1, nrow(H))
 #' test_statistics(X, y, H, h)
 #' @export
@@ -67,9 +71,9 @@ test_statistics <- function(X, y, H, h, normal_error = FALSE) {
   s2 <- (t(y - X %*% u_est$coef) %*% (y - X %*% u_est$coef)) / m
   C <- t(X) %*% X
   diff <- (H %*% u_est$coef - h)
-  if (!normal_error){
+  if (!normal_error) {
     as.numeric((t(diff) %*% solve(H %*% solve(C) %*% t(H)) %*% diff) / (q * s2))
-  }else{
+  } else {
     as.numeric((t(diff) %*% solve(H %*% solve(C) %*% t(H)) %*% diff) / (s2))
   }
 }

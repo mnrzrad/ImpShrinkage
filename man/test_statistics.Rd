@@ -36,7 +36,7 @@ H^{\top})^{-1}(H\hat{\beta}^{U}-h) }{q s^2_{unrestricted}}}
 If the error has a non-normal distribution:
 \deqn{\mathcal{L} = \frac{(H\hat{\beta}^{U}-h)^{\top}(H(X^{\top}X)^{-1}
 H^{\top})^{-1}(H\hat{\beta}^{U}-h) }{s^2_{unrestricted}}}
-#' where
+where
 \itemize{
   \item \eqn{\hat{\beta}^{U}}: the \code{\link{unrestricted}} estimator.
   \item \eqn{\hat{\beta}^{R}}: the \code{\link{restricted}} estimator.
@@ -55,14 +55,18 @@ X <- simulated_data$X
 y <- simulated_data$y
 p <- ncol(X)
 # H beta = h
-H <- matrix(c(1, 1, -1, 0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 1, 0), nrow = 3,
-ncol = p, byrow = TRUE)
+H <- matrix(c(1, 1, -1, 0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 1, 0),
+  nrow = 3,
+  ncol = p, byrow = TRUE
+)
 h <- rep(0, nrow(H))
 test_statistics(X, y, H, h)
 
 # H beta != h
-H <- matrix(c(1, 1, -1, 0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 1, 0), nrow = 3,
-ncol = p, byrow = TRUE)
+H <- matrix(c(1, 1, -1, 0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 1, 0),
+  nrow = 3,
+  ncol = p, byrow = TRUE
+)
 h <- rep(1, nrow(H))
 test_statistics(X, y, H, h)
 }
