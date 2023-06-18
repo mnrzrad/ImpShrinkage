@@ -32,7 +32,7 @@
 #' @param d An optional parameter. If not provided (or set to \code{NULL}), it will be
 #' calculated using \eqn{\frac{{(q - 2) \cdot (n - p}}{{q \cdot (n - p + 2)}}}
 #' @param is_error_normal logical value indicating whether the errors follow a
-#' normal distribution. #'If \code{is_error_normal} is \code{TRUE}, the distribution
+#' normal distribution. If \code{is_error_normal} is \code{TRUE}, the distribution
 #' of the test statistics for the null hypothesis is F distribution,
 #' \code{\link[stats]{FDist}}. On the other hand, if the errors have a
 #' non-normal distribution, the asymptotic distribution of the test statistics
@@ -72,14 +72,14 @@
 #' improvedpreliminaryTest(X, y, H, h, alpha = 0.05)
 #'
 #' data(cement)
-#' X <- as.matrix(cbind(1,cement[,1:4]))
+#' X <- as.matrix(cbind(1, cement[, 1:4]))
 #' y <- cement$y
 #' # Based on Kaciranlar et al. (1999)
-#' H <- matrix(c(0,1,-1,1,0), nrow = 1, ncol = 5, byrow = TRUE)
+#' H <- matrix(c(0, 1, -1, 1, 0), nrow = 1, ncol = 5, byrow = TRUE)
 #' h <- rep(0, nrow(H))
 #' improvedpreliminaryTest(X, y, H, h, alpha = 0.05)
 #'
-#' H <- matrix(c(0,1,-1,1,0,0, 0, 1, -1, -1,0, 1, -1, 0, -1), nrow = 3, ncol = 5, byrow = TRUE)
+#' H <- matrix(c(0, 1, -1, 1, 0, 0, 0, 1, -1, -1, 0, 1, -1, 0, -1), nrow = 3, ncol = 5, byrow = TRUE)
 #' h <- rep(0, nrow(H))
 #' improvedpreliminaryTest(X, y, H, h, alpha = 0.05)
 #' @importFrom stats qf
@@ -108,7 +108,7 @@ improvedpreliminaryTest <- function(X, y, H, h, alpha, d = NULL, is_error_normal
   residuals <- (y - X %*% beta)[, 1]
   s2 <- sum(residuals^2) / (n - p)
   fittedValues <- (X %*% beta)[, 1]
-  fit <- structure(list(coef = beta, s2 = s2, residuals = residuals,  fitted.value = fittedValues), class = c("improvedpreliminaryTest"))
+  fit <- structure(list(coef = beta, s2 = s2, residuals = residuals, fitted.value = fittedValues), class = c("improvedpreliminaryTest"))
   fit
 }
 

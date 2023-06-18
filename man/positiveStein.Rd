@@ -20,7 +20,7 @@ each row is an observation vector.}
 calculated using \eqn{\frac{{(q - 2) \cdot (n - p}}{{q \cdot (n - p + 2)}}}}
 
 \item{is_error_normal}{logical value indicating whether the errors follow a
-normal distribution. #'If \code{is_error_normal} is \code{TRUE}, the distribution
+normal distribution. If \code{is_error_normal} is \code{TRUE}, the distribution
 of the test statistics for the null hypothesis is F distribution,
 \code{\link[stats]{FDist}}. On the other hand, if the errors have a
 non-normal distribution, the asymptotic distribution of the test statistics
@@ -67,14 +67,14 @@ h <- rep(1, nrow(H))
 positivestein(X, y, H, h)
 
 data(cement)
-X <- as.matrix(cbind(1,cement[,1:4]))
+X <- as.matrix(cbind(1, cement[, 1:4]))
 y <- cement$y
 # Based on Kaciranlar et al. (1999)
-H <- matrix(c(0,1,-1,1,0), nrow = 1, ncol = 5, byrow = TRUE)
+H <- matrix(c(0, 1, -1, 1, 0), nrow = 1, ncol = 5, byrow = TRUE)
 h <- rep(0, nrow(H))
 positivestein(X, y, H, h)
 
-H <- matrix(c(0,1,-1,1,0,0, 0, 1, -1, -1,0, 1, -1, 0, -1), nrow = 3, ncol = 5, byrow = TRUE)
+H <- matrix(c(0, 1, -1, 1, 0, 0, 0, 1, -1, -1, 0, 1, -1, 0, -1), nrow = 3, ncol = 5, byrow = TRUE)
 h <- rep(0, nrow(H))
 positivestein(X, y, H, h)
 
