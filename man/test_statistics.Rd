@@ -4,7 +4,7 @@
 \alias{test_statistics}
 \title{Test-Statistics}
 \usage{
-test_statistics(X, y, H, h, normal_error = FALSE)
+test_statistics(X, y, H, h, is_error_normal = FALSE)
 }
 \arguments{
 \item{X}{Matrix with input observations, of dimension \code{n} x \code{p};
@@ -16,13 +16,13 @@ each row is an observation vector.}
 
 \item{h}{A given \code{q} x \code{1} vector.}
 
-\item{normal_error}{logical value indicating whether the errors follow a
+\item{is_error_normal}{logical value indicating whether the errors follow a
 normal distribution. #'If \code{normal_error} is \code{TRUE}, the distribution
 of the test statistics for the null hypothesis is F distribution,
 \code{\link[stats]{FDist}}.On the other hand, if the errors have a
 non-normal distribution, the asymptotic distribution of the test statistics
 is \eqn{\chi^2} distribution, \code{\link[stats]{Chisquare}}. By default,
-\code{normal_error} is set to \code{FALSE}.}
+\code{is_error_normal} is set to \code{FALSE}.}
 }
 \value{
 A numerical value of the test statistic

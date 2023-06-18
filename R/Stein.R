@@ -20,12 +20,12 @@
 #' @param h A given \code{q} x \code{1} vector.
 #' @param d An optional parameter. If not provided (or set to \code{NULL}), it will be
 #' calculated using \eqn{\frac{{(q - 2) \cdot (n - p}}{{q \cdot (n - p + 2)}}}
-#' @param normal_error logical value indicating whether the errors follow a
+#' @param is_error_normal logical value indicating whether the errors follow a
 #' normal distribution. #'If \code{normal_error} is \code{TRUE}, the distribution
 #' of the test statistics for the null hypothesis is \code{\link[stats]{FDist}}.
 #'  On the other hand, if the errors have a non-normal distribution, the
 #'  asymptotic distribution of the test statistics is \code{\link[stats]{Chisquare}}.
-#'  By default, \code{normal_error} is set to \code{FALSE}
+#'  By default, \code{is_error_normal} is set to \code{FALSE}
 #'
 #' @return A vector of regression coefficients
 #'
@@ -58,7 +58,7 @@
 #' stein(X, y, H, h)
 #' @export
 
-stein <- function(X, y, H, h, d = NULL, normal_error = FALSE) {
+stein <- function(X, y, H, h, d = NULL, is_error_normal = FALSE) {
   n <- dim(X)[1]
   p <- dim(X)[2]
   q <- nrow(H)
@@ -68,7 +68,7 @@ stein <- function(X, y, H, h, d = NULL, normal_error = FALSE) {
   }
   u_est <- unrestricted(X, y)
   r_est <- restricted(X, y, H, h)
-  if (!normal_error) {
+  if (!is_error_normal) {
     test_stat <- test_statistics(X, y, H, h)
   } else {
     test_stat <- q * test_statistics(X, y, H, h)

@@ -20,7 +20,7 @@ Woods, H., Steinour, H. H. and Starke, H. R. (1932) Effect of composition of Por
 Heat evolved in setting of cement, as a function of its chemical composition.
 }
 \details{
-cement is taken from an example in Little & Rubin's book on
+\code{cement} is taken from an example in Little & Rubin's book on
 Statistical Analysis with Missing Data (2002), pp.~154,
 for demonstrating estimation of multivariate means and variances
 when the missing data pattern is monotone.

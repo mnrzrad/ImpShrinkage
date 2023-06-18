@@ -23,13 +23,13 @@
 #' @param h A given \code{q} x \code{1} vector.
 #' @param d An optional parameter. If not provided (or set to \code{NULL}), it will be
 #' calculated using \eqn{\frac{{(q - 2) \cdot (n - p}}{{q \cdot (n - p + 2)}}}
-#' @param normal_error logical value indicating whether the errors follow a
-#' normal distribution. #'If \code{normal_error} is \code{TRUE}, the distribution
+#' @param is_error_normal logical value indicating whether the errors follow a
+#' normal distribution. #'If \code{is_error_normal} is \code{TRUE}, the distribution
 #' of the test statistics for the null hypothesis is F distribution,
 #' \code{\link[stats]{FDist}}. On the other hand, if the errors have a
 #' non-normal distribution, the asymptotic distribution of the test statistics
 #' is \eqn{\chi^2} distribution, \code{\link[stats]{Chisquare}}. By default,
-#' \code{normal_error} is set to \code{FALSE}.
+#' \code{is_error_normal} is set to \code{FALSE}.
 #'
 #'
 #' @return A vector of regression coefficients
@@ -57,7 +57,7 @@
 #' h <- rep(1, nrow(H))
 #' positivestein(X, y, H, h)
 #' @export
-positivestein <- function(X, y, H, h, d = NULL, normal_error = FALSE) {
+positivestein <- function(X, y, H, h, d = NULL, is_error_normal = FALSE) {
   n <- dim(X)[1]
   p <- dim(X)[2]
   q <- nrow(H)
@@ -65,7 +65,7 @@ positivestein <- function(X, y, H, h, d = NULL, normal_error = FALSE) {
   d <- ((q - 2) * m) / (q * (m + 2))
   u_est <- unrestricted(X, y)
   r_est <- restricted(X, y, H, h)
-  test_stat <- test_statistics(X, y, H, h, normal_error = normal_error)
+  test_stat <- test_statistics(X, y, H, h, is_error_normal = is_error_normal)
   beta <- r_est$coef + as.numeric(1 - d / test_stat) * as.integer(test_stat > d) * (u_est$coef - r_est$coef)
   residuals <- (y - X %*% beta)[, 1]
   s2 <- sum(residuals^2) / (n - p)

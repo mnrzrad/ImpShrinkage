@@ -2,7 +2,7 @@
 #'
 #' Heat evolved in setting of cement, as a function of its chemical composition.
 #'
-#' cement is taken from an example in Little & Rubin's book on
+#' \code{cement} is taken from an example in Little & Rubin's book on
 #' Statistical Analysis with Missing Data (2002), pp.~154,
 #' for demonstrating estimation of multivariate means and variances
 #' when the missing data pattern is monotone.

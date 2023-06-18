@@ -4,7 +4,7 @@
 \alias{stein}
 \title{The Stein estimator}
 \usage{
-stein(X, y, H, h, d = NULL, normal_error = FALSE)
+stein(X, y, H, h, d = NULL, is_error_normal = FALSE)
 }
 \arguments{
 \item{X}{Matrix with input observations, of dimension \code{n} x \code{p};
@@ -19,12 +19,12 @@ each row is an observation vector.}
 \item{d}{An optional parameter. If not provided (or set to \code{NULL}), it will be
 calculated using \eqn{\frac{{(q - 2) \cdot (n - p}}{{q \cdot (n - p + 2)}}}}
 
-\item{normal_error}{logical value indicating whether the errors follow a
+\item{is_error_normal}{logical value indicating whether the errors follow a
 normal distribution. #'If \code{normal_error} is \code{TRUE}, the distribution
 of the test statistics for the null hypothesis is \code{\link[stats]{FDist}}.
  On the other hand, if the errors have a non-normal distribution, the
  asymptotic distribution of the test statistics is \code{\link[stats]{Chisquare}}.
- By default, \code{normal_error} is set to \code{FALSE}}
+ By default, \code{is_error_normal} is set to \code{FALSE}}
 }
 \value{
 A vector of regression coefficients

@@ -31,13 +31,13 @@
 #' @param alpha  A given significance level
 #' @param d An optional parameter. If not provided (or set to \code{NULL}), it will be
 #' calculated using \eqn{\frac{{(q - 2) \cdot (n - p}}{{q \cdot (n - p + 2)}}}
-#' @param normal_error logical value indicating whether the errors follow a
-#' normal distribution. #'If \code{normal_error} is \code{TRUE}, the distribution
+#' @param is_error_normal logical value indicating whether the errors follow a
+#' normal distribution. #'If \code{is_error_normal} is \code{TRUE}, the distribution
 #' of the test statistics for the null hypothesis is F distribution,
 #' \code{\link[stats]{FDist}}. On the other hand, if the errors have a
 #' non-normal distribution, the asymptotic distribution of the test statistics
 #' is \eqn{\chi^2} distribution, \code{\link[stats]{Chisquare}}. By default,
-#' \code{normal_error} is set to \code{FALSE}.
+#' \code{is_error_normal} is set to \code{FALSE}.
 #'
 #' @return  A vector of regression coefficients
 #'
@@ -67,7 +67,7 @@
 #' @importFrom stats qf
 #' @export
 
-improvedpreliminaryTest <- function(X, y, H, h, alpha, d = NULL, normal_error = FALSE) {
+improvedpreliminaryTest <- function(X, y, H, h, alpha, d = NULL, is_error_normal = FALSE) {
   n <- dim(X)[1]
   p <- dim(X)[2]
   q <- nrow(H)
@@ -79,8 +79,8 @@ improvedpreliminaryTest <- function(X, y, H, h, alpha, d = NULL, normal_error = 
   u_est <- unrestricted(X, y)
   r_est <- restricted(X, y, H, h)
   pt_est <- preliminaryTest(X, y, H, h, alpha)
-  test_stat <- test_statistics(X, y, H, h, normal_error = normal_error)
-  if (!normal_error) {
+  test_stat <- test_statistics(X, y, H, h, is_error_normal = is_error_normal)
+  if (!is_error_normal) {
     threshold <- stats::qf(1 - alpha, q, n - p)
   } else {
     threshold <- stats::qchisq(1 - alpha, q)

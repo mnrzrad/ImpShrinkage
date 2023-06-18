@@ -24,13 +24,13 @@
 #' @param y Univariate quantitative response variable with dimension \code{n}.
 #' @param H A given \code{q} x \code{p} matrix.
 #' @param h A given \code{q} x \code{1} vector.
-#' @param normal_error logical value indicating whether the errors follow a
+#' @param is_error_normal logical value indicating whether the errors follow a
 #' normal distribution. #'If \code{normal_error} is \code{TRUE}, the distribution
 #' of the test statistics for the null hypothesis is F distribution,
 #' \code{\link[stats]{FDist}}.On the other hand, if the errors have a
 #' non-normal distribution, the asymptotic distribution of the test statistics
 #' is \eqn{\chi^2} distribution, \code{\link[stats]{Chisquare}}. By default,
-#' \code{normal_error} is set to \code{FALSE}.
+#' \code{is_error_normal} is set to \code{FALSE}.
 #'
 #' @return A numerical value of the test statistic
 #'
@@ -64,7 +64,7 @@
 #' h <- rep(1, nrow(H))
 #' test_statistics(X, y, H, h)
 #' @export
-test_statistics <- function(X, y, H, h, normal_error = FALSE) {
+test_statistics <- function(X, y, H, h, is_error_normal = FALSE) {
   n <- dim(X)[1]
   p <- dim(X)[2]
   m <- n - p
@@ -73,7 +73,7 @@ test_statistics <- function(X, y, H, h, normal_error = FALSE) {
   s2 <- (t(y - X %*% u_est$coef) %*% (y - X %*% u_est$coef)) / m
   C <- t(X) %*% X
   diff <- (H %*% u_est$coef - h)
-  if (!normal_error) {
+  if (!is_error_normal) {
     as.numeric((t(diff) %*% solve(H %*% solve(C) %*% t(H)) %*% diff) / (q * s2))
   } else {
     as.numeric((t(diff) %*% solve(H %*% solve(C) %*% t(H)) %*% diff) / (s2))
