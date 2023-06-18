@@ -9,7 +9,7 @@
 #'\itemize{
 #'   \item \eqn{\hat{\beta}^{U}}: the \code{\link{unrestricted}} estimator.
 #'   \item \eqn{\hat{\beta}^{R}}: the \code{\link{restricted}} estimator.
-#'   \item \eqn{\mathcal{L}}: the \code{\link{test_staistics}}.
+#'   \item \eqn{\mathcal{L}}: the \code{\link{test_statistics}}.
 #'   \item \eqn{F_{q,m}(\alpha)}: the upper \eqn{\alpha} level critical value of \eqn{F}-distribution with \eqn{(q,n-p)} degrees of freedom, calculated using \code{\link[stats]{qf}}.
 #'   \item \eqn{\chi^2_{q}(\alpha)}: the upper \eqn{\alpha} level critical value of \eqn{\chi^2}-distribution with \eqn{q} degree of freedom, calculated using \code{\link[stats]{qchisq}}.
 #'   \item \eqn{\alpha}: the significance level.
@@ -75,7 +75,7 @@ preliminaryTest <- function(X, y, H, h, alpha, normal_error = FALSE) {
 
 
 #' @rdname fitted.stein
-#' @importFrom stats predict
+#' @importFrom stats fitted
 #' @examples
 #' n_obs <- 100
 #' p_vars <- 5
@@ -88,14 +88,14 @@ preliminaryTest <- function(X, y, H, h, alpha, normal_error = FALSE) {
 #' H <- matrix(c(1, 1, -1, 0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 1, 0), nrow = 3, ncol = p, byrow = TRUE)
 #' h <- rep(0, nrow(H))
 #' model <- preliminaryTest(X, y, H, h, alpha = 0.05)
-#' fitted(model, X)
+#' fitted(model)
 #' @export
-fitted.preliminaryTest <- function(object, newdata, ...) {
-  return((newdata %*% object$coef)[, 1])
+fitted.preliminaryTest <- function(object, ...) {
+  return(object$fitted.value)
 }
 
-#' @rdname fitted.stein
-#' @importFrom stats fitted
+#' @rdname predict.stein
+#' @importFrom stats predict
 #' @examples
 #' n_obs <- 100
 #' p_vars <- 5

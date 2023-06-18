@@ -34,7 +34,7 @@ If the error has a non-normal distribution:
 \itemize{
   \item \eqn{\hat{\beta}^{U}}: the \code{\link{unrestricted}} estimator.
   \item \eqn{\hat{\beta}^{R}}: the \code{\link{restricted}} estimator.
-  \item \eqn{\mathcal{L}}: the \code{\link{test_staistics}}.
+  \item \eqn{\mathcal{L}}: the \code{\link{test_statistics}}.
   \item \eqn{F_{q,m}(\alpha)}: the upper \eqn{\alpha} level critical value of \eqn{F}-distribution with \eqn{(q,n-p)} degrees of freedom, calculated using \code{\link[stats]{qf}}.
   \item \eqn{\chi^2_{q}(\alpha)}: the upper \eqn{\alpha} level critical value of \eqn{\chi^2}-distribution with \eqn{q} degree of freedom, calculated using \code{\link[stats]{qchisq}}.
   \item \eqn{\alpha}: the significance level.

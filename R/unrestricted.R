@@ -50,7 +50,7 @@ unrestricted <- function(X, y) {
 
 
 #' @rdname fitted.stein
-#' @importFrom stats predict
+#' @importFrom stats fitted
 #' @examples
 #' n_obs <- 100
 #' p_vars <- 5
@@ -59,14 +59,14 @@ unrestricted <- function(X, y) {
 #' X <- simulated_data$X
 #' y <- simulated_data$y
 #' model <- unrestricted(X, y)
-#' fitted(model, X)
+#' fitted(model)
 #' @export
-fitted.unrestricted <- function(object, newdata, ...) {
-  return((newdata %*% object$coef)[, 1])
+fitted.unrestricted <- function(object, ...) {
+  return(object$fitted.value)
 }
 
-#' @rdname fitted.stein
-#' @importFrom stats fitted
+#' @rdname predict.stein
+#' @importFrom stats predict
 #' @examples
 #' n_obs <- 100
 #' p_vars <- 5

@@ -9,7 +9,7 @@
 #'   \item \eqn{\hat{\beta}^{S}}: the \code{\link{stein}} estimator
 #'   \item \eqn{\hat{\beta}^{U}}: the \code{\link{unrestricted}} estimator
 #'   \item \eqn{\hat{\beta}^{R}}: the \code{\link{restricted}} estimator
-#'   \item \eqn{\mathcal{L}}: the \code{\link{test_staistics}}
+#'   \item \eqn{\mathcal{L}}: the \code{\link{test_statistics}}
 #'   \item \eqn{d}: the shrinkage factor
 #' }
 #'
@@ -75,7 +75,7 @@ positivestein <- function(X, y, H, h, d = NULL, normal_error = FALSE) {
 
 
 #' @rdname fitted.stein
-#' @importFrom stats predict
+#' @importFrom stats fitted
 #' @examples
 #' n_obs <- 100
 #' p_vars <- 5
@@ -88,14 +88,14 @@ positivestein <- function(X, y, H, h, d = NULL, normal_error = FALSE) {
 #' H <- matrix(c(1, 1, -1, 0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 1, 0), nrow = 3, ncol = p, byrow = TRUE)
 #' h <- rep(0, nrow(H))
 #' model <- positivestein(X, y, H, h)
-#' fitted(model, X)
+#' fitted(model)
 #' @export
-fitted.positivestein <- function(object, newdata, ...) {
-  return((newdata %*% object$coef)[, 1])
+fitted.positivestein <- function(object, ...) {
+  return(object$fitted.value)
 }
 
-#' @rdname fitted.stein
-#' @importFrom stats fitted
+#' @rdname predict.stein
+#' @importFrom stats predict
 #' @examples
 #' n_obs <- 100
 #' p_vars <- 5

@@ -3,39 +3,24 @@
 %   R/positiveStein.R, R/preliminaryTest.R, R/restricted.R, R/unrestricted.R
 \name{fitted.improvedpreliminaryTest}
 \alias{fitted.improvedpreliminaryTest}
-\alias{predict.improvedpreliminaryTest}
 \alias{fitted.stein}
 \alias{fitted.positivestein}
-\alias{predict.positivestein}
 \alias{fitted.preliminaryTest}
-\alias{predict.preliminaryTest}
 \alias{fitted.restricted}
-\alias{predict.restricted}
 \alias{fitted.unrestricted}
-\alias{predict.unrestricted}
 \title{Extract Model Fitted Values}
 \usage{
-\method{fitted}{improvedpreliminaryTest}(object, newdata, ...)
-
-\method{predict}{improvedpreliminaryTest}(object, newdata, ...)
+\method{fitted}{improvedpreliminaryTest}(object, ...)
 
 \method{fitted}{stein}(object, ...)
 
-\method{fitted}{positivestein}(object, newdata, ...)
+\method{fitted}{positivestein}(object, ...)
 
-\method{predict}{positivestein}(object, newdata, ...)
+\method{fitted}{preliminaryTest}(object, ...)
 
-\method{fitted}{preliminaryTest}(object, newdata, ...)
+\method{fitted}{restricted}(object, ...)
 
-\method{predict}{preliminaryTest}(object, newdata, ...)
-
-\method{fitted}{restricted}(object, newdata, ...)
-
-\method{predict}{restricted}(object, newdata, ...)
-
-\method{fitted}{unrestricted}(object, newdata, ...)
-
-\method{predict}{unrestricted}(object, newdata, ...)
+\method{fitted}{unrestricted}(object, ...)
 }
 \arguments{
 \item{object}{An object of class "\code{unrestricted}", "\code{restricted}",
@@ -60,19 +45,7 @@ p <- ncol(X)
 H <- matrix(c(1, 1, -1, 0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 1, 0), nrow = 3, ncol = p, byrow = TRUE)
 h <- rep(0, nrow(H))
 model <- improvedpreliminaryTest(X, y, H, h, alpha = 0.05)
-fitted(model, X)
-n_obs <- 100
-p_vars <- 5
-beta <- c(2, 1, 3, 0, 5)
-simulated_data <- simdata(n = n_obs, p = p_vars, beta)
-X <- simulated_data$X
-y <- simulated_data$y
-p <- ncol(X)
-# H beta = h
-H <- matrix(c(1, 1, -1, 0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 1, 0), nrow = 3, ncol = p, byrow = TRUE)
-h <- rep(0, nrow(H))
-model <- improvedpreliminaryTest(X, y, H, h, alpha = 0.05)
-predict(model, X)
+fitted(model)
 n_obs <- 100
 p_vars <- 5
 beta <- c(2, 1, 3, 0, 5)
@@ -96,19 +69,7 @@ p <- ncol(X)
 H <- matrix(c(1, 1, -1, 0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 1, 0), nrow = 3, ncol = p, byrow = TRUE)
 h <- rep(0, nrow(H))
 model <- positivestein(X, y, H, h)
-fitted(model, X)
-n_obs <- 100
-p_vars <- 5
-beta <- c(2, 1, 3, 0, 5)
-simulated_data <- simdata(n = n_obs, p = p_vars, beta)
-X <- simulated_data$X
-y <- simulated_data$y
-p <- ncol(X)
-# H beta = h
-H <- matrix(c(1, 1, -1, 0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 1, 0), nrow = 3, ncol = p, byrow = TRUE)
-h <- rep(0, nrow(H))
-model <- positivestein(X, y, H, h)
-predict(model, X)
+fitted(model)
 n_obs <- 100
 p_vars <- 5
 beta <- c(2, 1, 3, 0, 5)
@@ -120,19 +81,7 @@ p <- ncol(X)
 H <- matrix(c(1, 1, -1, 0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 1, 0), nrow = 3, ncol = p, byrow = TRUE)
 h <- rep(0, nrow(H))
 model <- preliminaryTest(X, y, H, h, alpha = 0.05)
-fitted(model, X)
-n_obs <- 100
-p_vars <- 5
-beta <- c(2, 1, 3, 0, 5)
-simulated_data <- simdata(n = n_obs, p = p_vars, beta)
-X <- simulated_data$X
-y <- simulated_data$y
-p <- ncol(X)
-# H beta = h
-H <- matrix(c(1, 1, -1, 0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 1, 0), nrow = 3, ncol = p, byrow = TRUE)
-h <- rep(0, nrow(H))
-model <- preliminaryTest(X, y, H, h, alpha = 0.05)
-predict(model, X)
+fitted(model)
 n_obs <- 100
 p_vars <- 5
 beta <- c(2, 1, 3, 0, 5)
@@ -144,19 +93,7 @@ p <- ncol(X)
 H <- matrix(c(1, 1, -1, 0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 1, 0), nrow = 3, ncol = p, byrow = TRUE)
 h <- rep(0, nrow(H))
 model <- restricted(X, y, H, h)
-fitted(model, X)
-n_obs <- 100
-p_vars <- 5
-beta <- c(2, 1, 3, 0, 5)
-simulated_data <- simdata(n = n_obs, p = p_vars, beta)
-X <- simulated_data$X
-y <- simulated_data$y
-p <- ncol(X)
-# H beta = h
-H <- matrix(c(1, 1, -1, 0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 1, 0), nrow = 3, ncol = p, byrow = TRUE)
-h <- rep(0, nrow(H))
-model <- restricted(X, y, H, h)
-predict(model, X)
+fitted(model)
 n_obs <- 100
 p_vars <- 5
 beta <- c(2, 1, 3, 0, 5)
@@ -164,15 +101,7 @@ simulated_data <- simdata(n = n_obs, p = p_vars, beta)
 X <- simulated_data$X
 y <- simulated_data$y
 model <- unrestricted(X, y)
-fitted(model, X)
-n_obs <- 100
-p_vars <- 5
-beta <- c(2, 1, 3, 0, 5)
-simulated_data <- simdata(n = n_obs, p = p_vars, beta)
-X <- simulated_data$X
-y <- simulated_data$y
-model <- unrestricted(X, y)
-predict(model, X)
+fitted(model)
 }
 \seealso{
 #' \code{\link{fitted.unrestricted}}, \code{\link{fitted.restricted}},
