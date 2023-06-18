@@ -33,6 +33,14 @@
 #'  Saleh, A. K. Md. Ehsanes. (2006). \emph{Theory of Preliminary Test and
 #'  Stein‐Type Estimation With Applications}, Wiley.
 #'
+#' Kaciranlar, S., Akdeniz, S. S. F., Styan, G. P. & Werner, H. J. (1999). A new biased
+#' estimators in linear regression and detailed
+#' analysis of the widely-analysed dataset on
+#' portland cement. \emph{Sankhya, Series B}, 61(3), 443-459.
+#'
+#' Kibria, B. M. Golam (2005). Applications of Some Improved Estimators in Linear Regression,
+#' \emph{Journal of Modern Applied Statistical Methods}, 5(2), 367- 380.
+#'
 #' @examples
 #' n_obs <- 100
 #' p_vars <- 5
@@ -56,6 +64,19 @@
 #' )
 #' h <- rep(1, nrow(H))
 #' stein(X, y, H, h)
+#'
+#' data(cement)
+#' X <- as.matrix(cbind(1,cement[,1:4]))
+#' y <- cement$y
+#' # Based on Kaciranlar et al. (1999)
+#' H <- matrix(c(0,1,-1,1,0), nrow = 1, ncol = 5, byrow = TRUE)
+#' h <- rep(0, nrow(H))
+#' stein(X, y, H, h)
+#'
+#' H <- matrix(c(0,1,-1,1,0,0, 0, 1, -1, -1,0, 1, -1, 0, -1), nrow = 3, ncol = 5, byrow = TRUE)
+#' h <- rep(0, nrow(H))
+#' stein(X, y, H, h)
+#'
 #' @export
 
 stein <- function(X, y, H, h, d = NULL, is_error_normal = FALSE) {

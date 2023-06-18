@@ -44,7 +44,14 @@
 #' @references
 #'  Saleh, A. K. Md. Ehsanes. (2006). \emph{Theory of Preliminary Test and Stein‐Type Estimation With Applications}, Wiley.
 #'
-#'  ref
+#' Kaciranlar, S., Akdeniz, S. S. F., Styan, G. P. & Werner, H. J. (1999). A new biased
+#' estimators in linear regression and detailed
+#' analysis of the widely-analysed dataset on
+#' portland cement. \emph{Sankhya, Series B}, 61(3), 443-459.
+#'
+#' Kibria, B. M. Golam (2005). Applications of Some Improved Estimators in Linear Regression,
+#' \emph{Journal of Modern Applied Statistical Methods}, 5(2), 367- 380.
+#'
 #' @examples
 #' n_obs <- 100
 #' p_vars <- 5
@@ -64,6 +71,17 @@
 #' h <- rep(1, nrow(H))
 #' improvedpreliminaryTest(X, y, H, h, alpha = 0.05)
 #'
+#' data(cement)
+#' X <- as.matrix(cbind(1,cement[,1:4]))
+#' y <- cement$y
+#' # Based on Kaciranlar et al. (1999)
+#' H <- matrix(c(0,1,-1,1,0), nrow = 1, ncol = 5, byrow = TRUE)
+#' h <- rep(0, nrow(H))
+#' improvedpreliminaryTest(X, y, H, h, alpha = 0.05)
+#'
+#' H <- matrix(c(0,1,-1,1,0,0, 0, 1, -1, -1,0, 1, -1, 0, -1), nrow = 3, ncol = 5, byrow = TRUE)
+#' h <- rep(0, nrow(H))
+#' improvedpreliminaryTest(X, y, H, h, alpha = 0.05)
 #' @importFrom stats qf
 #' @export
 
@@ -90,7 +108,7 @@ improvedpreliminaryTest <- function(X, y, H, h, alpha, d = NULL, is_error_normal
   residuals <- (y - X %*% beta)[, 1]
   s2 <- sum(residuals^2) / (n - p)
   fittedValues <- (X %*% beta)[, 1]
-  fit <- structure(list(coef = beta, residuals = residuals, s2 = s2, fitted.value = fittedValues), class = c("improvedpreliminaryTest"))
+  fit <- structure(list(coef = beta, s2 = s2, residuals = residuals,  fitted.value = fittedValues), class = c("improvedpreliminaryTest"))
   fit
 }
 
