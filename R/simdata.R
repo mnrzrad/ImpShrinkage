@@ -1,6 +1,12 @@
 #' Simulation data
 #'
-#' This function generates simulated data from a standard normal distribution as an example.
+#' This function generates a toy example. The error term, \eqn{\varepsilon},
+#' and the design matrix, \eqn{X}, are simulated from a standard normal
+#' distribution, \eqn{\mathcal{N}(0,1)}, using the \code{\link[stats]{rnorm}}
+#' function. Given the true parameter vector, \eqn{\beta}, the response vector,
+#' \eqn{y}, is calculated as
+#' \deqn{y = X \beta + \varepsilon}.
+#'
 #'
 #' @param n Number of observations.
 #'
@@ -18,7 +24,8 @@
 #' }
 #'
 #' @references
-#'  Saleh, A. K. Md. Ehsanes. (2006). \emph{Theory of Preliminary Test and Stein‐Type Estimation With Applications}, Wiley.
+#'  Saleh, A. K. Md. Ehsanes. (2006). \emph{Theory of Preliminary Test and
+#'  Stein‐Type Estimation With Applications}, Wiley.
 #'
 #' @examples
 #' simulated_data <- simdata(n = 100, p = 5, beta = c(2, 1, 3, 0, 5))

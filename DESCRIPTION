@@ -1,6 +1,6 @@
 Package: shrinkage
 Type: Package
-Title: Prelimanry test, Stein, and positive rule Stein estimators for multiple linear regression
+Title: Prelimanry test, Stein, and positive-rule Stein estimators for multiple linear regression
 Version: 0.1.0
 Authors@R: c(
     person("Mina", "Norouzirad", email = "mina.norouzirad@gmail.com", role = c("aut", "cre"),comment = c(ORCID = "0000-0003-0311-6888")),

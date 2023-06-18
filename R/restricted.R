@@ -1,16 +1,27 @@
 #' The restricted estimator
 #'
-#' This function calculates the restricted estimator that may also be used in the "\code{\link{preliminaryTest}}".
+#' This function calculates the restricted estimator using the formula:
+#' \deqn{\hat{\beta}^{R} = \hat{\beta}^{U} - (X^{\top}X)^{-1}H^{\top}
+#' (H(X^{\top}X)^{-1}H^{\top})^{-1}(H\hat{\beta}^{U}-h)}
+#' where \eqn{H\beta = h} represents a subspace of the parameter space induced
+#' by the non-sample information. Here, \eqn{H} is a known \eqn{q \times p}
+#' matrix, and \eqn{h} is a known \eqn{q}-vector.
 #'
-#' @param X Matrix with input observations, of dimension n_obs x p_vars; each row is an observation vector.
-#' @param y Univariate quantitative response variable with dimension n_obs.
-#' @param H A given q_restr x p_vars matrix.
-#' @param h A given q_restr x 1 vector.
+#'
+#' #'The corresponding unrestricted estimator of \eqn{\sigma^2} is
+#' \deqn{s^2 = \frac{1}{n-p}(y-X\hat{\beta}^{R})^{\top}(y - X\hat{\beta}^{R})}
+#'
+#' @param X Matrix with input observations, of dimension \code{n} x \code{p};
+#' each row is an observation vector.
+#' @param y Univariate quantitative response variable with dimension \code{n}.
+#' @param H A given \code{q} x \code{p} matrix.
+#' @param h A given \code{q} x \code{1} vector.
 #'
 #' @return A vector of regression coefficients
 #'
 #' @references
-#'  Saleh, A. K. Md. Ehsanes. (2006). \emph{Theory of Preliminary Test and Stein‐Type Estimation With Applications}, Wiley.
+#'  Saleh, A. K. Md. Ehsanes. (2006). \emph{Theory of Preliminary Test and
+#'  Stein‐Type Estimation With Applications}, Wiley.
 #'
 #' @examples
 #' n_obs <- 100
@@ -21,12 +32,14 @@
 #' y <- simulated_data$y
 #' p <- ncol(X)
 #' # H beta = h
-#' H <- matrix(c(1, 1, -1, 0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 1, 0), nrow = 3, ncol = p, byrow = TRUE)
+#' H <- matrix(c(1, 1, -1, 0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 1, 0), nrow = 3,
+#' ncol = p, byrow = TRUE)
 #' h <- rep(0, nrow(H))
 #' restricted(X, y, H, h)
 #'
 #' # H beta != h
-#' H <- matrix(c(1, 1, -1, 0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 1, 0), nrow = 3, ncol = p, byrow = TRUE)
+#' H <- matrix(c(1, 1, -1, 0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 1, 0), nrow = 3,
+#' ncol = p, byrow = TRUE)
 #' h <- rep(1, nrow(H))
 #' restricted(X, y, H, h)
 #'
@@ -38,8 +51,11 @@ restricted <- function(X, y, H, h) {
   C <- t(X) %*% X
   beta <- u_est$coef - solve(C) %*% t(H) %*% solve(H %*% solve(C) %*% t(H)) %*% (H %*% u_est$coef - h)
   residuals <- (y - X %*% beta)[, 1]
-  s2 <- sum(residuals^2) / (d[1] - d[2])
-  fit <- structure(list(coef = beta, residuals = residuals, s2 = s2), class = c("restricted"))
+  n <- dim(X)[1]
+  p <- dim(X)[2]
+  s2 <- sum(residuals^2) / (n - p)
+  fittedValues <- (X %*% beta)[, 1]
+  fit <- structure(list(coef = beta, residuals = residuals, s2 = s2, fitted.value = fittedValues), class = c("restricted"))
   fit
 }
 

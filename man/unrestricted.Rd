@@ -7,15 +7,28 @@
 unrestricted(X, y)
 }
 \arguments{
-\item{X}{Matrix with input observations, of dimension n_obs x p_vars; each row is an observation vector.}
+\item{X}{Matrix with input observations, of dimension \code{n} x \code{p};
+each row is an observation vector.}
 
-\item{y}{Univariate quantitative response variable with dimension n_obs.}
+\item{y}{Univariate quantitative response variable with dimension \code{n}.}
 }
 \value{
 A vector of regression coefficients
 }
 \description{
-This function calculates the unrestricted estimator that may also be used in the "\code{\link{preliminaryTest}}".
+This function calculates the unrestricted estimator using the formula:
+\deqn{\hat{\beta}^{U} = (X^{\top} X)^{-1} X^{\top} y}
+where \eqn{^{\top}} denotes the transpose of a matrix, calculated using
+\code{\link[base]{t}}, and \eqn{^{-1}} represents the inverse of a matrix,
+calculated using \code{\link[base]{solve}}. It is important to note that the
+input matrices \eqn{X} and \eqn{y} should be standardized, for example, by
+using \code{\link[base]{scale}}. Alternatively, the user can employ
+\code{\link[stats]{lm}} to obtain this estimator, but it is crucial to
+remember to set \code{intercept = FALSE}.
+}
+\details{
+The corresponding unrestricted estimator of \eqn{\sigma^2} is
+\deqn{s^2 = \frac{1}{n-p}(y-X\hat{\beta}^{U})^{\top}(y - X\hat{\beta}^{U})}
 }
 \examples{
 n_obs <- 100
@@ -24,9 +37,9 @@ beta <- c(2, 1, 3, 0, 5)
 simulated_data <- simdata(n = n_obs, p = p_vars, beta)
 X <- simulated_data$X
 y <- simulated_data$y
-unrestricted(X, y)
-
+unrestricted(X, y) #'
 }
 \references{
-Saleh, A. K. Md. Ehsanes. (2006). \emph{Theory of Preliminary Test and Stein‐Type Estimation With Applications}, Wiley.
+Saleh, A. K. Md. Ehsanes. (2006). \emph{Theory of Preliminary Test and
+ Stein‐Type Estimation With Applications}, Wiley.
 }

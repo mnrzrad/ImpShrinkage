@@ -4,27 +4,55 @@
 \alias{improvedpreliminaryTest}
 \title{The improved preliminary test estimator}
 \usage{
-improvedpreliminaryTest(X, y, H, h, alpha, d = NULL)
+improvedpreliminaryTest(X, y, H, h, alpha, d = NULL, normal_error = FALSE)
 }
 \arguments{
-\item{X}{Matrix with input observations, of dimension n_obs x p_vars; each row is an observation vector.}
+\item{X}{Matrix with input observations, of dimension \code{n} x \code{p};
+each row is an observation vector.}
 
-\item{y}{Univariate quantitative response variable with dimension n_obs}
+\item{y}{Univariate quantitative response variable with dimension \code{n}.}
 
-\item{H}{A given q_restr x p_vars matrix.}
+\item{H}{A given \code{q} x \code{p} matrix.}
 
-\item{h}{A given q_restr x 1 vector.}
+\item{h}{A given \code{q} x \code{1} vector.}
 
 \item{alpha}{A given significance level}
 
-\item{d}{An optional parameter. If not provided (or set to NULL), it will be calculated using \eqn{\frac{{(q_restr - 2) \cdot (n_obs - p_vars}}{{q_restr \cdot (n_obs - p_vars + 2)}}}
-.}
+\item{d}{An optional parameter. If not provided (or set to \code{NULL}), it will be
+calculated using \eqn{\frac{{(q - 2) \cdot (n - p}}{{q \cdot (n - p + 2)}}}}
+
+\item{normal_error}{logical value indicating whether the errors follow a
+normal distribution. #'If \code{normal_error} is \code{TRUE}, the distribution
+of the test statistics for the null hypothesis is F distribution,
+\code{\link[stats]{FDist}}. On the other hand, if the errors have a
+non-normal distribution, the asymptotic distribution of the test statistics
+is \eqn{\chi^2} distribution, \code{\link[stats]{Chisquare}}. By default,
+\code{normal_error} is set to \code{FALSE}.}
 }
 \value{
 A vector of regression coefficients
 }
 \description{
-This function calculates the improved preliminary test for the null hypothesis: H.beta = h
+This function calculates the improved preliminary test estimator that is
+calculated by
+If the error has a normal distribution:#'
+\deqn{\hat{\beta}^{ipt}= \hat{\beta}^{PT} - d (\hat{\beta}^{U} - \hat{\beta}^{R}) \mathcal{L}^{-1} I(\mathcal{L} > F_{q,m}(\alpha)) }
+\deqn{\hat{\beta}^{ipt}= \hat{\beta}^{PT} - d (\hat{\beta}^{U} - \hat{\beta}^{R}) \mathcal{L}^{-1} I(\mathcal{L} > \chi^2_{q}(\alpha)) }
+where \eqn{I(A)} denotes an indicator function and
+\itemize{
+  \item \eqn{\hat{\beta}^{PT}}: the \code{\link{preliminaryTest}} estimator
+  \item \eqn{\hat{\beta}^{U}}: the \code{\link{unrestricted}} estimator
+  \item \eqn{\hat{\beta}^{R}}: the \code{\link{restricted}} estimator
+  \item \eqn{\mathcal{L}}: the \code{\link{test_staistics}}
+  \item \eqn{F_{q,m}(\alpha)}: the upper \eqn{\alpha} level critical value of \eqn{F}-distribution with \eqn{(q,n-p)} degrees of freedom, calculated using \code{\link[stats]{qf}}.
+  \item \eqn{\chi^2_{q}(\alpha)}: the upper \eqn{\alpha} level critical value of \eqn{\chi^2}-distribution with \eqn{q} degree of freedom, calculated using \code{\link[stats]{qchisq}}.
+  \item \eqn{d}: the shrinkage factor
+  \item \eqn{\alpha}: the significance level.
+}
+}
+\details{
+#'The corresponding unrestricted estimator of \eqn{\sigma^2} is
+\deqn{s^2 = \frac{1}{n-p}(y-X\hat{\beta}^{iPT})^{\top}(y - X\hat{\beta}^{iPT})}
 }
 \examples{
 n_obs <- 100

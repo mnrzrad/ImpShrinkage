@@ -7,19 +7,29 @@
 restricted(X, y, H, h)
 }
 \arguments{
-\item{X}{Matrix with input observations, of dimension n_obs x p_vars; each row is an observation vector.}
+\item{X}{Matrix with input observations, of dimension \code{n} x \code{p};
+each row is an observation vector.}
 
-\item{y}{Univariate quantitative response variable with dimension n_obs.}
+\item{y}{Univariate quantitative response variable with dimension \code{n}.}
 
-\item{H}{A given q_restr x p_vars matrix.}
+\item{H}{A given \code{q} x \code{p} matrix.}
 
-\item{h}{A given q_restr x 1 vector.}
+\item{h}{A given \code{q} x \code{1} vector.}
 }
 \value{
 A vector of regression coefficients
 }
 \description{
-This function calculates the restricted estimator that may also be used in the "\code{\link{preliminaryTest}}".
+This function calculates the restricted estimator using the formula:
+\deqn{\hat{\beta}^{R} = \hat{\beta}^{U} - (X^{\top}X)^{-1}H^{\top}
+(H(X^{\top}X)^{-1}H^{\top})^{-1}(H\hat{\beta}^{U}-h)}
+where \eqn{H\beta = h} represents a subspace of the parameter space induced
+by the non-sample information. Here, \eqn{H} is a known \eqn{q \times p}
+matrix, and \eqn{h} is a known \eqn{q}-vector.
+}
+\details{
+#'The corresponding unrestricted estimator of \eqn{\sigma^2} is
+\deqn{s^2 = \frac{1}{n-p}(y-X\hat{\beta}^{R})^{\top}(y - X\hat{\beta}^{R})}
 }
 \examples{
 n_obs <- 100
@@ -30,16 +40,19 @@ X <- simulated_data$X
 y <- simulated_data$y
 p <- ncol(X)
 # H beta = h
-H <- matrix(c(1, 1, -1, 0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 1, 0), nrow = 3, ncol = p, byrow = TRUE)
+H <- matrix(c(1, 1, -1, 0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 1, 0), nrow = 3,
+ncol = p, byrow = TRUE)
 h <- rep(0, nrow(H))
 restricted(X, y, H, h)
 
 # H beta != h
-H <- matrix(c(1, 1, -1, 0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 1, 0), nrow = 3, ncol = p, byrow = TRUE)
+H <- matrix(c(1, 1, -1, 0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 1, 0), nrow = 3,
+ncol = p, byrow = TRUE)
 h <- rep(1, nrow(H))
 restricted(X, y, H, h)
 
 }
 \references{
-Saleh, A. K. Md. Ehsanes. (2006). \emph{Theory of Preliminary Test and Stein‐Type Estimation With Applications}, Wiley.
+Saleh, A. K. Md. Ehsanes. (2006). \emph{Theory of Preliminary Test and
+ Stein‐Type Estimation With Applications}, Wiley.
 }
