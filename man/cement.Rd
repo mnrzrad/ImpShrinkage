@@ -27,6 +27,7 @@ when the missing data pattern is monotone.
 }
 \examples{
 data("cement")
+cement
 }
 \references{
 Davison, A. C. (2003) Statistical Models. Cambridge University Press. Page 355.

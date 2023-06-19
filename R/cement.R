@@ -28,4 +28,5 @@
 #' Roderick J.A. Little and Donald B. Rubin (2002). Statistical Analysis with Missing Data, Second Edition. Wilely. Page 154.
 #' @examples
 #' data("cement")
+#' cement
 NULL
