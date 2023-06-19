@@ -8,7 +8,7 @@ unrestricted(X, y)
 }
 \arguments{
 \item{X}{Matrix with input observations, of dimension \code{n} x \code{p}, where
-each row is an observation vector.}
+each row is an observation vector;}
 
 \item{y}{Vector with response observations of size \code{n}.}
 }
@@ -42,7 +42,19 @@ beta <- c(2, 1, 3, 0, 5)
 simulated_data <- simdata(n = n_obs, p = p_vars, beta)
 X <- simulated_data$X
 y <- simulated_data$y
-unrestricted(X, y) #'
+unrestricted(X, y)
+
+data(cement)
+X <- as.matrix(cbind(1, cement[, 1:4]))
+y <- cement$y
+# Based on Kaciranlar et al. (1999)
+H <- matrix(c(0, 1, -1, 1, 0), nrow = 1, ncol = 5, byrow = TRUE)
+h <- rep(0, nrow(H))
+unrestricted(X, y)
+
+H <- matrix(c(0, 1, -1, 1, 0, 0, 0, 1, -1, -1, 0, 1, -1, 0, -1), nrow = 3, ncol = 5, byrow = TRUE)
+h <- rep(0, nrow(H))
+unrestricted(X, y)
 }
 \references{
 Saleh, A. K. Md. Ehsanes. (2006). \emph{Theory of Preliminary Test and
