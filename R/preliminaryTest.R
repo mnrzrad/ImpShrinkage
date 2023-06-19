@@ -8,11 +8,14 @@
 #' \itemize{
 #'   \item \eqn{\hat{\beta}^{U}} is the \code{\link{unrestricted}} estimator;
 #'   \item \eqn{\hat{\beta}^{R}} is the \code{\link{restricted}} estimator;
-#'   \item \eqn{\mathcal{L}} is the \code{\link{test_statistics}};
+#'   \item \eqn{\mathcal{L}} is the \code{\link{test_statistic}};
 #'   \item \eqn{F_{q,m}(\alpha)} is the upper \eqn{\alpha} level critical value of \eqn{F}-distribution with \eqn{(q,n-p)} degrees of freedom, calculated using \code{\link[stats]{qf}};
 #'   \item \eqn{\chi^2_{q}(\alpha)}is the upper \eqn{\alpha} level critical value of \eqn{\chi^2}-distribution with \eqn{q} degree of freedom, calculated using \code{\link[stats]{qchisq}};
 #'   \item \eqn{\alpha}: the significance level.
 #' }
+#'
+#' The corresponding estimator of \eqn{\sigma^2} is
+#' \deqn{s^2 = \frac{1}{n-p}(y-X\hat{\beta}^{PT})^{\top}(y - X\hat{\beta}^{PT})}
 #'
 #' @param X Matrix with input observations, of dimension \code{n} x \code{p};
 #' each row is an observation vector.
@@ -89,7 +92,7 @@ preliminaryTest <- function(X, y, H, h, alpha, is_error_normal = FALSE) {
   q <- nrow(H)
   u_est <- unrestricted(X, y)
   r_est <- restricted(X, y, H, h)
-  test_stat <- test_statistics(X, y, H, h, is_error_normal = is_error_normal)
+  test_stat <- test_statistic(X, y, H, h, is_error_normal = is_error_normal)
   if (!is_error_normal) {
     threshold <- stats::qf(1 - alpha, q, n - p)
   } else {

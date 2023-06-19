@@ -6,7 +6,7 @@
 #' \itemize{
 #'   \item \eqn{\hat{\beta}^{U}} is the \code{\link{unrestricted}} estimator;
 #'   \item \eqn{\hat{\beta}^{R}} is the \code{\link{restricted}} estimator;
-#'   \item \eqn{\mathcal{L}} is the \code{\link{test_statistics}};
+#'   \item \eqn{\mathcal{L}} is the \code{\link{test_statistic}};
 #'   \item \eqn{d} is the shrinkage factor.
 #' }
 #'
@@ -97,9 +97,9 @@ stein <- function(X, y, H, h, d = NULL, is_error_normal = FALSE) {
   u_est <- unrestricted(X, y)
   r_est <- restricted(X, y, H, h)
   if (!is_error_normal) {
-    test_stat <- test_statistics(X, y, H, h)
+    test_stat <- test_statistic(X, y, H, h)
   } else {
-    test_stat <- q * test_statistics(X, y, H, h)
+    test_stat <- q * test_statistic(X, y, H, h)
   }
   beta <- u_est$coef - d * (u_est$coef - r_est$coef) / test_stat
   residuals <- (y - X %*% beta)[, 1]

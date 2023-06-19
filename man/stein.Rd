@@ -42,7 +42,7 @@ where
 \itemize{
   \item \eqn{\hat{\beta}^{U}} is the \code{\link{unrestricted}} estimator;
   \item \eqn{\hat{\beta}^{R}} is the \code{\link{restricted}} estimator;
-  \item \eqn{\mathcal{L}} is the \code{\link{test_statistics}};
+  \item \eqn{\mathcal{L}} is the \code{\link{test_statistic}};
   \item \eqn{d} is the shrinkage factor.
 }
 }

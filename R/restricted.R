@@ -8,14 +8,14 @@
 #' matrix, and \eqn{h} is a known \eqn{q}-vector.
 #'
 #'
-#' The corresponding estimator of \eqn{\sigma^2} is
-#' \deqn{s^2 = \frac{1}{n-p}(y-X\hat{\beta}^{R})^{\top}(y - X\hat{\beta}^{R})}
-#'
 #' @param X Matrix with input observations, of dimension \code{n} x \code{p};
 #' each row is an observation vector.
 #' @param y Vector with response observations of size \code{n}.
 #' @param H A given \code{q} x \code{p} matrix.
 #' @param h A given \code{q} x \code{1} vector.
+#'
+#' The corresponding estimator of \eqn{\sigma^2} is
+#' \deqn{s^2 = \frac{1}{n-p}(y-X\hat{\beta}^{R})^{\top}(y - X\hat{\beta}^{R})}
 #'
 #' @returns
 #' An object of class \code{restricted} is a list containing at least the following components:

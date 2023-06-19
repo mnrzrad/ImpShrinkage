@@ -11,6 +11,7 @@
 #' The corresponding unrestricted estimator of \eqn{\sigma^2} is
 #' \deqn{s^2 = \frac{1}{n-p}(y-X\hat{\beta}^{U})^{\top}(y - X\hat{\beta}^{U})}
 #'
+#'
 #' @param X Matrix with input observations, of dimension \code{n} x \code{p}, where
 #' each row is an observation vector.
 #' @param y Vector with response observations of size \code{n}.

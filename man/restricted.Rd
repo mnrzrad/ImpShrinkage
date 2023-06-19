@@ -14,7 +14,10 @@ each row is an observation vector.}
 
 \item{H}{A given \code{q} x \code{p} matrix.}
 
-\item{h}{A given \code{q} x \code{1} vector.}
+\item{h}{A given \code{q} x \code{1} vector.
+
+The corresponding estimator of \eqn{\sigma^2} is
+\deqn{s^2 = \frac{1}{n-p}(y-X\hat{\beta}^{R})^{\top}(y - X\hat{\beta}^{R})}}
 }
 \value{
 An object of class \code{restricted} is a list containing at least the following components:
@@ -32,10 +35,6 @@ This function calculates the restricted estimator using
 where \eqn{H\beta = h} represents a subspace of the parameter space induced
 by the non-sample information. Here, \eqn{H} is a known \eqn{q \times p}
 matrix, and \eqn{h} is a known \eqn{q}-vector.
-}
-\details{
-The corresponding estimator of \eqn{\sigma^2} is
-\deqn{s^2 = \frac{1}{n-p}(y-X\hat{\beta}^{R})^{\top}(y - X\hat{\beta}^{R})}
 }
 \examples{
 n_obs <- 100
