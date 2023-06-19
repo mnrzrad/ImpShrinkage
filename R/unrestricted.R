@@ -61,9 +61,12 @@ unrestricted <- function(X, y) {
 #'
 #' @param object An object of class "\code{unrestricted}".
 #' @param ... Other.
-#' @seealso#' \code{\link{fitted.unrestricted}}, \code{\link{fitted.restricted}},
-#' \code{\link{fitted.preliminaryTest}},\code{\link{fitted.improvedpreliminaryTest}},
-#' \code{\link{fitted.stein}}, \code{\link{fitted.positivestein}}
+#' @seealso#'
+#' \code{\link{fitted.restricted}},
+#' \code{\link{fitted.preliminaryTest}},
+#' \code{\link{fitted.improvedpreliminaryTest}},
+#' \code{\link{fitted.stein}},
+#' \code{\link{fitted.positivestein}}.
 #' @importFrom stats fitted
 #' @examples
 #' n_obs <- 100
@@ -89,9 +92,12 @@ fitted.unrestricted <- function(object, ...) {
 #' @param newdata An optional data frame in which to look for variables with which to predict.
 #'  If omitted, the fitted values are used.
 #' @param ... Other.
-#' @seealso \code{\link{predict.unrestricted}}, \code{\link{predict.restricted}},
-#'  \code{\link{predict.preliminaryTest}}, \code{\link{predict.improvedpreliminaryTest}},
-#'  \code{\link{predict.stein}}, \code{\link{predict.positivestein}}.
+#' @seealso
+#' \code{\link{predict.restricted}},
+#' \code{\link{predict.preliminaryTest}},
+#' \code{\link{predict.improvedpreliminaryTest}},
+#' \code{\link{predict.stein}},
+#' \code{\link{predict.positivestein}}.
 #'
 #' @importFrom stats predict
 #' @examples
@@ -115,9 +121,12 @@ predict.unrestricted <- function(object, newdata, ...) {
 #'
 #' @param object An object of class "\code{unrestricted}".
 #' @param ... Other.
-#' @seealso \code{\link{residuals.positivestein}}, \code{\link{residuals.preliminaryTest}},
-#' \code{\link{residuals.restricted}}, \code{\link{residuals.stein}},
-#' \code{\link{residuals.unrestricted}}, \code{\link{residuals.improvedpreliminaryTest}}.
+#' @seealso
+#' \code{\link{residuals.restricted}},
+#' \code{\link{residuals.preliminaryTest}},
+#' \code{\link{residuals.improvedpreliminaryTest}}
+#' \code{\link{residuals.stein}},
+#' \code{\link{residuals.positivestein}}.
 #' @importFrom stats residuals
 #' @examples
 #' n_obs <- 100
@@ -142,12 +151,17 @@ residuals.unrestricted <- function(object, ...) {
 #'
 #' @param object An object of class "\code{unrestricted}".
 #' @param ... Other.
-#' @seealso \code{\link{coefficients.positivestein}}, \code{\link{coefficients.preliminaryTest}},
-#' \code{\link{coefficients.restricted}}, \code{\link{coefficients.stein}},
-#' \code{\link{coefficients.unrestricted}}, \code{\link{coefficients.improvedpreliminaryTest}},
-#' \code{\link{coef.positivestein}}, \code{\link{coef.preliminaryTest}},
-#' \code{\link{coef.restricted}}, \code{\link{coef.stein}},
-#' \code{\link{coef.unrestricted}}, \code{\link{coef.improvedpreliminaryTest}}.
+#' @seealso
+#' \code{\link{coefficients.restricted}},
+#' \code{\link{coefficients.preliminaryTest}},
+#' \code{\link{coefficients.improvedpreliminaryTest}},
+#' \code{\link{coefficients.stein}},
+#' \code{\link{coefficients.positivestein}},
+#' \code{\link{coef.restricted}},
+#' \code{\link{coef.preliminaryTest}},
+#' \code{\link{coef.improvedpreliminaryTest}}
+#' \code{\link{coef.stein}},
+#' \code{\link{coef.positivestein}}.
 #' @importFrom stats coefficients
 #' @examples
 #' n_obs <- 100

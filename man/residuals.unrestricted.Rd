@@ -25,7 +25,9 @@ model <- unrestricted(X, y)
 residuals(model)
 }
 \seealso{
-\code{\link{residuals.positivestein}}, \code{\link{residuals.preliminaryTest}},
-\code{\link{residuals.restricted}}, \code{\link{residuals.stein}},
-\code{\link{residuals.unrestricted}}, \code{\link{residuals.improvedpreliminaryTest}}.
+\code{\link{residuals.restricted}},
+\code{\link{residuals.preliminaryTest}},
+\code{\link{residuals.improvedpreliminaryTest}}
+\code{\link{residuals.stein}},
+\code{\link{residuals.positivestein}}.
 }

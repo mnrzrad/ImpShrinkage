@@ -30,6 +30,6 @@ residuals(model)
 }
 \seealso{
 \code{\link{residuals.positivestein}}, \code{\link{residuals.preliminaryTest}},
-\code{\link{residuals.restricted}}, \code{\link{residuals.stein}},
+\code{\link{residuals.restricted}},
 \code{\link{residuals.unrestricted}}, \code{\link{residuals.improvedpreliminaryTest}}.
 }

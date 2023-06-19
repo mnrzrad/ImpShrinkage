@@ -30,7 +30,10 @@ model <- stein(X, y, H, h)
 fitted(model)
 }
 \seealso{
-#' \code{\link{fitted.unrestricted}}, \code{\link{fitted.restricted}},
-\code{\link{fitted.preliminaryTest}},\code{\link{fitted.improvedpreliminaryTest}},
-\code{\link{fitted.stein}}, \code{\link{fitted.positivestein}}
+#'
+\code{\link{fitted.unrestricted}},
+\code{\link{fitted.restricted}},
+\code{\link{fitted.preliminaryTest}},
+\code{\link{fitted.improvedpreliminaryTest}},
+\code{\link{fitted.positivestein}}
 }

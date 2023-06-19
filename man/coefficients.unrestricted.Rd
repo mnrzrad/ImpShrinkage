@@ -31,10 +31,14 @@ coefficients(model)
 coefficients(model)
 }
 \seealso{
-\code{\link{coefficients.positivestein}}, \code{\link{coefficients.preliminaryTest}},
-\code{\link{coefficients.restricted}}, \code{\link{coefficients.stein}},
-\code{\link{coefficients.unrestricted}}, \code{\link{coefficients.improvedpreliminaryTest}},
-\code{\link{coef.positivestein}}, \code{\link{coef.preliminaryTest}},
-\code{\link{coef.restricted}}, \code{\link{coef.stein}},
-\code{\link{coef.unrestricted}}, \code{\link{coef.improvedpreliminaryTest}}.
+\code{\link{coefficients.restricted}},
+\code{\link{coefficients.preliminaryTest}},
+\code{\link{coefficients.improvedpreliminaryTest}},
+\code{\link{coefficients.stein}},
+\code{\link{coefficients.positivestein}},
+\code{\link{coef.restricted}},
+\code{\link{coef.preliminaryTest}},
+\code{\link{coef.improvedpreliminaryTest}}
+\code{\link{coef.stein}},
+\code{\link{coef.positivestein}}.
 }

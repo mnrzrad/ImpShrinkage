@@ -33,7 +33,9 @@ model <- stein(X, y, H, h)
 predict(model, X)
 }
 \seealso{
-\code{\link{predict.unrestricted}}, \code{\link{predict.restricted}},
- \code{\link{predict.preliminaryTest}}, \code{\link{predict.improvedpreliminaryTest}},
- \code{\link{predict.stein}}, \code{\link{predict.positivestein}}.
+\code{\link{predict.unrestricted}},
+\code{\link{predict.restricted}},
+\code{\link{predict.preliminaryTest}},
+\code{\link{predict.improvedpreliminaryTest}},
+\code{\link{predict.positivestein}}.
 }
