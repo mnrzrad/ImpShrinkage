@@ -1,10 +1,8 @@
 #' The Unrestricted estimator
 #'
-#' This function calculates the unrestricted estimator using the formula:
+#' This function calculates the unrestricted estimator as
 #' \deqn{\hat{\beta}^{U} = (X^{\top} X)^{-1} X^{\top} y}
-#' where \eqn{^{\top}} denotes the transpose of a matrix, calculated using
-#' \code{\link[base]{t}}, and \eqn{^{-1}} represents the inverse of a matrix,
-#' calculated using \code{\link[base]{solve}}. It is important to note that the
+#' where \eqn{^{\top}} denotes the transpose of a matrix. It is important to note that the
 #' input matrices \eqn{X} and \eqn{y} should be standardized, for example, by
 #' using \code{\link[base]{scale}}. Alternatively, the user can employ
 #' \code{\link[stats]{lm}} to obtain this estimator, but it is crucial to
@@ -13,10 +11,10 @@
 #' The corresponding unrestricted estimator of \eqn{\sigma^2} is
 #' \deqn{s^2 = \frac{1}{n-p}(y-X\hat{\beta}^{U})^{\top}(y - X\hat{\beta}^{U})}
 #'
-#' @param X Matrix with input observations, of dimension \code{n} x \code{p};
+#' @param X Matrix with input observations, of dimension \code{n} x \code{p}, where
 #' each row is an observation vector.
 #'
-#' @param y Univariate quantitative response variable with dimension \code{n}.
+#' @param y Vector with response observations of size \code{n}.
 #'
 #' @return A vector of regression coefficients
 #'

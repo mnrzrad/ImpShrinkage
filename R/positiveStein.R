@@ -38,7 +38,7 @@
 #'     \item{\code{coef}}{A named vector of coefficients.}
 #'     \item{\code{residuals}}{The residuals, that is, response minus fitted values.}
 #'     \item{\code{s2}}{The estimated variance.}
-#'     \item{\code{fitted.values}}{The fitted mean values.}
+#'     \item{\code{fitted.values}}{The fitted values.}
 #'   }
 #'
 
