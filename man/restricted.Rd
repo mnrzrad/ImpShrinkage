@@ -17,7 +17,13 @@ each row is an observation vector.}
 \item{h}{A given \code{q} x \code{1} vector.}
 }
 \value{
-A vector of regression coefficients
+An object of class \code{restricted} is a list containing at least the following components:
+  \describe{
+    \item{\code{coef}}{A named vector of coefficients.}
+    \item{\code{residuals}}{The residuals, that is, response minus fitted values.}
+    \item{\code{s2}}{The estimated variance.}
+    \item{\code{fitted.values}}{The fitted values.}
+  }
 }
 \description{
 This function calculates the restricted estimator using the formula:

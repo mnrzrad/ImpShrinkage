@@ -31,7 +31,7 @@
 #' is the \eqn{\chi^2} distribution (\code{\link[stats]{Chisquare}}). By default,
 #' \code{is_error_normal} is set to \code{FALSE}.
 #'
-#' @return A numerical value of the test statistic
+#' @return the value of test statistic
 #'
 #' @references
 #'  Saleh, A. K. Md. Ehsanes. (2006). \emph{Theory of Preliminary Test and

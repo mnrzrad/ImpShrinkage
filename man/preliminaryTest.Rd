@@ -28,7 +28,13 @@ a normal distribution. If \code{is_error_normal} is \code{TRUE},
  By default, \code{is_error_normal} is set to \code{FALSE}.}
 }
 \value{
-A vector of regression coefficients
+An object of class \code{preliminaryTest} is a list containing at least the following components:
+  \describe{
+    \item{\code{coef}}{A named vector of coefficients.}
+    \item{\code{residuals}}{The residuals, that is, response minus fitted values.}
+    \item{\code{s2}}{The estimated variance.}
+    \item{\code{fitted.values}}{The fitted values.}
+  }
 }
 \description{
 This function calculates the preliminary test using the formula:
