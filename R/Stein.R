@@ -180,8 +180,7 @@ predict.stein <- function(object, newdata, ...) {
 #'
 #' residuals values based on model object.
 #'
-#' @param object An object of class "\code{positivestein}", "\code{preliminaryTest}",
-#' "\code{restricted}", "\code{stein}", "\code{unrestricted}" or "\code{improvedpreliminaryTest}".
+#' @param object An object of class "\code{stein}".
 #' @param ... Other.
 #' @seealso \code{\link{residuals.positivestein}}, \code{\link{residuals.preliminaryTest}},
 #' \code{\link{residuals.restricted}}, \code{\link{residuals.stein}},
@@ -208,11 +207,11 @@ residuals.stein <- function(object, ...) {
 
 #' Extract Model Coefficients
 #'
-#' coef is a generic function which extracts model
-#' coefficients from objects returned by modeling functions.coefficients is an alias for it.
+#' \code{coef} is a generic function which extracts model
+#' coefficients from objects returned by modeling \code{functions.coefficients}
+#' is an alias for it.
 #'
-#' @param object An object of class "\code{positivestein}", "\code{preliminaryTest}",
-#' "\code{restricted}", "\code{stein}", "\code{unrestricted}" or "\code{improvedpreliminaryTest}".
+#' @param object An object of class "\code{stein}".
 #' @param ... Other.
 #' @seealso \code{\link{coefficients.positivestein}}, \code{\link{coefficients.preliminaryTest}},
 #' \code{\link{coefficients.restricted}}, \code{\link{coefficients.stein}},

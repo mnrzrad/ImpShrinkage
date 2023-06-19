@@ -165,7 +165,15 @@ predict.preliminaryTest <- function(object, newdata, ...) {
   return((newdata %*% object$coef)[, 1])
 }
 
-#' @rdname residuals.stein
+#' residuals method for Model Fits
+#'
+#' residuals values based on model object.
+#'
+#' @param object An object of class "\code{preliminaryTest}".
+#' @param ... Other.
+#' @seealso \code{\link{residuals.positivestein}}, \code{\link{residuals.preliminaryTest}},
+#' \code{\link{residuals.restricted}}, \code{\link{residuals.stein}},
+#' \code{\link{residuals.unrestricted}}, \code{\link{residuals.improvedpreliminaryTest}}.
 #' @importFrom stats residuals
 #' @examples
 #' n_obs <- 100
@@ -186,7 +194,20 @@ residuals.preliminaryTest <- function(object, ...) {
   return(object$residuals)
 }
 
-#' @rdname coefficients.stein
+#' Extract Model Coefficients
+#'
+#' \code{coef} is a generic function which extracts model
+#' coefficients from objects returned by modeling \code{functions.coefficients}
+#' is an alias for it.
+#'
+#' @param object An object of class "\code{preliminaryTest}".
+#' @param ... Other.
+#' @seealso \code{\link{coefficients.positivestein}}, \code{\link{coefficients.preliminaryTest}},
+#' \code{\link{coefficients.restricted}}, \code{\link{coefficients.stein}},
+#' \code{\link{coefficients.unrestricted}}, \code{\link{coefficients.improvedpreliminaryTest}},
+#' \code{\link{coef.positivestein}}, \code{\link{coef.preliminaryTest}},
+#' \code{\link{coef.restricted}}, \code{\link{coef.stein}},
+#' \code{\link{coef.unrestricted}}, \code{\link{coef.improvedpreliminaryTest}}.
 #' @importFrom stats coefficients
 #' @examples
 #' n_obs <- 100
@@ -207,7 +228,7 @@ coefficients.preliminaryTest <- function(object, ...) {
   return(object$coef)
 }
 
-#' @rdname coefficients.stein
+#' @rdname coefficients.preliminaryTest
 #' @importFrom stats coef
 #' @examples
 #' n_obs <- 100
