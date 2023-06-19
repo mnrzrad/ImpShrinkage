@@ -28,14 +28,7 @@ X <- simulated_data$X
 y <- simulated_data$y
 model <- unrestricted(X, y)
 coefficients(model)
-n_obs <- 100
-p_vars <- 5
-beta <- c(2, 1, 3, 0, 5)
-simulated_data <- simdata(n = n_obs, p = p_vars, beta)
-X <- simulated_data$X
-y <- simulated_data$y
-model <- unrestricted(X, y)
-coef(model)
+coefficients(model)
 }
 \seealso{
 \code{\link{coefficients.positivestein}}, \code{\link{coefficients.preliminaryTest}},

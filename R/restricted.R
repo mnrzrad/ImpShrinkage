@@ -216,17 +216,6 @@ coefficients.restricted <- function(object, ...) {
 #' @rdname coefficients.restricted
 #' @importFrom stats coef
 #' @examples
-#' n_obs <- 100
-#' p_vars <- 5
-#' beta <- c(2, 1, 3, 0, 5)
-#' simulated_data <- simdata(n = n_obs, p = p_vars, beta)
-#' X <- simulated_data$X
-#' y <- simulated_data$y
-#' p <- ncol(X)
-#' # H beta = h
-#' H <- matrix(c(1, 1, -1, 0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 1, 0), nrow = 3, ncol = p, byrow = TRUE)
-#' h <- rep(0, nrow(H))
-#' model <- restricted(X, y, H, h)
 #' coef(model)
 #' @export
 
