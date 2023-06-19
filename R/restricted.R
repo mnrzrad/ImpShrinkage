@@ -17,7 +17,14 @@
 #' @param H A given \code{q} x \code{p} matrix.
 #' @param h A given \code{q} x \code{1} vector.
 #'
-#' @return A vector of regression coefficients
+#' @returns
+#' An object of class \code{restricted} is a list containing at least the following components:
+#'   \describe{
+#'     \item{\code{coef}}{A named vector of coefficients.}
+#'     \item{\code{residuals}}{The residuals, that is, response minus fitted values.}
+#'     \item{\code{s2}}{The estimated variance.}
+#'     \item{\code{fitted.values}}{The fitted values.}
+#'   }
 #'
 #' @references
 #'  Saleh, A. K. Md. Ehsanes. (2006). \emph{Theory of Preliminary Test and

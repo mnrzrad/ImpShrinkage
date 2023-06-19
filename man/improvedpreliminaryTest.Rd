@@ -30,7 +30,13 @@ is \eqn{\chi^2} distribution, \code{\link[stats]{Chisquare}}. By default,
 \code{is_error_normal} is set to \code{FALSE}.}
 }
 \value{
-A vector of regression coefficients
+An object of class \code{improvedpreliminaryTest} is a list containing at least the following components:
+  \describe{
+    \item{\code{coef}}{A named vector of coefficients.}
+    \item{\code{residuals}}{The residuals, that is, response minus fitted values.}
+    \item{\code{s2}}{The estimated variance.}
+    \item{\code{fitted.values}}{The fitted values.}
+  }
 }
 \description{
 This function calculates the improved preliminary test estimator that is

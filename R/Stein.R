@@ -21,13 +21,20 @@
 #' @param d An optional parameter. If not provided (or set to \code{NULL}), it will be
 #' calculated using \eqn{\frac{{(q - 2) \cdot (n - p}}{{q \cdot (n - p + 2)}}}
 #' @param is_error_normal logical value indicating whether the errors follow a
-#' normal distribution. If \code{normal_error} is \code{TRUE}, the distribution
+#' normal distribution. If \code{is_error_normal} is \code{TRUE}, the distribution
 #' of the test statistics for the null hypothesis is \code{\link[stats]{FDist}}.
 #'  On the other hand, if the errors have a non-normal distribution, the
 #'  asymptotic distribution of the test statistics is \code{\link[stats]{Chisquare}}.
 #'  By default, \code{is_error_normal} is set to \code{FALSE}
 #'
-#' @return A vector of regression coefficients
+#' @returns
+#' An object of class \code{stein} is a list containing at least the following components:
+#'   \describe{
+#'     \item{\code{coef}}{A named vector of coefficients.}
+#'     \item{\code{residuals}}{The residuals, that is, response minus fitted values.}
+#'     \item{\code{s2}}{The estimated variance.}
+#'     \item{\code{fitted.values}}{The fitted values.}
+#'   }
 #'
 #' @references
 #'  Saleh, A. K. Md. Ehsanes. (2006). \emph{Theory of Preliminary Test and
