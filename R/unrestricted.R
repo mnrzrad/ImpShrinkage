@@ -13,7 +13,6 @@
 #'
 #' @param X Matrix with input observations, of dimension \code{n} x \code{p}, where
 #' each row is an observation vector.
-#'
 #' @param y Vector with response observations of size \code{n}.
 #'
 #' @returns
