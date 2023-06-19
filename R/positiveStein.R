@@ -1,16 +1,16 @@
 #' The positive-rule Stein estimator
 #'
-#' This function calculates the positive-rule Stein estimator that is an improved
-#' version of Stein Estimator by only considering the positive part of
-#' shrinking factor. It is calculated by
+#' This function calculates the positive-rule Stein estimator. This estimator is an improved
+#' version of the Stein estimator, where only the positive part of
+#' shrinking factor is considered. It may be calculated by
 #' \deqn{\hat{\beta}^{S+}= \hat{\beta}^{S} + (1 + d \mathcal{L}^{-1}) I(\mathcal{L} > d) (\hat{\beta}^{U} - \hat{\beta}^{R})}
 #' where \eqn{I(A)} denotes an indicator function and
 #' \itemize{
-#'   \item \eqn{\hat{\beta}^{S}}: the \code{\link{stein}} estimator
-#'   \item \eqn{\hat{\beta}^{U}}: the \code{\link{unrestricted}} estimator
-#'   \item \eqn{\hat{\beta}^{R}}: the \code{\link{restricted}} estimator
-#'   \item \eqn{\mathcal{L}}: the \code{\link{test_statistics}}
-#'   \item \eqn{d}: the shrinkage factor
+#'   \item \eqn{\hat{\beta}^{S}} is the \code{\link{stein}} estimator;
+#'   \item \eqn{\hat{\beta}^{U}} is the \code{\link{unrestricted}} estimator;
+#'   \item \eqn{\hat{\beta}^{R}} is the \code{\link{restricted}} estimator;
+#'   \item \eqn{\mathcal{L}} is the \code{\link{test_statistics}};
+#'   \item and \eqn{d} is the shrinkage factor.
 #' }
 #'
 #' The corresponding unrestricted estimator of \eqn{\sigma^2} is
