@@ -18,7 +18,7 @@
 #'
 #' @param X Matrix with input observations, of dimension \code{n} x \code{p};
 #' each row is an observation vector.
-#' @param y Univariate quantitative response variable with dimension \code{n}.
+#' @param y Vector with response observations of size \code{n}.
 #' @param H A given \code{q} x \code{p} matrix.
 #' @param h A given \code{q} x \code{1} vector.
 #' @param d An optional parameter. If not provided (or set to \code{NULL}), it will be
@@ -32,7 +32,17 @@
 #' \code{is_error_normal} is set to \code{FALSE}.
 #'
 #'
-#' @return A vector of regression coefficients
+#' @returns
+#' An object of class \code{positivestein} is a list containing at least the following components:
+#'   \describe{
+#'     \item{\code{coef}}{A named vector of coefficients.}
+#'     \item{\code{residuals}}{The residuals, that is, response minus fitted values.}
+#'     \item{\code{s2}}{The estimated variance.}
+#'     \item{\code{fitted.values}}{The fitted mean values.}
+#'   }
+#'
+
+#'
 #'
 #' @references
 #'  Saleh, A. K. Md. Ehsanes. (2006). \emph{Theory of Preliminary Test

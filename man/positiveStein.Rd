@@ -10,7 +10,7 @@ positivestein(X, y, H, h, d = NULL, is_error_normal = FALSE)
 \item{X}{Matrix with input observations, of dimension \code{n} x \code{p};
 each row is an observation vector.}
 
-\item{y}{Univariate quantitative response variable with dimension \code{n}.}
+\item{y}{Vector with response observations of size \code{n}.}
 
 \item{H}{A given \code{q} x \code{p} matrix.}
 
@@ -28,7 +28,13 @@ is \eqn{\chi^2} distribution, \code{\link[stats]{Chisquare}}. By default,
 \code{is_error_normal} is set to \code{FALSE}.}
 }
 \value{
-A vector of regression coefficients
+'An object of class \code{positivestein} is a list containing at least the following components:
+  \describe{
+    \item{\code{coef}}{A named vector of coefficients.}
+    \item{\code{residuals}}{The residuals, that is, response minus fitted values.}
+    \item{\code{s2}}{The estimated variance.}
+    \item{\code{fitted.values}}{The fitted mean values.}
+  }
 }
 \description{
 This function calculates the positive-rule Stein estimator. This estimator is an improved
