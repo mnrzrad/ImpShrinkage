@@ -24,8 +24,8 @@ A list containing the following components:
 }
 \description{
 This function generates a toy example. The error term, \eqn{\varepsilon},
-and the design matrix, \eqn{X}, are simulated from a standard normal
-distribution, \eqn{\mathcal{N}(0,1)}, using the \code{\link[stats]{rnorm}}
+and the design matrix, \eqn{X}, are simulated from standard normal
+distributions, \eqn{\mathcal{N}(0,1)}, using the \code{\link[stats]{rnorm}}
 function. Given the true parameter vector, \eqn{\beta}, the response vector,
 \eqn{y}, is calculated as
 \deqn{y = X \beta + \varepsilon}.
