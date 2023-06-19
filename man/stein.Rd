@@ -30,6 +30,10 @@ of the test statistics for the null hypothesis is \code{\link[stats]{FDist}}.
 A vector of regression coefficients
 }
 \description{
+<<<<<<< HEAD
+=======
+This function can be used to calculate the Stein estimator using the following formula:
+>>>>>>> c01a7eb880ec5a3da585d964f32c76e03f590376
 \deqn{\hat{\beta}^{S}=\hat{\beta}^{U} - d \mathcal{L}^{-1} (\hat{\beta}^{U} - \hat{\beta}^{R})}
 where
 \itemize{

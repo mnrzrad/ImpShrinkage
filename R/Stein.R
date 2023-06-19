@@ -1,6 +1,6 @@
 #' The Stein estimator
 #'
-# This function can be used to calculate the Stein estimator using the following formula:
+#' This function can be used to calculate the Stein estimator using the following formula:
 #' \deqn{\hat{\beta}^{S}=\hat{\beta}^{U} - d \mathcal{L}^{-1} (\hat{\beta}^{U} - \hat{\beta}^{R})}
 #' where
 #' \itemize{
