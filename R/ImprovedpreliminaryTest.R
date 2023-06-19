@@ -17,7 +17,6 @@
 #'   \item \eqn{\alpha} is the significance level.
 #' }
 #'
-#'
 #' The corresponding estimator of \eqn{\sigma^2} is
 #' \deqn{s^2 = \frac{1}{n-p}(y-X\hat{\beta}^{iPT})^{\top}(y - X\hat{\beta}^{iPT})}
 #'

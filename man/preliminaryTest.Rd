@@ -51,6 +51,10 @@ where \eqn{I(A)} denotes an indicator function and
   \item \eqn{\alpha}: the significance level.
 }
 }
+\details{
+The corresponding estimator of \eqn{\sigma^2} is
+\deqn{s^2 = \frac{1}{n-p}(y-X\hat{\beta}^{PT})^{\top}(y - X\hat{\beta}^{PT})}
+}
 \examples{
 n_obs <- 100
 p_vars <- 5
