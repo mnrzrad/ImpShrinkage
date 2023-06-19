@@ -13,7 +13,7 @@
 #'
 #' @param X Matrix with input observations, of dimension \code{n} x \code{p};
 #' each row is an observation vector.
-#' @param y Univariate quantitative response variable with dimension \code{n}.
+#' @param y Vector with response observations of size \code{n}.
 #' @param H A given \code{q} x \code{p} matrix.
 #' @param h A given \code{q} x \code{1} vector.
 #'
@@ -91,8 +91,16 @@ restricted <- function(X, y, H, h) {
 }
 
 
-#' @rdname fitted.stein
-#' @importFrom stats fitted
+#' Extract Model Fitted Values
+#'
+#' \code{fitted} is a generic function which extracts fitted values from objects
+#'  returned by modeling functions. \code{fitted.values} is an alias for it.
+#'
+#' @param object An object of class "\code{restricted}".
+#' @param ... Other.
+#' @seealso#' \code{\link{fitted.unrestricted}}, \code{\link{fitted.restricted}},
+#' \code{\link{fitted.preliminaryTest}},\code{\link{fitted.improvedpreliminaryTest}},
+#' \code{\link{fitted.stein}}, \code{\link{fitted.positivestein}}
 #' @examples
 #' n_obs <- 100
 #' p_vars <- 5
@@ -111,7 +119,18 @@ fitted.restricted <- function(object, ...) {
   return(object$fitted.value)
 }
 
-#' @rdname predict.stein
+#' Model Predictions
+#'
+#' \code{predict} is a generic function for predictions from the results of various
+#' model fitting functions.
+#'
+#' @param object An object of class "\code{restricted}".
+#' @param newdata An optional data frame in which to look for variables with which to predict.
+#'  If omitted, the fitted values are used.
+#' @param ... Other.
+#' @seealso \code{\link{predict.unrestricted}}, \code{\link{predict.restricted}},
+#'  \code{\link{predict.preliminaryTest}}, \code{\link{predict.improvedpreliminaryTest}},
+#'  \code{\link{predict.stein}}, \code{\link{predict.positivestein}}.
 #' @importFrom stats predict
 #' @examples
 #' n_obs <- 100

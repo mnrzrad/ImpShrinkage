@@ -119,9 +119,7 @@ stein <- function(X, y, H, h, d = NULL, is_error_normal = FALSE) {
 #' \code{fitted} is a generic function that extracts fitted values from objects
 #'  returned by the modeling functions. \code{fitted.values} is an alias for it.
 #'
-#' @param object An object of class "\code{unrestricted}", "\code{restricted}",
-#' "\code{preliminaryTest}",
-#' "\code{improvedpreliminaryTest}", "\code{stein}" and "\code{positivestein}".
+#' @param object An object of class "\code{stein}".
 #' @param ... Other.
 #' @seealso#' \code{\link{fitted.unrestricted}}, \code{\link{fitted.restricted}},
 #' \code{\link{fitted.preliminaryTest}},\code{\link{fitted.improvedpreliminaryTest}},
@@ -151,9 +149,7 @@ fitted.stein <- function(object, ...) {
 #' \code{predict} is a generic function that performs predictions from the results of a variety of
 #' model fitting functions.
 #'
-#' @param object An object of class "\code{unrestricted}", "\code{restricted}",
-#'  "\code{preliminaryTest}", "\code{improvedpreliminaryTest}",
-#' "\code{stein}" and"\code{positivestein}".
+#' @param object An object of class "\code{stein}".
 #' @param newdata An optional data frame in which to look for variables with which to predict.
 #'  If omitted, the fitted values are used.
 #' @param ... Other.

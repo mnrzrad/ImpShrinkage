@@ -54,8 +54,16 @@ unrestricted <- function(X, y) {
   fit
 }
 
-
-#' @rdname fitted.stein
+#' Extract Model Fitted Values
+#'
+#' \code{fitted} is a generic function which extracts fitted values from objects
+#'  returned by modeling functions. \code{fitted.values} is an alias for it.
+#'
+#' @param object An object of class "\code{unrestricted}".
+#' @param ... Other.
+#' @seealso#' \code{\link{fitted.unrestricted}}, \code{\link{fitted.restricted}},
+#' \code{\link{fitted.preliminaryTest}},\code{\link{fitted.improvedpreliminaryTest}},
+#' \code{\link{fitted.stein}}, \code{\link{fitted.positivestein}}
 #' @importFrom stats fitted
 #' @examples
 #' n_obs <- 100
@@ -67,11 +75,24 @@ unrestricted <- function(X, y) {
 #' model <- unrestricted(X, y)
 #' fitted(model)
 #' @export
+#'
 fitted.unrestricted <- function(object, ...) {
   return(object$fitted.value)
 }
 
-#' @rdname predict.stein
+#' Model Predictions
+#'
+#' \code{predict} is a generic function for predictions from the results of various
+#' model fitting functions.
+#'
+#' @param object An object of class "\code{unrestricted}".
+#' @param newdata An optional data frame in which to look for variables with which to predict.
+#'  If omitted, the fitted values are used.
+#' @param ... Other.
+#' @seealso \code{\link{predict.unrestricted}}, \code{\link{predict.restricted}},
+#'  \code{\link{predict.preliminaryTest}}, \code{\link{predict.improvedpreliminaryTest}},
+#'  \code{\link{predict.stein}}, \code{\link{predict.positivestein}}.
+#'
 #' @importFrom stats predict
 #' @examples
 #' n_obs <- 100
@@ -83,6 +104,7 @@ fitted.unrestricted <- function(object, ...) {
 #' model <- unrestricted(X, y)
 #' predict(model, X)
 #' @export
+#'
 predict.unrestricted <- function(object, newdata, ...) {
   return((newdata %*% object$coef)[, 1])
 }
