@@ -57,14 +57,14 @@
 #'
 #'
 #' data(cement)
-#' X <- as.matrix(cbind(1,cement[,1:4]))
+#' X <- as.matrix(cbind(1, cement[, 1:4]))
 #' y <- cement$y
 #' # Based on Kaciranlar et al. (1999)
-#' H <- matrix(c(0,1,-1,1,0), nrow = 1, ncol = 5, byrow = TRUE)
+#' H <- matrix(c(0, 1, -1, 1, 0), nrow = 1, ncol = 5, byrow = TRUE)
 #' h <- rep(0, nrow(H))
 #' restricted(X, y, H, h)
 #'
-#' H <- matrix(c(0,1,-1,1,0,0, 0, 1, -1, -1,0, 1, -1, 0, -1), nrow = 3, ncol = 5, byrow = TRUE)
+#' H <- matrix(c(0, 1, -1, 1, 0, 0, 0, 1, -1, -1, 0, 1, -1, 0, -1), nrow = 3, ncol = 5, byrow = TRUE)
 #' h <- rep(0, nrow(H))
 #' restricted(X, y, H, h)
 #' @export

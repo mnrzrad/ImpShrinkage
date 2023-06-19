@@ -27,7 +27,6 @@
 #'  Saleh, A. K. Md. Ehsanes. (2006). \emph{Theory of Preliminary Test and
 #'  Stein‐Type Estimation With Applications}, Wiley.
 #'
-#'  ref
 #'
 #' @examples
 #' simulated_data <- simdata(n = 100, p = 5, beta = c(2, 1, 3, 0, 5))
