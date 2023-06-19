@@ -15,7 +15,7 @@
 #'
 #' @param X Matrix with input observations, of dimension \code{n} x \code{p};
 #' each row is an observation vector.
-#' @param y Univariate quantitative response variable with dimension \code{n}.
+#' @param y Vector with response observations of size \code{n}.
 #' @param H A given \code{q} x \code{p} matrix.
 #' @param h A given \code{q} x \code{1} vector.
 #' @param d An optional parameter. If not provided (or set to \code{NULL}), it will be
@@ -119,9 +119,7 @@ stein <- function(X, y, H, h, d = NULL, is_error_normal = FALSE) {
 #' \code{fitted} is a generic function which extracts fitted values from objects
 #'  returned by modeling functions. \code{fitted.values} is an alias for it.
 #'
-#' @param object An object of class "\code{unrestricted}", "\code{restricted}",
-#' "\code{preliminaryTest}",
-#' "\code{improvedpreliminaryTest}", "\code{stein}" and "\code{positivestein}".
+#' @param object An object of class "\code{stein}".
 #' @param ... Other.
 #' @seealso#' \code{\link{fitted.unrestricted}}, \code{\link{fitted.restricted}},
 #' \code{\link{fitted.preliminaryTest}},\code{\link{fitted.improvedpreliminaryTest}},
@@ -151,9 +149,7 @@ fitted.stein <- function(object, ...) {
 #' \code{predict} is a generic function for predictions from the results of various
 #' model fitting functions.
 #'
-#' @param object An object of class "\code{unrestricted}", "\code{restricted}",
-#'  "\code{preliminaryTest}", "\code{improvedpreliminaryTest}",
-#' "\code{stein}" and"\code{positivestein}".
+#' @param object An object of class "\code{stein}".
 #' @param newdata An optional data frame in which to look for variables with which to predict.
 #'  If omitted, the fitted values are used.
 #' @param ... Other.

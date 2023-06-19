@@ -10,7 +10,7 @@ stein(X, y, H, h, d = NULL, is_error_normal = FALSE)
 \item{X}{Matrix with input observations, of dimension \code{n} x \code{p};
 each row is an observation vector.}
 
-\item{y}{Univariate quantitative response variable with dimension \code{n}.}
+\item{y}{Vector with response observations of size \code{n}.}
 
 \item{H}{A given \code{q} x \code{p} matrix.}
 
