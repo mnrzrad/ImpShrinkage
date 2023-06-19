@@ -46,7 +46,7 @@ where \eqn{I(A)} denotes an indicator function and
   \item \eqn{\hat{\beta}^{S}} is the \code{\link{stein}} estimator;
   \item \eqn{\hat{\beta}^{U}} is the \code{\link{unrestricted}} estimator;
   \item \eqn{\hat{\beta}^{R}} is the \code{\link{restricted}} estimator;
-  \item \eqn{\mathcal{L}} is the \code{\link{test_statistics}};
+  \item \eqn{\mathcal{L}} is the \code{\link{test_statistic}};
   \item and \eqn{d} is the shrinkage factor.
 }
 }

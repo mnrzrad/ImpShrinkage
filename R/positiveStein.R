@@ -9,7 +9,7 @@
 #'   \item \eqn{\hat{\beta}^{S}} is the \code{\link{stein}} estimator;
 #'   \item \eqn{\hat{\beta}^{U}} is the \code{\link{unrestricted}} estimator;
 #'   \item \eqn{\hat{\beta}^{R}} is the \code{\link{restricted}} estimator;
-#'   \item \eqn{\mathcal{L}} is the \code{\link{test_statistics}};
+#'   \item \eqn{\mathcal{L}} is the \code{\link{test_statistic}};
 #'   \item and \eqn{d} is the shrinkage factor.
 #' }
 #'
@@ -94,7 +94,7 @@ positivestein <- function(X, y, H, h, d = NULL, is_error_normal = FALSE) {
   d <- ((q - 2) * m) / (q * (m + 2))
   u_est <- unrestricted(X, y)
   r_est <- restricted(X, y, H, h)
-  test_stat <- test_statistics(X, y, H, h, is_error_normal = is_error_normal)
+  test_stat <- test_statistic(X, y, H, h, is_error_normal = is_error_normal)
   beta <- r_est$coef + as.numeric(1 - d / test_stat) * as.integer(test_stat > d) * (u_est$coef - r_est$coef)
   residuals <- (y - X %*% beta)[, 1]
   s2 <- sum(residuals^2) / (n - p)

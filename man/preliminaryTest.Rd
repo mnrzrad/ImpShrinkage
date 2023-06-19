@@ -45,7 +45,7 @@ where \eqn{I(A)} denotes an indicator function and
 \itemize{
   \item \eqn{\hat{\beta}^{U}} is the \code{\link{unrestricted}} estimator;
   \item \eqn{\hat{\beta}^{R}} is the \code{\link{restricted}} estimator;
-  \item \eqn{\mathcal{L}} is the \code{\link{test_statistics}};
+  \item \eqn{\mathcal{L}} is the \code{\link{test_statistic}};
   \item \eqn{F_{q,m}(\alpha)} is the upper \eqn{\alpha} level critical value of \eqn{F}-distribution with \eqn{(q,n-p)} degrees of freedom, calculated using \code{\link[stats]{qf}};
   \item \eqn{\chi^2_{q}(\alpha)}is the upper \eqn{\alpha} level critical value of \eqn{\chi^2}-distribution with \eqn{q} degree of freedom, calculated using \code{\link[stats]{qchisq}};
   \item \eqn{\alpha}: the significance level.
