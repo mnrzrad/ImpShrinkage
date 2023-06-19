@@ -28,7 +28,7 @@ and the design matrix, \eqn{X}, are simulated from standard normal
 distributions, \eqn{\mathcal{N}(0,1)}, using the \code{\link[stats]{rnorm}}
 function. Given the true parameter vector, \eqn{\beta}, the response vector,
 \eqn{y}, is calculated as
-\deqn{y = X \beta + \varepsilon}.
+\deqn{y = X \beta + \varepsilon.}
 }
 \examples{
 simulated_data <- simdata(n = 100, p = 5, beta = c(2, 1, 3, 0, 5))

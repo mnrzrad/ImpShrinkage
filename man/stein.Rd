@@ -30,7 +30,7 @@ of the test statistics for the null hypothesis is \code{\link[stats]{FDist}}.
 An object of class \code{stein} is a list containing at least the following components:
   \describe{
     \item{\code{coef}}{A vector of coefficients.}
-    \item{\code{residuals}}{The residuals, that is, the response values subtracted by fitted values.}
+    \item{\code{residuals}}{The residuals, that is, the response values minus the fitted values.}
     \item{\code{s2}}{The estimated variance.}
     \item{\code{fitted.values}}{The fitted values.}
   }
@@ -47,7 +47,7 @@ where
 }
 }
 \details{
-The corresponding unrestricted estimator of \eqn{\sigma^2} is
+The corresponding estimator of \eqn{\sigma^2} is
 \deqn{s^2 = \frac{1}{n-p}(y-X\hat{\beta}^{S})^{\top}(y - X\hat{\beta}^{S})}
 }
 \examples{

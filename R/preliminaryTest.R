@@ -1,17 +1,16 @@
 #' The preliminary test estimator
 #'
-#' This function calculates the preliminary test using the formula:
-#' If the error has a normal distribution:
+#' This function calculates the preliminary test. When the error has a normal distribution, the test statistic is given by
 #' \deqn{\hat{\beta}^{PT}=\hat{\beta}^{U} - (\hat{\beta}^{U} - \hat{\beta}^{R}) I(\mathcal{L} \le F_{q,m}(\alpha))}
-#' If the error has a non-normal distribution:
-#' \deqn{\hat{\beta}^{PT}=\hat{\beta}^{U} - (\hat{\beta}^{U} - \hat{\beta}^{R}) I(\mathcal{L} \le \chi^2_{q}(\alpha))}
+#' and, if the error has a non-normal distribution, is given by
+#' \deqn{\hat{\beta}^{PT}=\hat{\beta}^{U} - (\hat{\beta}^{U} - \hat{\beta}^{R}) I(\mathcal{L} \le \chi^2_{q}(\alpha)),}
 #' where \eqn{I(A)} denotes an indicator function and
 #' \itemize{
-#'   \item \eqn{\hat{\beta}^{U}}: the \code{\link{unrestricted}} estimator.
-#'   \item \eqn{\hat{\beta}^{R}}: the \code{\link{restricted}} estimator.
-#'   \item \eqn{\mathcal{L}}: the \code{\link{test_statistics}}.
-#'   \item \eqn{F_{q,m}(\alpha)}: the upper \eqn{\alpha} level critical value of \eqn{F}-distribution with \eqn{(q,n-p)} degrees of freedom, calculated using \code{\link[stats]{qf}}.
-#'   \item \eqn{\chi^2_{q}(\alpha)}: the upper \eqn{\alpha} level critical value of \eqn{\chi^2}-distribution with \eqn{q} degree of freedom, calculated using \code{\link[stats]{qchisq}}.
+#'   \item \eqn{\hat{\beta}^{U}} is the \code{\link{unrestricted}} estimator;
+#'   \item \eqn{\hat{\beta}^{R}} is the \code{\link{restricted}} estimator;
+#'   \item \eqn{\mathcal{L}} is the \code{\link{test_statistics}};
+#'   \item \eqn{F_{q,m}(\alpha)} is the upper \eqn{\alpha} level critical value of \eqn{F}-distribution with \eqn{(q,n-p)} degrees of freedom, calculated using \code{\link[stats]{qf}};
+#'   \item \eqn{\chi^2_{q}(\alpha)}is the upper \eqn{\alpha} level critical value of \eqn{\chi^2}-distribution with \eqn{q} degree of freedom, calculated using \code{\link[stats]{qchisq}};
 #'   \item \eqn{\alpha}: the significance level.
 #' }
 #'
@@ -24,17 +23,17 @@
 #' @param is_error_normal logical value indicating whether the errors follow
 #' a normal distribution. If \code{is_error_normal} is \code{TRUE},
 #'  the distribution of the test statistics for the null hypothesis
-#'  is F distribution, \code{\link[stats]{FDist}}.
+#'  is F distribution (\code{\link[stats]{FDist}}).
 #'  On the other hand, if the errors have a non-normal distribution,
 #'  the asymptotic distribution of the test statistics is \eqn{\chi^2}
-#'  distribution, \code{\link[stats]{Chisquare}}.
+#'  distribution (\code{\link[stats]{Chisquare}}).
 #'  By default, \code{is_error_normal} is set to \code{FALSE}.
 #'
 #' @returns
 #' An object of class \code{preliminaryTest} is a list containing at least the following components:
 #'   \describe{
 #'     \item{\code{coef}}{A named vector of coefficients.}
-#'     \item{\code{residuals}}{The residuals, that is, response minus fitted values.}
+#'     \item{\code{residuals}}{The residuals, that is, the response values minus fitted values.}
 #'     \item{\code{s2}}{The estimated variance.}
 #'     \item{\code{fitted.values}}{The fitted values.}
 #'   }

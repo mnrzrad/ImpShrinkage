@@ -1,26 +1,24 @@
 #' The improved preliminary test estimator
 #'
-#' This function calculates the improved preliminary test estimator that is
-#' calculated by
-#' If the error has a normal distribution:#'
-#' \deqn{\hat{\beta}^{ipt}= \hat{\beta}^{PT} - d (\hat{\beta}^{U} - \hat{\beta}^{R}) \mathcal{L}^{-1} I(\mathcal{L} > F_{q,m}(\alpha)) }
-# If the error has a non-normal distribution:
-#' \deqn{\hat{\beta}^{ipt}= \hat{\beta}^{PT} - d (\hat{\beta}^{U} - \hat{\beta}^{R}) \mathcal{L}^{-1} I(\mathcal{L} > \chi^2_{q}(\alpha)) }
-# ``
+#' This function calculates the improved preliminary test estimator. When the error has a normal distribution,
+#' this estimator can be calculated by
+#' \deqn{\hat{\beta}^{iPT}= \hat{\beta}^{PT} - d (\hat{\beta}^{U} - \hat{\beta}^{R}) \mathcal{L}^{-1} I(\mathcal{L} > F_{q,n-p}(\alpha)) }
+#' and, when the error has a non-normal distribution, by
+#' \deqn{\hat{\beta}^{iPT}= \hat{\beta}^{PT} - d (\hat{\beta}^{U} - \hat{\beta}^{R}) \mathcal{L}^{-1} I(\mathcal{L} > \chi^2_{q}(\alpha)),}
 #' where \eqn{I(A)} denotes an indicator function and
 #' \itemize{
-#'   \item \eqn{\hat{\beta}^{PT}}: the \code{\link{preliminaryTest}} estimator
-#'   \item \eqn{\hat{\beta}^{U}}: the \code{\link{unrestricted}} estimator
-#'   \item \eqn{\hat{\beta}^{R}}: the \code{\link{restricted}} estimator
-#'   \item \eqn{\mathcal{L}}: the \code{\link{test_statistics}}
-#'   \item \eqn{F_{q,m}(\alpha)}: the upper \eqn{\alpha} level critical value of \eqn{F}-distribution with \eqn{(q,n-p)} degrees of freedom, calculated using \code{\link[stats]{qf}}.
-#'   \item \eqn{\chi^2_{q}(\alpha)}: the upper \eqn{\alpha} level critical value of \eqn{\chi^2}-distribution with \eqn{q} degree of freedom, calculated using \code{\link[stats]{qchisq}}.
-#'   \item \eqn{d}: the shrinkage factor
-#'   \item \eqn{\alpha}: the significance level.
+#'   \item \eqn{\hat{\beta}^{PT}} is the \code{\link{preliminaryTest}} estimator;
+#'   \item \eqn{\hat{\beta}^{U}} is the \code{\link{unrestricted}} estimator;
+#'   \item \eqn{\hat{\beta}^{R}} is the \code{\link{restricted}} estimator;
+#'   \item \eqn{\mathcal{L}} is the \code{\link{test_statistics}};
+#'   \item \eqn{F_{q,n-p}(\alpha)} is the upper \eqn{\alpha} level critical value of \eqn{F}-distribution with \eqn{(q,n-p)} degrees of freedom, calculated using \code{\link[stats]{qf}};
+#'   \item \eqn{\chi^2_{q}(\alpha)} is the upper \eqn{\alpha} level critical value of \eqn{\chi^2}-distribution with \eqn{q} degree of freedom, calculated using \code{\link[stats]{qchisq}};
+#'   \item \eqn{d} is the shrinkage factor;
+#'   \item \eqn{\alpha} is the significance level.
 #' }
 #'
 #'
-#' The corresponding unrestricted estimator of \eqn{\sigma^2} is
+#' The corresponding estimator of \eqn{\sigma^2} is
 #' \deqn{s^2 = \frac{1}{n-p}(y-X\hat{\beta}^{iPT})^{\top}(y - X\hat{\beta}^{iPT})}
 #'
 #' @param X Matrix with input observations, of dimension \code{n} x \code{p};
@@ -29,21 +27,21 @@
 #' @param H A given \code{q} x \code{p} matrix.
 #' @param h A given \code{q} x \code{1} vector.
 #' @param alpha  A given significance level
-#' @param d An optional parameter. If not provided (or set to \code{NULL}), it will be
-#' calculated using \eqn{\frac{{(q - 2) \cdot (n - p}}{{q \cdot (n - p + 2)}}}
+#' @param d (optional) If not provided (or set to \code{NULL}), it will be
+#' calculated using \eqn{\frac{{(q - 2) \cdot (n - p)}}{{q \cdot (n - p + 2)}}}
 #' @param is_error_normal logical value indicating whether the errors follow a
 #' normal distribution. If \code{is_error_normal} is \code{TRUE}, the distribution
-#' of the test statistics for the null hypothesis is F distribution,
-#' \code{\link[stats]{FDist}}. On the other hand, if the errors have a
+#' of the test statistics for the null hypothesis is F distribution
+#' (\code{\link[stats]{FDist}}). On the other hand, if the errors have a
 #' non-normal distribution, the asymptotic distribution of the test statistics
-#' is \eqn{\chi^2} distribution, \code{\link[stats]{Chisquare}}. By default,
+#' is \eqn{\chi^2} distribution (\code{\link[stats]{Chisquare}}). By default,
 #' \code{is_error_normal} is set to \code{FALSE}.
 #'
 #' @returns
 #' An object of class \code{improvedpreliminaryTest} is a list containing at least the following components:
 #'   \describe{
 #'     \item{\code{coef}}{A named vector of coefficients.}
-#'     \item{\code{residuals}}{The residuals, that is, response minus fitted values.}
+#'     \item{\code{residuals}}{The residuals, that is, the response values minus fitted values.}
 #'     \item{\code{s2}}{The estimated variance.}
 #'     \item{\code{fitted.values}}{The fitted values.}
 #'   }

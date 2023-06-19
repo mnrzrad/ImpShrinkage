@@ -25,7 +25,7 @@ is the \eqn{\chi^2} distribution (\code{\link[stats]{Chisquare}}). By default,
 \code{is_error_normal} is set to \code{FALSE}.}
 }
 \value{
-the value of test statistic
+The value of the test statistic
 }
 \description{
 This function calculates the test statistics, assuming

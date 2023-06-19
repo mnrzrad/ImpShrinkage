@@ -1,6 +1,6 @@
 #' The restricted estimator
 #'
-#' This function calculates the restricted estimator using the formula:
+#' This function calculates the restricted estimator using
 #' \deqn{\hat{\beta}^{R} = \hat{\beta}^{U} - (X^{\top}X)^{-1}H^{\top}
 #' (H(X^{\top}X)^{-1}H^{\top})^{-1}(H\hat{\beta}^{U}-h)}
 #' where \eqn{H\beta = h} represents a subspace of the parameter space induced
@@ -8,7 +8,7 @@
 #' matrix, and \eqn{h} is a known \eqn{q}-vector.
 #'
 #'
-#' The corresponding unrestricted estimator of \eqn{\sigma^2} is
+#' The corresponding estimator of \eqn{\sigma^2} is
 #' \deqn{s^2 = \frac{1}{n-p}(y-X\hat{\beta}^{R})^{\top}(y - X\hat{\beta}^{R})}
 #'
 #' @param X Matrix with input observations, of dimension \code{n} x \code{p};
@@ -21,7 +21,7 @@
 #' An object of class \code{restricted} is a list containing at least the following components:
 #'   \describe{
 #'     \item{\code{coef}}{A named vector of coefficients.}
-#'     \item{\code{residuals}}{The residuals, that is, response minus fitted values.}
+#'     \item{\code{residuals}}{The residuals, that is, the response values minus fitted values.}
 #'     \item{\code{s2}}{The estimated variance.}
 #'     \item{\code{fitted.values}}{The fitted values.}
 #'   }

@@ -1,7 +1,7 @@
 #' The positive-rule Stein estimator
 #'
 #' This function calculates the positive-rule Stein estimator. This estimator is an improved
-#' version of the Stein estimator, where only the positive part of
+#' version of the Stein estimator, where only the positive part of the
 #' shrinking factor is considered. It may be calculated by
 #' \deqn{\hat{\beta}^{S+}= \hat{\beta}^{S} + (1 + d \mathcal{L}^{-1}) I(\mathcal{L} > d) (\hat{\beta}^{U} - \hat{\beta}^{R})}
 #' where \eqn{I(A)} denotes an indicator function and
@@ -13,7 +13,7 @@
 #'   \item and \eqn{d} is the shrinkage factor.
 #' }
 #'
-#' The corresponding unrestricted estimator of \eqn{\sigma^2} is given by
+#' The corresponding estimator of \eqn{\sigma^2} is given by
 #' \deqn{s^2 = \frac{1}{n-p}(y-X\hat{\beta}^{S+})^{\top}(y - X\hat{\beta}^{S+})}
 #'
 #' @param X Matrix with input observations, of dimension \code{n} x \code{p};
@@ -21,14 +21,14 @@
 #' @param y Vector with response observations of size \code{n}.
 #' @param H A given \code{q} x \code{p} matrix.
 #' @param h A given \code{q} x \code{1} vector.
-#' @param d An optional parameter. If not provided (or set to \code{NULL}), it will be
-#' calculated using \eqn{\frac{{(q - 2) \cdot (n - p}}{{q \cdot (n - p + 2)}}}
+#' @param d (optional) If not provided (or set to \code{NULL}), it will be
+#' calculated using \eqn{\frac{{(q - 2) \cdot (n - p)}}{{q \cdot (n - p + 2)}}}
 #' @param is_error_normal logical value indicating whether the errors follow a
 #' normal distribution. If \code{is_error_normal} is \code{TRUE}, the distribution
-#' of the test statistics for the null hypothesis is F distribution,
-#' \code{\link[stats]{FDist}}. On the other hand, if the errors have a
+#' of the test statistics for the null hypothesis is F distribution
+#' (\code{\link[stats]{FDist}}). On the other hand, if the errors have a
 #' non-normal distribution, the asymptotic distribution of the test statistics
-#' is \eqn{\chi^2} distribution, \code{\link[stats]{Chisquare}}. By default,
+#' is \eqn{\chi^2} distribution (\code{\link[stats]{Chisquare}}). By default,
 #' \code{is_error_normal} is set to \code{FALSE}.
 #'
 #'
@@ -36,7 +36,7 @@
 #' An object of class \code{positivestein} is a list containing at least the following components:
 #'   \describe{
 #'     \item{\code{coef}}{A named vector of coefficients.}
-#'     \item{\code{residuals}}{The residuals, that is, response minus fitted values.}
+#'     \item{\code{residuals}}{The residuals, that is, the response values minus fitted values.}
 #'     \item{\code{s2}}{The estimated variance.}
 #'     \item{\code{fitted.values}}{The fitted values.}
 #'   }

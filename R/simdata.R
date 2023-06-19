@@ -5,7 +5,7 @@
 #' distributions, \eqn{\mathcal{N}(0,1)}, using the \code{\link[stats]{rnorm}}
 #' function. Given the true parameter vector, \eqn{\beta}, the response vector,
 #' \eqn{y}, is calculated as
-#' \deqn{y = X \beta + \varepsilon}.
+#' \deqn{y = X \beta + \varepsilon.}
 #'
 #'
 #' @param n Number of observations.
