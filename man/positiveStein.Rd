@@ -45,7 +45,7 @@ where \eqn{I(A)} denotes an indicator function and
 }
 }
 \details{
-The corresponding unrestricted estimator of \eqn{\sigma^2} is
+The corresponding unrestricted estimator of \eqn{\sigma^2} is given by
 \deqn{s^2 = \frac{1}{n-p}(y-X\hat{\beta}^{S+})^{\top}(y - X\hat{\beta}^{S+})}
 }
 \examples{
