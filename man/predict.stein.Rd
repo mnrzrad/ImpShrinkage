@@ -15,7 +15,7 @@ If omitted, the fitted values are used.}
 \item{...}{Other.}
 }
 \description{
-\code{predict} is a generic function for predictions from the results of various
+\code{predict} is a generic function that performs predictions from the results of a variety of
 model fitting functions.
 }
 \examples{

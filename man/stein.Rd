@@ -16,34 +16,34 @@ each row is an observation vector.}
 
 \item{h}{A given \code{q} x \code{1} vector.}
 
-\item{d}{An optional parameter. If not provided (or set to \code{NULL}), it will be
-calculated using \eqn{\frac{{(q - 2) \cdot (n - p}}{{q \cdot (n - p + 2)}}}}
+\item{d}{(Optional) If not provided (or set to \code{NULL}), it will be
+set to be equal to \eqn{\frac{{(q - 2) \cdot (n - p)}}{{q \cdot (n - p + 2)}}}}
 
 \item{is_error_normal}{logical value indicating whether the errors follow a
 normal distribution. If \code{is_error_normal} is \code{TRUE}, the distribution
 of the test statistics for the null hypothesis is \code{\link[stats]{FDist}}.
  On the other hand, if the errors have a non-normal distribution, the
  asymptotic distribution of the test statistics is \code{\link[stats]{Chisquare}}.
- By default, \code{is_error_normal} is set to \code{FALSE}}
+ By default, \code{is_error_normal} is set to \code{FALSE}.}
 }
 \value{
 An object of class \code{stein} is a list containing at least the following components:
   \describe{
-    \item{\code{coef}}{A named vector of coefficients.}
-    \item{\code{residuals}}{The residuals, that is, response minus fitted values.}
+    \item{\code{coef}}{A vector of coefficients.}
+    \item{\code{residuals}}{The residuals, that is, the response values subtracted by fitted values.}
     \item{\code{s2}}{The estimated variance.}
     \item{\code{fitted.values}}{The fitted values.}
   }
 }
 \description{
-This function can be used to calculate the Stein estimator using the following formula:
+This function can be used to calculate the Stein estimator using
 \deqn{\hat{\beta}^{S}=\hat{\beta}^{U} - d \mathcal{L}^{-1} (\hat{\beta}^{U} - \hat{\beta}^{R})}
 where
 \itemize{
-  \item \eqn{\hat{\beta}^{U}}: the \code{\link{unrestricted}} estimator
-  \item \eqn{\hat{\beta}^{R}}: the \code{\link{restricted}} estimator
-  \item \eqn{\mathcal{L}}: the \code{\link{test_statistics}}
-  \item \eqn{d}: the shrinkage factor
+  \item \eqn{\hat{\beta}^{U}} is the \code{\link{unrestricted}} estimator;
+  \item \eqn{\hat{\beta}^{R}} is the \code{\link{restricted}} estimator;
+  \item \eqn{\mathcal{L}} is the \code{\link{test_statistics}};
+  \item \eqn{d} is the shrinkage factor.
 }
 }
 \details{

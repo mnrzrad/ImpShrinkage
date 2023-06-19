@@ -1,13 +1,13 @@
 #' The Stein estimator
 #'
-#' This function can be used to calculate the Stein estimator using the following formula:
+#' This function can be used to calculate the Stein estimator using
 #' \deqn{\hat{\beta}^{S}=\hat{\beta}^{U} - d \mathcal{L}^{-1} (\hat{\beta}^{U} - \hat{\beta}^{R})}
 #' where
 #' \itemize{
-#'   \item \eqn{\hat{\beta}^{U}}: the \code{\link{unrestricted}} estimator
-#'   \item \eqn{\hat{\beta}^{R}}: the \code{\link{restricted}} estimator
-#'   \item \eqn{\mathcal{L}}: the \code{\link{test_statistics}}
-#'   \item \eqn{d}: the shrinkage factor
+#'   \item \eqn{\hat{\beta}^{U}} is the \code{\link{unrestricted}} estimator;
+#'   \item \eqn{\hat{\beta}^{R}} is the \code{\link{restricted}} estimator;
+#'   \item \eqn{\mathcal{L}} is the \code{\link{test_statistics}};
+#'   \item \eqn{d} is the shrinkage factor.
 #' }
 #'
 #' The corresponding unrestricted estimator of \eqn{\sigma^2} is
@@ -18,20 +18,20 @@
 #' @param y Vector with response observations of size \code{n}.
 #' @param H A given \code{q} x \code{p} matrix.
 #' @param h A given \code{q} x \code{1} vector.
-#' @param d An optional parameter. If not provided (or set to \code{NULL}), it will be
-#' calculated using \eqn{\frac{{(q - 2) \cdot (n - p}}{{q \cdot (n - p + 2)}}}
+#' @param d (Optional) If not provided (or set to \code{NULL}), it will be
+#' set to be equal to \eqn{\frac{{(q - 2) \cdot (n - p)}}{{q \cdot (n - p + 2)}}}
 #' @param is_error_normal logical value indicating whether the errors follow a
 #' normal distribution. If \code{is_error_normal} is \code{TRUE}, the distribution
 #' of the test statistics for the null hypothesis is \code{\link[stats]{FDist}}.
 #'  On the other hand, if the errors have a non-normal distribution, the
 #'  asymptotic distribution of the test statistics is \code{\link[stats]{Chisquare}}.
-#'  By default, \code{is_error_normal} is set to \code{FALSE}
+#'  By default, \code{is_error_normal} is set to \code{FALSE}.
 #'
 #' @returns
 #' An object of class \code{stein} is a list containing at least the following components:
 #'   \describe{
-#'     \item{\code{coef}}{A named vector of coefficients.}
-#'     \item{\code{residuals}}{The residuals, that is, response minus fitted values.}
+#'     \item{\code{coef}}{A vector of coefficients.}
+#'     \item{\code{residuals}}{The residuals, that is, the response values subtracted by fitted values.}
 #'     \item{\code{s2}}{The estimated variance.}
 #'     \item{\code{fitted.values}}{The fitted values.}
 #'   }
@@ -116,8 +116,8 @@ stein <- function(X, y, H, h, d = NULL, is_error_normal = FALSE) {
 
 #' Extract Model Fitted Values
 #'
-#' \code{fitted} is a generic function which extracts fitted values from objects
-#'  returned by modeling functions. \code{fitted.values} is an alias for it.
+#' \code{fitted} is a generic function that extracts fitted values from objects
+#'  returned by the modeling functions. \code{fitted.values} is an alias for it.
 #'
 #' @param object An object of class "\code{stein}".
 #' @param ... Other.
@@ -146,7 +146,7 @@ fitted.stein <- function(object, ...) {
 
 #' Model Predictions
 #'
-#' \code{predict} is a generic function for predictions from the results of various
+#' \code{predict} is a generic function that performs predictions from the results of a variety of
 #' model fitting functions.
 #'
 #' @param object An object of class "\code{stein}".
@@ -178,7 +178,7 @@ predict.stein <- function(object, newdata, ...) {
 
 #' residuals method for Model Fits
 #'
-#' residuals values based on model object.
+#' \code{residuals} is a generica function that returns the residual values based on the respective model.
 #'
 #' @param object An object of class "\code{stein}".
 #' @param ... Other.
@@ -207,9 +207,14 @@ residuals.stein <- function(object, ...) {
 
 #' Extract Model Coefficients
 #'
+<<<<<<< HEAD
 #' \code{coef} is a generic function which extracts model
 #' coefficients from objects returned by modeling \code{functions.coefficients}
 #' is an alias for it.
+=======
+#' \code{coef} is a generic function that extracts model regression
+#' coefficients from the objects returned by the modeling. \code{functions.coefficients} is an alias for it.
+>>>>>>> 0ed14b48b300230c83b868522bf47d7257e56e0c
 #'
 #' @param object An object of class "\code{stein}".
 #' @param ... Other.

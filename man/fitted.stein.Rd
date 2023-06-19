@@ -12,8 +12,8 @@
 \item{...}{Other.}
 }
 \description{
-\code{fitted} is a generic function which extracts fitted values from objects
- returned by modeling functions. \code{fitted.values} is an alias for it.
+\code{fitted} is a generic function that extracts fitted values from objects
+ returned by the modeling functions. \code{fitted.values} is an alias for it.
 }
 \examples{
 n_obs <- 100

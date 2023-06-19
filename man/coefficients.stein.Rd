@@ -15,9 +15,14 @@
 \item{...}{Other.}
 }
 \description{
+<<<<<<< HEAD
 \code{coef} is a generic function which extracts model
 coefficients from objects returned by modeling \code{functions.coefficients}
 is an alias for it.
+=======
+\code{coef} is a generic function that extracts model regression
+coefficients from the objects returned by the modeling. \code{functions.coefficients} is an alias for it.
+>>>>>>> 0ed14b48b300230c83b868522bf47d7257e56e0c
 }
 \examples{
 n_obs <- 100

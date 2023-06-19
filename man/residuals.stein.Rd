@@ -12,7 +12,7 @@
 \item{...}{Other.}
 }
 \description{
-residuals values based on model object.
+\code{residuals} is a generica function that returns the residual values based on the respective model.
 }
 \examples{
 n_obs <- 100
