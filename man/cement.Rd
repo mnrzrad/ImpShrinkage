@@ -17,22 +17,9 @@ A data.frame with 13 observations on the following 5 variables.
 Woods, H., Steinour, H. H. and Starke, H. R. (1932) Effect of composition of Portland cement on heat evolved during hardening. Industrial Engineering and Chemistry, 24, 1207–1214.
 }
 \description{
-Heat evolved in setting of cement, as a function of its chemical composition.
-}
-\details{
-\code{cement} is taken from an example in Little & Rubin's book on
-Statistical Analysis with Missing Data (2002), pp.~154,
-for demonstrating estimation of multivariate means and variances
-when the missing data pattern is monotone.
+Heat evolved (cals/gm) in the setting of 13 samples of Portland cement with different percentage weight of chemical components.
 }
 \examples{
 data("cement")
 cement
-}
-\references{
-Davison, A. C. (2003) Statistical Models. Cambridge University Press. Page 355.
-
-Draper, N.R. and Smith, H. (1998) Applied Regression Analysis. Wiley. Page 630.
-
-Roderick J.A. Little and Donald B. Rubin (2002). Statistical Analysis with Missing Data, Second Edition. Wilely. Page 154.
 }
