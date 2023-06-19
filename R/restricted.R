@@ -86,7 +86,7 @@ restricted <- function(X, y, H, h) {
   p <- dim(X)[2]
   s2 <- sum(residuals^2) / (n - p)
   fittedValues <- (X %*% beta)[, 1]
-  fit <- structure(list(coef = beta, residuals = residuals, s2 = s2, fitted.value = fittedValues), class = c("restricted"))
+  fit <- structure(list(coef = beta, s2 = s2, residuals = residuals, fitted.value = fittedValues), class = c("restricted"))
   fit
 }
 

@@ -99,7 +99,7 @@ positivestein <- function(X, y, H, h, d = NULL, is_error_normal = FALSE) {
   residuals <- (y - X %*% beta)[, 1]
   s2 <- sum(residuals^2) / (n - p)
   fittedValues <- (X %*% beta)[, 1]
-  fit <- structure(list(coef = beta, residuals = residuals, s2 = s2, fitted.value = fittedValues), class = c("positivestein"))
+  fit <- structure(list(coef = beta, s2 = s2, residuals = residuals, fitted.value = fittedValues), class = c("positivestein"))
   fit
 }
 
