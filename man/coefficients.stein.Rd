@@ -47,8 +47,8 @@
 \item{...}{Other.}
 }
 \description{
-coef is a generic function which extracts model
-coefficients from objects returned by modeling functions.coefficients is an alias for it.
+\code{coef} is a generic function that extracts model regression
+coefficients from the objects returned by the modeling. \code{functions.coefficients} is an alias for it.
 }
 \examples{
 n_obs <- 100
