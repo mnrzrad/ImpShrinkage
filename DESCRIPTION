@@ -1,6 +1,6 @@
 Package: ImpShrinkage
 Type: Package
-Title: Enhanced Shrinkage Estimations for Multiple Linear Regression
+Title: Improved Shrinkage Estimations for Multiple Linear Regression
 Version: 1.0.0
 Authors@R: c(
     person("Mina", "Norouzirad", email = "mina.norouzirad@gmail.com", role = c("aut", "cre"),comment = c(ORCID = "0000-0003-0311-6888")),
