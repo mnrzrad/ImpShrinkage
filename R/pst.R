@@ -1,20 +1,20 @@
 #' The positive-rule Stein estimator
 #'
-#' This function calculates the positive-rule Stein estimator. This estimator is an improved
-#' version of the Stein estimator, where only the positive part of the
+#' This function calculates the positive-rule Stein estimator. This estimator is
+#' an improved version of the Stein estimator, where only the positive part of the
 #' shrinking factor is considered. It may be calculated by
 #' \deqn{\hat{\beta}^{S+}= \hat{\beta}^{S} + (1 + d \mathcal{L}^{-1}) I(\mathcal{L} > d) (\hat{\beta}^{U} - \hat{\beta}^{R})}
 #' where \eqn{I(A)} denotes an indicator function and
 #' \itemize{
-#'   \item \eqn{\hat{\beta}^{S}} is the \code{\link{stein}} estimator;
-#'   \item \eqn{\hat{\beta}^{U}} is the \code{\link{unrestricted}} estimator;
-#'   \item \eqn{\hat{\beta}^{R}} is the \code{\link{restricted}} estimator;
-#'   \item \eqn{\mathcal{L}} is the \code{\link{test_statistic}};
-#'   \item and \eqn{d} is the shrinkage factor.
+#'   \item \eqn{\hat{\beta}^{S}} is the Stein estimator; See \link[stein]{st}.
+#'   \item \eqn{\hat{\beta}^{U}} is the unres estimator; See \link[unres]{unres}.
+#'   \item \eqn{\hat{\beta}^{R}} is the res estimator; See \link[res]{res}.
+#'   \item \eqn{\mathcal{L}} is the test statistic; See \link{ImpShrinkage}[teststat].
+#'   \item \eqn{d} is the shrinkage factor.
 #' }
 #'
 #' The corresponding estimator of \eqn{\sigma^2} is given by
-#' \deqn{s^2 = \frac{1}{n-p}(y-X\hat{\beta}^{S+})^{\top}(y - X\hat{\beta}^{S+})}
+#' \deqn{s^2 = \frac{1}{n-p}(y-X\hat{\beta}^{S+})^{\top}(y - X\hat{\beta}^{S+}).}
 #'
 #'
 #' @param X Matrix with input observations, of dimension \code{n} x \code{p};
@@ -23,7 +23,7 @@
 #' @param H A given \code{q} x \code{p} matrix.
 #' @param h A given \code{q} x \code{1} vector.
 #' @param d (optional) If not provided (or set to \code{NULL}), it will be
-#' calculated using \eqn{\frac{{(q - 2) \cdot (n - p)}}{{q \cdot (n - p + 2)}}}
+#' calculated using \eqn{\frac{{(q - 2) \cdot (n - p)}}{{q \cdot (n - p + 2)}}.}
 #' @param is_error_normal logical value indicating whether the errors follow a
 #' normal distribution. If \code{is_error_normal} is \code{TRUE}, the distribution
 #' of the test statistics for the null hypothesis is F distribution
@@ -34,7 +34,7 @@
 #'
 #'
 #' @returns
-#' An object of class \code{positivestein} is a list containing at least the following components:
+#' An object of class \code{pst} is a list containing at least the following components:
 #'   \describe{
 #'     \item{\code{coef}}{A named vector of coefficients.}
 #'     \item{\code{residuals}}{The residuals, that is, the response values minus fitted values.}
@@ -67,12 +67,12 @@
 #' # H beta = h
 #' H <- matrix(c(1, 1, -1, 0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 1, 0), nr = 3, nc = p, byrow = TRUE)
 #' h <- rep(0, nrow(H))
-#' positivestein(X, y, H, h)
+#' pst(X, y, H, h)
 #'
 #' # H beta != h
 #' H <- matrix(c(1, 1, -1, 0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 1, 0), nr = 3, nc = p, byrow = TRUE)
 #' h <- rep(1, nrow(H))
-#' positivestein(X, y, H, h)
+#' pst(X, y, H, h)
 #'
 #' data(cement)
 #' X <- as.matrix(cbind(1, cement[, 1:4]))
@@ -80,21 +80,21 @@
 #' # Based on Kaciranlar et al. (1999)
 #' H <- matrix(c(0, 1, -1, 1, 0), nrow = 1, ncol = 5, byrow = TRUE)
 #' h <- rep(0, nrow(H))
-#' positivestein(X, y, H, h)
-#'
+#' pst(X, y, H, h)
+#' # Based on Kibria (2005)
 #' H <- matrix(c(0, 1, -1, 1, 0, 0, 0, 1, -1, -1, 0, 1, -1, 0, -1), nrow = 3, ncol = 5, byrow = TRUE)
 #' h <- rep(0, nrow(H))
-#' positivestein(X, y, H, h)
+#' pst(X, y, H, h)
 #'
 #' @export
-positivestein <- function(X, y, H, h, d = NULL, is_error_normal = FALSE) {
+pst <- function(X, y, H, h, d = NULL, is_error_normal = FALSE) {
   n <- dim(X)[1]
   p <- dim(X)[2]
   q <- nrow(H)
   m <- n - p
   d <- ((q - 2) * m) / (q * (m + 2))
-  u_est <- unrestricted(X, y)
-  r_est <- restricted(X, y, H, h)
+  u_est <- unres(X, y)
+  r_est <- res(X, y, H, h)
   test_stat <- test_statistic(X, y, H, h, is_error_normal = is_error_normal)
   beta <- r_est$coef + as.numeric(1 - d / test_stat) * as.integer(test_stat > d) * (u_est$coef - r_est$coef)
   residuals <- (y - X %*% beta)[, 1]
@@ -107,14 +107,20 @@ positivestein <- function(X, y, H, h, d = NULL, is_error_normal = FALSE) {
 
 #' Extract Model Fitted Values
 #'
-#' \code{fitted} is a generic function which extracts fitted values from objects
-#'  returned by modeling functions. \code{fitted.values} is an alias for it.
+#' Fitted values based on object \code{positivestein}.
 #'
-#' @param object An object of class "\code{positivestein}".
-#' @param ... Other.
-#' @seealso#' \code{\link{fitted.unrestricted}}, \code{\link{fitted.restricted}},
-#' \code{\link{fitted.preliminaryTest}},\code{\link{fitted.improvedpreliminaryTest}},
-#' \code{\link{fitted.stein}}, \code{\link{fitted.positivestein}}
+#' @param object An object of class \code{positivestein}.
+#' @param ... Other arguments.
+#'
+#' @return A vector of fitted values.
+#'
+#' @seealso
+#' \code{\link{fitted.unres}},
+#' \code{\link{fitted.res}},
+#' \code{\link{fitted.pt}},
+#' \code{\link{fitted.ipt}},
+#' \code{\link{fitted.st}}.
+#'
 #' @importFrom stats fitted
 #' @examples
 #' n_obs <- 100
@@ -127,27 +133,33 @@ positivestein <- function(X, y, H, h, d = NULL, is_error_normal = FALSE) {
 #' # H beta = h
 #' H <- matrix(c(1, 1, -1, 0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 1, 0), nrow = 3, ncol = p, byrow = TRUE)
 #' h <- rep(0, nrow(H))
-#' model <- positivestein(X, y, H, h)
+#' model <- pst(X, y, H, h)
 #' fitted(model)
 #' @export
-fitted.positivestein <- function(object, ...) {
+fitted.pst <- function(object, ...) {
   return(object$fitted.value)
 }
 
-#' Model Predictions
+#' Extract Model Predictions Values
 #'
-#' \code{predict} is a generic function for predictions from the results of various
-#' model fitting functions.
+#' Predicted values based on object \code{positivestein}.
 #'
-#' @param object An object of class \code{positivestein}".
+#' @param object An object of class "\code{positivestein}".
 #' @param newdata An optional data frame in which to look for variables with which to predict.
 #'  If omitted, the fitted values are used.
-#' @param ... Other.
-#' @seealso \code{\link{predict.unrestricted}}, \code{\link{predict.restricted}},
-#'  \code{\link{predict.preliminaryTest}}, \code{\link{predict.improvedpreliminaryTest}},
-#'  \code{\link{predict.stein}}, \code{\link{predict.positivestein}}.
+#' @param ... Other arguments.
+#'
+#' @return A vector of predictions.
+#'
+#' @seealso
+#' \code{\link{predict.unres}},
+#' \code{\link{predict.res}},
+#' \code{\link{predict.pt}},
+#' \code{\link{predict.ipt}},
+#'  \code{\link{predict.st}}.
 #'
 #' @importFrom stats predict
+#'
 #' @examples
 #' n_obs <- 100
 #' p_vars <- 5
@@ -159,23 +171,32 @@ fitted.positivestein <- function(object, ...) {
 #' # H beta = h
 #' H <- matrix(c(1, 1, -1, 0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 1, 0), nrow = 3, ncol = p, byrow = TRUE)
 #' h <- rep(0, nrow(H))
-#' model <- positivestein(X, y, H, h)
+#' model <- pst(X, y, H, h)
 #' predict(model, X)
 #' @export
-predict.positivestein <- function(object, newdata, ...) {
+#'
+predict.pst <- function(object, newdata, ...) {
   return((newdata %*% object$coef)[, 1])
 }
 
-#' residuals method for Model Fits
+#' Extract Model Residuals
 #'
-#' residuals values based on model object.
+#' Residuals values based on model object \code{positivestein}.
 #'
-#' @param object An object of class "\code{positivestein}"
-#' @param ... Other.
-#' @seealso \code{\link{residuals.positivestein}}, \code{\link{residuals.preliminaryTest}},
-#' \code{\link{residuals.restricted}}, \code{\link{residuals.stein}},
-#' \code{\link{residuals.unrestricted}}, \code{\link{residuals.improvedpreliminaryTest}}.
+#' @param object An object of class \code{positivestein}.
+#' @param ... Other arguments.
+#'
+#' @return A vector of residuals.
+#'
+#' @seealso
+#' \code{\link{residuals.unres}},
+#' \code{\link{residuals.res}},
+#' \code{\link{residuals.pt}},
+#' \code{\link{residuals.ipt}},
+#' \code{\link{residuals.st}}.
+#'
 #' @importFrom stats residuals
+#'
 #' @examples
 #' n_obs <- 100
 #' p_vars <- 5
@@ -187,33 +208,36 @@ predict.positivestein <- function(object, newdata, ...) {
 #' # H beta = h
 #' H <- matrix(c(1, 1, -1, 0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 1, 0), nrow = 3, ncol = p, byrow = TRUE)
 #' h <- rep(0, nrow(H))
-#' model <- positivestein(X, y, H, h)
+#' model <- pst(X, y, H, h)
 #' residuals(model)
+#'
 #' @export
 
-residuals.positivestein <- function(object, ...) {
+residuals.pst <- function(object, ...) {
   return(object$residuals)
 }
 
 #' Extract Model Coefficients
 #'
-#' \code{coef} is a generic function which extracts model
-#' coefficients from objects returned by modeling \code{functions.coefficients}
-#' is an alias for it.
+#' Coefficients extracted from the model object \code{positivestein}
 #'
-#' @param object An object of class "\code{positivestein}".
-#' @param ... Other.
+#' @param object An object of class \code{positivestein}.
+#' @param ... Other arguments.
+#'
+#' @return A vector of coefficients.
+#'
 #' @seealso
-#' \code{\link{coefficients.unrestricted}},
-#' \code{\link{coefficients.restricted}},
-#' \code{\link{coefficients.preliminaryTest}},
-#' \code{\link{coefficients.improvedpreliminaryTest}},
-#' \code{\link{coefficients.stein}},
-#' \code{\link{coef.unrestricted}},
-#' \code{\link{coef.restricted}},
-#' \code{\link{coef.preliminaryTest}},
-#' \code{\link{coef.improvedpreliminaryTest}}
-#' \code{\link{coef.stein}}.
+#' \code{\link{coefficients.unres}},
+#' \code{\link{coefficients.res}},
+#' \code{\link{coefficients.pt}},
+#' \code{\link{coefficients.ipt}},
+#' \code{\link{coefficients.st}},
+#' \code{\link{coef.unres}},
+#' \code{\link{coef.res}},
+#' \code{\link{coef.pt}},
+#' \code{\link{coef.ipt}},
+#' \code{\link{coef.st}}.
+#'
 #' @importFrom stats coefficients
 #' @examples
 #' n_obs <- 100
@@ -226,20 +250,20 @@ residuals.positivestein <- function(object, ...) {
 #' # H beta = h
 #' H <- matrix(c(1, 1, -1, 0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 1, 0), nrow = 3, ncol = p, byrow = TRUE)
 #' h <- rep(0, nrow(H))
-#' model <- positivestein(X, y, H, h)
+#' model <- pst(X, y, H, h)
 #' coefficients(model)
 #' @export
 
-coefficients.positivestein <- function(object, ...) {
+coefficients.pst <- function(object, ...) {
   return(object$coef)
 }
 
-#' @rdname coefficients.positivestein
+#' @rdname coefficients.pst
 #' @importFrom stats coef
 #' @examples
 #' coef(model)
 #' @export
 
-coef.positivestein <- function(object, ...) {
+coef.pst <- function(object, ...) {
   return(object$coef)
 }

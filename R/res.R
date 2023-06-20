@@ -7,6 +7,8 @@
 #' by the non-sample information. Here, \eqn{H} is a known \eqn{q \times p}
 #' matrix, and \eqn{h} is a known \eqn{q}-vector.
 #'
+#'#' The corresponding estimator of \eqn{\sigma^2} is
+#' \deqn{s^2 = \frac{1}{n-p}(y-X\hat{\beta}^{R})^{\top}(y - X\hat{\beta}^{R}).}
 #'
 #' @param X Matrix with input observations, of dimension \code{n} x \code{p};
 #' each row is an observation vector.
@@ -14,8 +16,6 @@
 #' @param H A given \code{q} x \code{p} matrix.
 #' @param h A given \code{q} x \code{1} vector.
 #'
-#' The corresponding estimator of \eqn{\sigma^2} is
-#' \deqn{s^2 = \frac{1}{n-p}(y-X\hat{\beta}^{R})^{\top}(y - X\hat{\beta}^{R})}
 #'
 #' @returns
 #' An object of class \code{restricted} is a list containing at least the following components:
@@ -47,20 +47,14 @@
 #' y <- simulated_data$y
 #' p <- ncol(X)
 #' # H beta = h
-#' H <- matrix(c(1, 1, -1, 0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 1, 0),
-#'   nrow = 3,
-#'   ncol = p, byrow = TRUE
-#' )
+#' H <- matrix(c(1, 1, -1, 0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 1, 0), nrow = 3, ncol = p, byrow = TRUE)
 #' h <- rep(0, nrow(H))
-#' restricted(X, y, H, h)
+#' res(X, y, H, h)
 #'
 #' # H beta != h
-#' H <- matrix(c(1, 1, -1, 0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 1, 0),
-#'   nrow = 3,
-#'   ncol = p, byrow = TRUE
-#' )
+#' H <- matrix(c(1, 1, -1, 0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 1, 0), nrow = 3, ncol = p, byrow = TRUE)
 #' h <- rep(1, nrow(H))
-#' restricted(X, y, H, h)
+#' res(X, y, H, h)
 #'
 #'
 #' data(cement)
@@ -69,41 +63,42 @@
 #' # Based on Kaciranlar et al. (1999)
 #' H <- matrix(c(0, 1, -1, 1, 0), nrow = 1, ncol = 5, byrow = TRUE)
 #' h <- rep(0, nrow(H))
-#' restricted(X, y, H, h)
-#'
+#' res(X, y, H, h)
+#' # Based on Kibria (2005)
 #' H <- matrix(c(0, 1, -1, 1, 0, 0, 0, 1, -1, -1, 0, 1, -1, 0, -1), nrow = 3, ncol = 5, byrow = TRUE)
 #' h <- rep(0, nrow(H))
-#' restricted(X, y, H, h)
+#' res(X, y, H, h)
 #' @export
 
-restricted <- function(X, y, H, h) {
-  d <- dim(X)
-  u_est <- unrestricted(X, y) # unrestricted estimator
+res <- function(X, y, H, h) {
+  n <- dim(X)[1]
+  p <- dim(X)[2]
+  u_est <- unres(X, y) # unrestricted estimator
   C <- t(X) %*% X
   beta <- u_est$coef - solve(C) %*% t(H) %*% solve(H %*% solve(C) %*% t(H)) %*% (H %*% u_est$coef - h)
   residuals <- (y - X %*% beta)[, 1]
-  n <- dim(X)[1]
-  p <- dim(X)[2]
   s2 <- sum(residuals^2) / (n - p)
   fittedValues <- (X %*% beta)[, 1]
   fit <- structure(list(coef = beta, s2 = s2, residuals = residuals, fitted.value = fittedValues), class = c("restricted"))
   fit
 }
 
-
 #' Extract Model Fitted Values
 #'
-#' \code{fitted} is a generic function which extracts fitted values from objects
-#'  returned by modeling functions. \code{fitted.values} is an alias for it.
+#' Fitted values based on object \code{restrcited}.
 #'
-#' @param object An object of class "\code{restricted}".
-#' @param ... Other.
-#' @seealso#'
-#' \code{\link{fitted.unrestricted}},
-#' \code{\link{fitted.preliminaryTest}},
-#' \code{\link{fitted.improvedpreliminaryTest}},
-#' \code{\link{fitted.stein}},
-#' \code{\link{fitted.positivestein}}
+#' @param object An object of class \code{restricted}.
+#' @param ... Other arguments.
+#'
+#' @return Fitted values extracted from the object \code{restricted}.
+#'
+#' @seealso
+#' \code{\link{fitted.unres}},
+#' \code{\link{fitted.pt}},
+#' \code{\link{fitted.ipt}},
+#' \code{\link{fitted.st}},
+#' \code{\link{fitted.pst}}
+#'
 #' @examples
 #' n_obs <- 100
 #' p_vars <- 5
@@ -115,28 +110,31 @@ restricted <- function(X, y, H, h) {
 #' # H beta = h
 #' H <- matrix(c(1, 1, -1, 0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 1, 0), nrow = 3, ncol = p, byrow = TRUE)
 #' h <- rep(0, nrow(H))
-#' model <- restricted(X, y, H, h)
+#' model <- res(X, y, H, h)
 #' fitted(model)
 #' @export
-fitted.restricted <- function(object, ...) {
+fitted.res <- function(object, ...) {
   return(object$fitted.value)
 }
 
-#' Model Predictions
+#' Extract Model Predictions Values
 #'
-#' \code{predict} is a generic function for predictions from the results of various
-#' model fitting functions.
+#' Predicted values based on object \code{restrcited}.
 #'
-#' @param object An object of class "\code{restricted}".
+#' @param object An object of class \code{restricted}.
 #' @param newdata An optional data frame in which to look for variables with which to predict.
 #'  If omitted, the fitted values are used.
-#' @param ... Other.
+#' @param ... Other arguments.
+#'
+#' @return A vector of predictions.
+#'
 #' @seealso
-#' \code{\link{predict.unrestricted}},
-#' \code{\link{predict.preliminaryTest}},
-#' \code{\link{predict.improvedpreliminaryTest}},
-#' \code{\link{predict.stein}},
-#' \code{\link{predict.positivestein}}.
+#' \code{\link{predict.unres}},
+#' \code{\link{predict.pt}},
+#' \code{\link{predict.ipt}},
+#' \code{\link{predict.st}},
+#' \code{\link{predict.pst}}.
+#'
 #' @importFrom stats predict
 #' @examples
 #' n_obs <- 100
@@ -149,25 +147,25 @@ fitted.restricted <- function(object, ...) {
 #' # H beta = h
 #' H <- matrix(c(1, 1, -1, 0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 1, 0), nrow = 3, ncol = p, byrow = TRUE)
 #' h <- rep(0, nrow(H))
-#' model <- restricted(X, y, H, h)
+#' model <- res(X, y, H, h)
 #' predict(model, X)
 #' @export
-predict.restricted <- function(object, newdata, ...) {
+predict.res <- function(object, newdata, ...) {
   return((newdata %*% object$coef)[, 1])
 }
 
-#' residuals method for Model Fits
+#' Extract Model Residuals
 #'
-#' residuals values based on model object.
+#' Residuals values based on model object \code{restrcited}.
 #'
-#' @param object An object of class "\code{restricted}".
+#' @param object An object of class \code{restricted}.
 #' @param ... Other.
 #' @seealso
-#' \code{\link{residuals.unrestricted}},
-#' \code{\link{residuals.preliminaryTest}},
-#' \code{\link{residuals.improvedpreliminaryTest}},
-#'  \code{\link{residuals.stein}},
-#'  #' \code{\link{residuals.positivestein}}.
+#' \code{\link{residuals.unres}},
+#' \code{\link{residuals.pt}},
+#' \code{\link{residuals.ipt}},
+#'  \code{\link{residuals.st}},
+#'  #' \code{\link{residuals.pst}}.
 #' @importFrom stats residuals
 #' @examples
 #' n_obs <- 100
@@ -180,33 +178,34 @@ predict.restricted <- function(object, newdata, ...) {
 #' # H beta = h
 #' H <- matrix(c(1, 1, -1, 0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 1, 0), nrow = 3, ncol = p, byrow = TRUE)
 #' h <- rep(0, nrow(H))
-#' model <- restricted(X, y, H, h)
+#' model <- res(X, y, H, h)
 #' residuals(model)
 #' @export
 
-residuals.restricted <- function(object, ...) {
+residuals.res <- function(object, ...) {
   return(object$residuals)
 }
 
 #' Extract Model Coefficients
 #'
-#' \code{coef} is a generic function which extracts model
-#' coefficients from objects returned by modeling \code{functions.coefficients}
-#' is an alias for it.
+#' Coefficients extracted from the model object \code{restrcited}.
 #'
-#' @param object An object of class "\code{restricted}".
-#' @param ... Other.
+#' @param object An object of class \code{restricted}.
+#' @param ... Other arguments.
+#'
+#' @return A vector of coefficients.
+#'
 #' @seealso
-#' \code{\link{coefficients.unrestricted}},
-#' \code{\link{coefficients.preliminaryTest}},
-#' \code{\link{coefficients.improvedpreliminaryTest}},
-#' \code{\link{coefficients.stein}},
-#' \code{\link{coefficients.positivestein}},
-#' \code{\link{coef.unrestricted}},
-#' \code{\link{coef.preliminaryTest}},
-#' \code{\link{coef.improvedpreliminaryTest}}
-#' \code{\link{coef.stein}},
-#' \code{\link{coef.positivestein}}.
+#' \code{\link{coefficients.unres}},
+#' \code{\link{coefficients.pt}},
+#' \code{\link{coefficients.ipt}},
+#' \code{\link{coefficients.st}},
+#' \code{\link{coefficients.pst}},
+#' \code{\link{coef.unres}},
+#' \code{\link{coef.pt}},
+#' \code{\link{coef.ipt}}
+#' \code{\link{coef.st}},
+#' \code{\link{coef.pst}}.
 #' @importFrom stats coefficients
 #' @examples
 #' n_obs <- 100
@@ -219,20 +218,20 @@ residuals.restricted <- function(object, ...) {
 #' # H beta = h
 #' H <- matrix(c(1, 1, -1, 0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 1, 0), nrow = 3, ncol = p, byrow = TRUE)
 #' h <- rep(0, nrow(H))
-#' model <- restricted(X, y, H, h)
+#' model <- res(X, y, H, h)
 #' coefficients(model)
 #' @export
 
-coefficients.restricted <- function(object, ...) {
+coefficients.res <- function(object, ...) {
   return(object$coef)
 }
 
-#' @rdname coefficients.restricted
+#' @rdname coefficients.res
 #' @importFrom stats coef
 #' @examples
 #' coef(model)
 #' @export
 
-coef.restricted <- function(object, ...) {
+coef.res <- function(object, ...) {
   return(object$coef)
 }

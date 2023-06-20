@@ -4,14 +4,14 @@
 #' \deqn{\hat{\beta}^{S}=\hat{\beta}^{U} - d \mathcal{L}^{-1} (\hat{\beta}^{U} - \hat{\beta}^{R})}
 #' where
 #' \itemize{
-#'   \item \eqn{\hat{\beta}^{U}} is the \code{\link{unrestricted}} estimator;
-#'   \item \eqn{\hat{\beta}^{R}} is the \code{\link{restricted}} estimator;
-#'   \item \eqn{\mathcal{L}} is the \code{\link{test_statistic}};
+#'   \item \eqn{\hat{\beta}^{U}} is the unrestricted estimator; See \link[unrestricted]{unres}.
+#'   \item \eqn{\hat{\beta}^{R}} is the restricted estimator; See \link[restricted]{res}.
+#'   \item \eqn{\mathcal{L}} is the test statistic; See \link{ImpShrinkage}[teststat].
 #'   \item \eqn{d} is the shrinkage factor.
 #' }
 #'
 #' The corresponding estimator of \eqn{\sigma^2} is
-#' \deqn{s^2 = \frac{1}{n-p}(y-X\hat{\beta}^{S})^{\top}(y - X\hat{\beta}^{S})}
+#' \deqn{s^2 = \frac{1}{n-p}(y-X\hat{\beta}^{S})^{\top}(y - X\hat{\beta}^{S}).}
 #'
 #' @param X Matrix with input observations, of dimension \code{n} x \code{p};
 #' each row is an observation vector.
@@ -19,7 +19,7 @@
 #' @param H A given \code{q} x \code{p} matrix.
 #' @param h A given \code{q} x \code{1} vector.
 #' @param d (Optional) If not provided (or set to \code{NULL}), it will be
-#' set to be equal to \eqn{\frac{{(q - 2) \cdot (n - p)}}{{q \cdot (n - p + 2)}}}
+#' set to be equal to \eqn{\frac{{(q - 2) \cdot (n - p)}}{{q \cdot (n - p + 2)}}.}
 #' @param is_error_normal logical value indicating whether the errors follow a
 #' normal distribution. If \code{is_error_normal} is \code{TRUE}, the distribution
 #' of the test statistics for the null hypothesis is \code{\link[stats]{FDist}}.
@@ -37,7 +37,7 @@
 #'   }
 #'
 #' @references
-#'  Saleh, A. K. Md. Ehsanes. (2006). \emph{Theory of Preliminary Test and
+#' Saleh, A. K. Md. Ehsanes. (2006). \emph{Theory of Preliminary Test and
 #'  Stein‐Type Estimation With Applications}, Wiley.
 #'
 #' Kaciranlar, S., Akdeniz, S. S. F., Styan, G. P. & Werner, H. J. (1999). A new biased
@@ -57,18 +57,12 @@
 #' y <- simulated_data$y
 #' p <- ncol(X)
 #' # H beta = h
-#' H <- matrix(c(1, 1, -1, 0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 1, 0),
-#'   nrow = 3,
-#'   ncol = p, byrow = TRUE
-#' )
+#' H <- matrix(c(1, 1, -1, 0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 1, 0), nrow = 3, ncol = p, byrow = TRUE)
 #' h <- rep(0, nrow(H))
-#' stein(X, y, H, h)
+#' st(X, y, H, h)
 #'
 #' # H beta != h
-#' H <- matrix(c(1, 1, -1, 0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 1, 0),
-#'   nrow = 3,
-#'   ncol = p, byrow = TRUE
-#' )
+#' H <- matrix(c(1, 1, -1, 0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 1, 0), nrow = 3, ncol = p, byrow = TRUE)
 #' h <- rep(1, nrow(H))
 #' stein(X, y, H, h)
 #'
@@ -78,15 +72,15 @@
 #' # Based on Kaciranlar et al. (1999)
 #' H <- matrix(c(0, 1, -1, 1, 0), nrow = 1, ncol = 5, byrow = TRUE)
 #' h <- rep(0, nrow(H))
-#' stein(X, y, H, h)
-#'
+#' st(X, y, H, h)
+#' # Based on Kibria (2005)
 #' H <- matrix(c(0, 1, -1, 1, 0, 0, 0, 1, -1, -1, 0, 1, -1, 0, -1), nrow = 3, ncol = 5, byrow = TRUE)
 #' h <- rep(0, nrow(H))
-#' stein(X, y, H, h)
+#' st(X, y, H, h)
 #'
 #' @export
 
-stein <- function(X, y, H, h, d = NULL, is_error_normal = FALSE) {
+st <- function(X, y, H, h, d = NULL, is_error_normal = FALSE) {
   n <- dim(X)[1]
   p <- dim(X)[2]
   q <- nrow(H)
@@ -94,12 +88,12 @@ stein <- function(X, y, H, h, d = NULL, is_error_normal = FALSE) {
   if (is.null(d)) {
     d <- ((q - 2) * m) / (q * (m + 2))
   }
-  u_est <- unrestricted(X, y)
-  r_est <- restricted(X, y, H, h)
+  u_est <- unres(X, y)
+  r_est <- res(X, y, H, h)
   if (!is_error_normal) {
-    test_stat <- test_statistic(X, y, H, h)
+    test_stat <- teststat(X, y, H, h)
   } else {
-    test_stat <- q * test_statistic(X, y, H, h)
+    test_stat <- q * teststat(X, y, H, h)
   }
   beta <- u_est$coef - d * (u_est$coef - r_est$coef) / test_stat
   residuals <- (y - X %*% beta)[, 1]
@@ -113,18 +107,21 @@ stein <- function(X, y, H, h, d = NULL, is_error_normal = FALSE) {
 
 #' Extract Model Fitted Values
 #'
-#' \code{fitted} is a generic function that extracts fitted values from objects
-#'  returned by the modeling functions. \code{fitted.values} is an alias for it.
+#' Fitted values based on object \code{stein}.
 #'
-#' @param object An object of class "\code{stein}".
-#' @param ... Other.
-#' @seealso#'
-#' \code{\link{fitted.unrestricted}},
-#' \code{\link{fitted.restricted}},
-#' \code{\link{fitted.preliminaryTest}},
-#' \code{\link{fitted.improvedpreliminaryTest}},
-#' \code{\link{fitted.positivestein}}
+#' @param object An object of class \code{stein}.
+#' @param ... Other arguments.
+#'
+#' @return A vector of fitted values.
+#'
+#' @seealso
+#' \code{\link{fitted.unres}},
+#' \code{\link{fitted.res}},
+#' \code{\link{fitted.pt}},
+#' \code{\link{fitted.ipt}},
+#' \code{\link{fitted.pst}}
 #' @importFrom stats fitted
+#'
 #' @examples
 #' n_obs <- 100
 #' p_vars <- 5
@@ -139,26 +136,28 @@ stein <- function(X, y, H, h, d = NULL, is_error_normal = FALSE) {
 #' model <- stein(X, y, H, h)
 #' fitted(model)
 #' @export
-fitted.stein <- function(object, ...) {
+fitted.st <- function(object, ...) {
   return(object$fitted.value)
 }
 
 
-#' Model Predictions
+#' Extract Model Predictions Values
 #'
-#' \code{predict} is a generic function that performs predictions from the results of a variety of
-#' model fitting functions.
+#' Predicted values based on object \code{stein}.
 #'
 #' @param object An object of class "\code{stein}".
 #' @param newdata An optional data frame in which to look for variables with which to predict.
 #'  If omitted, the fitted values are used.
-#' @param ... Other.
+#' @param ... Other arguments.
+#'
+#' @return A vector of predictions.
+#'
 #' @seealso
-#' \code{\link{predict.unrestricted}},
-#' \code{\link{predict.restricted}},
-#' \code{\link{predict.preliminaryTest}},
-#' \code{\link{predict.improvedpreliminaryTest}},
-#' \code{\link{predict.positivestein}}.
+#' \code{\link{predict.unres}},
+#' \code{\link{predict.res}},
+#' \code{\link{predict.pt}},
+#' \code{\link{predict.ipt}},
+#' \code{\link{predict.pst}}.
 #'
 #' @importFrom stats predict
 #' @examples
@@ -172,23 +171,32 @@ fitted.stein <- function(object, ...) {
 #' # H beta = h
 #' H <- matrix(c(1, 1, -1, 0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 1, 0), nr = 3, nc = p, byrow = TRUE)
 #' h <- rep(0, nrow(H))
-#' model <- stein(X, y, H, h)
+#' model <- st(X, y, H, h)
 #' predict(model, X)
+#'
 #' @export
-predict.stein <- function(object, newdata, ...) {
+predict.st <- function(object, newdata, ...) {
   return((newdata %*% object$coef)[, 1])
 }
 
-#' residuals method for Model Fits
+#' Extract Model Residuals
 #'
-#' \code{residuals} is a generica function that returns the residual values based on the respective model.
+#' Residuals values based on model object \code{stein}.
 #'
-#' @param object An object of class "\code{stein}".
-#' @param ... Other.
-#' @seealso \code{\link{residuals.positivestein}}, \code{\link{residuals.preliminaryTest}},
-#' \code{\link{residuals.restricted}},
-#' \code{\link{residuals.unrestricted}}, \code{\link{residuals.improvedpreliminaryTest}}.
+#' @param object An object of class \code{stein}.
+#' @param ... Other arguments.
+#'
+#' @return A vector of residuals.
+#'
+#' @seealso
+#' \code{\link{residuals.unres}},
+#' \code{\link{residuals.res}},
+#' \code{\link{residuals.pt}},
+#' \code{\link{residuals.ipt}},
+#' \code{\link{residuals.pst}},.
+#'
 #' @importFrom stats residuals
+#'
 #' @examples
 #' n_obs <- 100
 #' p_vars <- 5
@@ -200,34 +208,35 @@ predict.stein <- function(object, newdata, ...) {
 #' # H beta = h
 #' H <- matrix(c(1, 1, -1, 0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 1, 0), nr = 3, nc = p, byrow = TRUE)
 #' h <- rep(0, nrow(H))
-#' model <- stein(X, y, H, h)
+#' model <- st(X, y, H, h)
 #' residuals(model)
 #' @export
 
-residuals.stein <- function(object, ...) {
+residuals.st <- function(object, ...) {
   return(object$residuals)
 }
 
 #' Extract Model Coefficients
 #'
-#' \code{coef} is a generic function which extracts model
-#' coefficients from objects returned by modeling \code{functions.coefficients}
-#' is an alias for it.
+#' Coefficients extracted from the model object \code{stein}
 #'
-#' @param object An object of class "\code{stein}".
-#' @param ... Other.
+#' @param object An object of class \code{stein}.
+#' @param ... Other arguments.
+#'
+#' @return A vector of coefficients.
+#'
 #' @seealso
-#' \code{\link{coefficients.unrestricted}},
-#' \code{\link{coefficients.restricted}},
-#' \code{\link{coefficients.preliminaryTest}},
-#' \code{\link{coefficients.improvedpreliminaryTest}},
-#' \code{\link{coefficients.positivestein}},
-#' \code{\link{coef.unrestricted}},
-#' \code{\link{coef.restricted}},
-#' \code{\link{coef.preliminaryTest}},
-#' \code{\link{coef.improvedpreliminaryTest}},
-#' \code{\link{coef.stein}},
-#' \code{\link{coef.positivestein}}.
+#' \code{\link{coefficients.unres}},
+#' \code{\link{coefficients.res}},
+#' \code{\link{coefficients.pt}},
+#' \code{\link{coefficients.ipt}},
+#' \code{\link{coefficients.pst}},
+#' \code{\link{coef.unres}},
+#' \code{\link{coef.res}},
+#' \code{\link{coef.pt}},
+#' \code{\link{coef.ipt}},
+#' \code{\link{coef.pst}}.
+#'
 #' @importFrom stats coefficients
 #' @examples
 #' n_obs <- 100
@@ -240,20 +249,20 @@ residuals.stein <- function(object, ...) {
 #' # H beta = h
 #' H <- matrix(c(1, 1, -1, 0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 1, 0), nr = 3, nc = p, byrow = TRUE)
 #' h <- rep(0, nrow(H))
-#' model <- stein(X, y, H, h)
+#' model <- st(X, y, H, h)
 #' coefficients(model)
 #' @export
 
-coefficients.stein <- function(object, ...) {
+coefficients.st <- function(object, ...) {
   return(object$coef)
 }
 
-#' @rdname coefficients.stein
+#' @rdname coefficients.st
 #' @importFrom stats coef
 #' @examples
 #' coef(model)
 #' @export
 
-coef.stein <- function(object, ...) {
+coef.st <- function(object, ...) {
   return(object$coef)
 }

@@ -1,7 +1,8 @@
 #' Test-Statistics
 #'
 #' This function calculates the test statistics, assuming
-#' \eqn{\mathcal{H}_0: H \beta = h}. When the error has a normal distribution, it is defined as
+#' \eqn{\mathcal{H}_0: H \beta = h}. When the error has a normal distribution,
+#' it is defined as
 #' \deqn{\mathcal{L} = \frac{(H\hat{\beta}^{U}-h)^{\top}(H(X^{\top}X)^{-1}
 #' H^{\top})^{-1}(H\hat{\beta}^{U}-h) }{q s^2_{unr}}}
 #' and when the error has a non-normal distribution, as
@@ -9,9 +10,9 @@
 #' H^{\top})^{-1}(H\hat{\beta}^{U}-h) }{s^2_{unr}}}
 #' where
 #' \itemize{
-#'   \item \eqn{\hat{\beta}^{U}} is the \code{\link{unrestricted}} estimator;
-#'   \item \eqn{\hat{\beta}^{R}} is the \code{\link{restricted}} estimator;
-#'   \item \eqn{q} is the number of restrictions, i.e., the number of rows of
+#'   \item \eqn{\hat{\beta}^{U}} is the unrestricted estimator; See \link[unrestrcited]{unres}.
+#'   \item \eqn{\hat{\beta}^{R}} is the restricted estimator; See \link[restricted]{res}.
+#'   \item \eqn{q} is the number of restrictions, i.e., the number of rows of known matrix
 #'   \eqn{H};
 #'   \item \eqn{s^2_{unr}} is the corresponding unrestricted estimator of
 #'   \eqn{\sigma^2}.
@@ -31,7 +32,7 @@
 #' is the \eqn{\chi^2} distribution (\code{\link[stats]{Chisquare}}). By default,
 #' \code{is_error_normal} is set to \code{FALSE}.
 #'
-#' @return The value of the test statistic
+#' @return The value of the test statistic.
 #'
 #' @references
 #'  Saleh, A. K. Md. Ehsanes. (2006). \emph{Theory of Preliminary Test and
@@ -54,20 +55,14 @@
 #' y <- simulated_data$y
 #' p <- ncol(X)
 #' # H beta = h
-#' H <- matrix(c(1, 1, -1, 0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 1, 0),
-#'   nrow = 3,
-#'   ncol = p, byrow = TRUE
-#' )
+#' H <- matrix(c(1, 1, -1, 0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 1, 0), nrow = 3, ncol = p, byrow = TRUE)
 #' h <- rep(0, nrow(H))
-#' test_statistic(X, y, H, h)
+#' teststat(X, y, H, h)
 #'
 #' # H beta != h
-#' H <- matrix(c(1, 1, -1, 0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 1, 0),
-#'   nrow = 3,
-#'   ncol = p, byrow = TRUE
-#' )
+#' H <- matrix(c(1, 1, -1, 0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 1, 0), nrow = 3, ncol = p, byrow = TRUE)
 #' h <- rep(1, nrow(H))
-#' test_statistic(X, y, H, h)
+#' teststat(X, y, H, h)
 #'
 #' data(cement)
 #' X <- as.matrix(cbind(1, cement[, 1:4]))
@@ -75,18 +70,18 @@
 #' # Based on Kaciranlar et al. (1999)
 #' H <- matrix(c(0, 1, -1, 1, 0), nrow = 1, ncol = 5, byrow = TRUE)
 #' h <- rep(0, nrow(H))
-#' test_statistic(X, y, H, h)
-#'
+#' teststat(X, y, H, h)
+#' # Based on Kibria (2005)
 #' H <- matrix(c(0, 1, -1, 1, 0, 0, 0, 1, -1, -1, 0, 1, -1, 0, -1), nrow = 3, ncol = 5, byrow = TRUE)
 #' h <- rep(0, nrow(H))
-#' test_statistic(X, y, H, h)
+#' teststat(X, y, H, h)
 #' @export
-test_statistic <- function(X, y, H, h, is_error_normal = FALSE) {
+teststat <- function(X, y, H, h, is_error_normal = FALSE) {
   n <- dim(X)[1]
   p <- dim(X)[2]
   m <- n - p
   q <- nrow(H)
-  u_est <- unrestricted(X, y) # unrestricted estimator
+  u_est <- unres(X, y) # unrestricted estimator
   s2 <- (t(y - X %*% u_est$coef) %*% (y - X %*% u_est$coef)) / m
   C <- t(X) %*% X
   diff <- (H %*% u_est$coef - h)

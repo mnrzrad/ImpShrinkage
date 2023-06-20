@@ -1,21 +1,22 @@
 #' The preliminary test estimator
 #'
-#' This function calculates the preliminary test. When the error has a normal distribution, the test statistic is given by
-#' \deqn{\hat{\beta}^{PT}=\hat{\beta}^{U} - (\hat{\beta}^{U} - \hat{\beta}^{R}) I(\mathcal{L} \le F_{q,m}(\alpha))}
+#' This function calculates the preliminary test. When the error has a normal
+#' distribution, the test statistic is given by
+#' \deqn{\hat{\beta}^{PT}=\hat{\beta}^{U} - (\hat{\beta}^{U} - \hat{\beta}^{R}) I(\mathcal{L} \le F_{q,n-p}(\alpha))}
 #' and, if the error has a non-normal distribution, is given by
-#' \deqn{\hat{\beta}^{PT}=\hat{\beta}^{U} - (\hat{\beta}^{U} - \hat{\beta}^{R}) I(\mathcal{L} \le \chi^2_{q}(\alpha)),}
+#' \deqn{\hat{\beta}^{PT}=\hat{\beta}^{U} - (\hat{\beta}^{U} - \hat{\beta}^{R}) I(\mathcal{L} \le \chi^2_{q}(\alpha))}
 #' where \eqn{I(A)} denotes an indicator function and
 #' \itemize{
-#'   \item \eqn{\hat{\beta}^{U}} is the \code{\link{unrestricted}} estimator;
-#'   \item \eqn{\hat{\beta}^{R}} is the \code{\link{restricted}} estimator;
-#'   \item \eqn{\mathcal{L}} is the \code{\link{test_statistic}};
-#'   \item \eqn{F_{q,m}(\alpha)} is the upper \eqn{\alpha} level critical value of \eqn{F}-distribution with \eqn{(q,n-p)} degrees of freedom, calculated using \code{\link[stats]{qf}};
+#'   \item \eqn{\hat{\beta}^{U}} is the unrestricted estimator; See \link[unrestrcited]{unres}.
+#'   \item \eqn{\hat{\beta}^{R}} is the restricted estimator; See \link[restrcited]{unres}.
+#'   \item \eqn{\mathcal{L}} is the test statistic. See \link[test_statistic}[teststat];
+#'   \item \eqn{F_{q,n-p}(\alpha)} is the upper \eqn{\alpha} level critical value of \eqn{F}-distribution with \eqn{(q,n-p)} degrees of freedom, calculated using \code{\link[stats]{qf}};
 #'   \item \eqn{\chi^2_{q}(\alpha)}is the upper \eqn{\alpha} level critical value of \eqn{\chi^2}-distribution with \eqn{q} degree of freedom, calculated using \code{\link[stats]{qchisq}};
 #'   \item \eqn{\alpha}: the significance level.
 #' }
 #'
 #' The corresponding estimator of \eqn{\sigma^2} is
-#' \deqn{s^2 = \frac{1}{n-p}(y-X\hat{\beta}^{PT})^{\top}(y - X\hat{\beta}^{PT})}
+#' \deqn{s^2 = \frac{1}{n-p}(y-X\hat{\beta}^{PT})^{\top}(y - X\hat{\beta}^{PT}).}
 #'
 #' @param X Matrix with input observations, of dimension \code{n} x \code{p};
 #' each row is an observation vector.
@@ -63,13 +64,13 @@
 #' # H beta = h
 #' H <- matrix(c(1, 1, -1, 0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 1, 0), nrow = 3, ncol = p, byrow = TRUE)
 #' h <- rep(0, nrow(H))
-#' preliminaryTest(X, y, H, h, alpha = 0.05)
+#' pt(X, y, H, h, alpha = 0.05)
 #'
 #' # H beta != h
 #' p <- ncol(X)
 #' H <- matrix(c(1, 1, -1, 0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 1, 0), nrow = 3, ncol = p, byrow = TRUE)
 #' h <- rep(1, nrow(H))
-#' preliminaryTest(X, y, H, h, alpha = 0.05)
+#' pt(X, y, H, h, alpha = 0.05)
 #'
 #' data(cement)
 #' X <- as.matrix(cbind(1, cement[, 1:4]))
@@ -77,22 +78,22 @@
 #' # Based on Kaciranlar et al. (1999)
 #' H <- matrix(c(0, 1, -1, 1, 0), nrow = 1, ncol = 5, byrow = TRUE)
 #' h <- rep(0, nrow(H))
-#' preliminaryTest(X, y, H, h, alpha = 0.05)
-#'
+#' pt(X, y, H, h, alpha = 0.05)
+#' # Based on Kibria (2005)
 #' H <- matrix(c(0, 1, -1, 1, 0, 0, 0, 1, -1, -1, 0, 1, -1, 0, -1), nrow = 3, ncol = 5, byrow = TRUE)
 #' h <- rep(0, nrow(H))
-#' preliminaryTest(X, y, H, h, alpha = 0.05)
+#' pt(X, y, H, h, alpha = 0.05)
 #'
 #' @importFrom stats qf
 #' @export
 
-preliminaryTest <- function(X, y, H, h, alpha, is_error_normal = FALSE) {
+pt <- function(X, y, H, h, alpha, is_error_normal = FALSE) {
   n <- dim(X)[1]
   p <- dim(X)[2]
   q <- nrow(H)
-  u_est <- unrestricted(X, y)
-  r_est <- restricted(X, y, H, h)
-  test_stat <- test_statistic(X, y, H, h, is_error_normal = is_error_normal)
+  u_est <- unres(X, y)
+  r_est <- res(X, y, H, h)
+  test_stat <- teststat(X, y, H, h, is_error_normal = is_error_normal)
   if (!is_error_normal) {
     threshold <- stats::qf(1 - alpha, q, n - p)
   } else {
@@ -108,18 +109,22 @@ preliminaryTest <- function(X, y, H, h, alpha, is_error_normal = FALSE) {
 
 #' Extract Model Fitted Values
 #'
-#' \code{fitted} is a generic function which extracts fitted values from objects
-#'  returned by modeling functions. \code{fitted.values} is an alias for it.
+#' Fitted values based on object \code{preliminaryTest}.
 #'
-#' @param object An object of class "\code{preliminaryTest}".
-#' @param ... Other.
-#' @seealso#'
-#' \code{\link{fitted.unrestricted}},
-#' \code{\link{fitted.restricted}},
-#' \code{\link{fitted.improvedpreliminaryTest}},
-#' \code{\link{fitted.stein}},
-#' \code{\link{fitted.positivestein}}
+#' @param object An object of class \code{preliminaryTest}.
+#' @param ... Other arguments.
+#'
+#' @return A vector of fitted values.
+#'
+#' @seealso
+#' \code{\link{fitted.unres}},
+#' \code{\link{fitted.res}},
+#' \code{\link{fitted.ipt}},
+#' \code{\link{fitted.st}},
+#' \code{\link{fitted.pst}}
+#'
 #' @importFrom stats fitted
+#'
 #' @examples
 #' n_obs <- 100
 #' p_vars <- 5
@@ -131,30 +136,34 @@ preliminaryTest <- function(X, y, H, h, alpha, is_error_normal = FALSE) {
 #' # H beta = h
 #' H <- matrix(c(1, 1, -1, 0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 1, 0), nrow = 3, ncol = p, byrow = TRUE)
 #' h <- rep(0, nrow(H))
-#' model <- preliminaryTest(X, y, H, h, alpha = 0.05)
+#' model <- pt(X, y, H, h, alpha = 0.05)
 #' fitted(model)
+#'
 #' @export
-fitted.preliminaryTest <- function(object, ...) {
+fitted.pt <- function(object, ...) {
   return(object$fitted.value)
 }
 
-#' Model Predictions
+#' Extract Model Predictions Values
 #'
-#' \code{predict} is a generic function for predictions from the results of various
-#' model fitting functions.
+#' Predicted values based on object \code{preliminaryTest}.
 #'
 #' @param object An object of class "\code{preliminaryTest}".
 #' @param newdata An optional data frame in which to look for variables with which to predict.
 #'  If omitted, the fitted values are used.
-#' @param ... Other.
+#' @param ... Other arguments.
+#'
+#' @return A vector of predictions.
+#'
 #' @seealso
-#' \code{\link{predict.unrestricted}},
-#' \code{\link{predict.restricted}},
-#' \code{\link{predict.improvedpreliminaryTest}},
+#' \code{\link{predict.unres}},
+#' \code{\link{predict.res}},
+#' \code{\link{predict.ipt}},
 #' \code{\link{predict.stein}},
-#' \code{\link{predict.positivestein}}.
+#' \code{\link{predict.pst}}.
 #'
 #' @importFrom stats predict
+#'
 #' @examples
 #' n_obs <- 100
 #' p_vars <- 5
@@ -166,25 +175,28 @@ fitted.preliminaryTest <- function(object, ...) {
 #' # H beta = h
 #' H <- matrix(c(1, 1, -1, 0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 1, 0), nrow = 3, ncol = p, byrow = TRUE)
 #' h <- rep(0, nrow(H))
-#' model <- preliminaryTest(X, y, H, h, alpha = 0.05)
+#' model <- pt(X, y, H, h, alpha = 0.05)
 #' predict(model, X)
 #' @export
-predict.preliminaryTest <- function(object, newdata, ...) {
+predict.pt <- function(object, newdata, ...) {
   return((newdata %*% object$coef)[, 1])
 }
 
-#' residuals method for Model Fits
+#' Extract Model Residuals
 #'
-#' residuals values based on model object.
+#' Residuals values based on model object \code{preliminaryTest}.
 #'
-#' @param object An object of class "\code{preliminaryTest}".
-#' @param ... Other.
+#' @param object An object of class \code{preliminaryTest}.
+#' @param ... Other arguments.
+#'
+#' @return A vector of residuals.
+#'
 #' @seealso
-#' \code{\link{residuals.unrestricted}},
-#' \code{\link{residuals.restricted}},
-#' \code{\link{residuals.improvedpreliminaryTest}},
-#' \code{\link{residuals.stein}},
-#' \code{\link{residuals.positivestein}}.
+#' \code{\link{residuals.unres}},
+#' \code{\link{residuals.res}},
+#' \code{\link{residuals.ipt}},
+#' \code{\link{residuals.st}},
+#' \code{\link{residuals.pst}}.
 #' @importFrom stats residuals
 #' @examples
 #' n_obs <- 100
@@ -207,24 +219,27 @@ residuals.preliminaryTest <- function(object, ...) {
 
 #' Extract Model Coefficients
 #'
-#' \code{coef} is a generic function which extracts model
-#' coefficients from objects returned by modeling \code{functions.coefficients}
-#' is an alias for it.
+#' Coefficients extracted from the model object \code{preliminaryTest}
 #'
-#' @param object An object of class "\code{preliminaryTest}".
-#' @param ... Other.
+#' @param object An object of class \code{preliminaryTest}.
+#' @param ... Other arguments.
+#'
+#' @return A vector of coefficients.
+#'
 #' @seealso
-#' \code{\link{coefficients.unrestricted}},
-#' \code{\link{coefficients.restricted}},
-#' \code{\link{coefficients.improvedpreliminaryTest}},
-#' \code{\link{coefficients.stein}},
-#' \code{\link{coefficients.positivestein}},
-#' \code{\link{coef.unrestricted}},
-#' \code{\link{coef.restricted}},
-#' \code{\link{coef.improvedpreliminaryTest}}.
-#' \code{\link{coef.stein}},
-#' \code{\link{coef.positivestein}}.
+#' \code{\link{coefficients.unres}},
+#' \code{\link{coefficients.res}},
+#' \code{\link{coefficients.ipt}},
+#' \code{\link{coefficients.st}},
+#' \code{\link{coefficients.pst}},
+#' \code{\link{coef.unres}},
+#' \code{\link{coef.res}},
+#' \code{\link{coef.ipt}}.
+#' \code{\link{coef.st}},
+#' \code{\link{coef.pst}}.
+#' #'
 #' @importFrom stats coefficients
+#'
 #' @examples
 #' n_obs <- 100
 #' p_vars <- 5
@@ -236,20 +251,20 @@ residuals.preliminaryTest <- function(object, ...) {
 #' # H beta = h
 #' H <- matrix(c(1, 1, -1, 0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 1, 0), nrow = 3, ncol = p, byrow = TRUE)
 #' h <- rep(0, nrow(H))
-#' model <- preliminaryTest(X, y, H, h, alpha = 0.05)
+#' model <- pt(X, y, H, h, alpha = 0.05)
 #' coefficients(model)
 #' @export
 
-coefficients.preliminaryTest <- function(object, ...) {
+coefficients.pt <- function(object, ...) {
   return(object$coef)
 }
 
-#' @rdname coefficients.preliminaryTest
+#' @rdname coefficients.pt
 #' @importFrom stats coef
 #' @examples
 #' coef(model)
 #' @export
 
-coef.preliminaryTest <- function(object, ...) {
+coef.pt <- function(object, ...) {
   return(object$coef)
 }

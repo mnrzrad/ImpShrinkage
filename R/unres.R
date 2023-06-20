@@ -9,7 +9,7 @@
 #' remember to set \code{intercept = FALSE}.
 #'
 #' The corresponding unrestricted estimator of \eqn{\sigma^2} is
-#' \deqn{s^2 = \frac{1}{n-p}(y-X\hat{\beta}^{U})^{\top}(y - X\hat{\beta}^{U})}
+#' \deqn{s^2 = \frac{1}{n-p}(y-X\hat{\beta}^{U})^{\top}(y - X\hat{\beta}^{U}).}
 #'
 #'
 #' @param X Matrix with input observations, of dimension \code{n} x \code{p}, where
@@ -38,7 +38,7 @@
 #' simulated_data <- simdata(n = n_obs, p = p_vars, beta)
 #' X <- simulated_data$X
 #' y <- simulated_data$y
-#' unrestricted(X, y)
+#' unres(X, y)
 #'
 #' data(cement)
 #' X <- as.matrix(cbind(1, cement[, 1:4]))
@@ -46,14 +46,14 @@
 #' # Based on Kaciranlar et al. (1999)
 #' H <- matrix(c(0, 1, -1, 1, 0), nrow = 1, ncol = 5, byrow = TRUE)
 #' h <- rep(0, nrow(H))
-#' unrestricted(X, y)
+#' unres(X, y)
 #'
 #' H <- matrix(c(0, 1, -1, 1, 0, 0, 0, 1, -1, -1, 0, 1, -1, 0, -1), nrow = 3, ncol = 5, byrow = TRUE)
 #' h <- rep(0, nrow(H))
-#' unrestricted(X, y)
+#' unres(X, y)
 #' @export
 #'
-unrestricted <- function(X, y) {
+unres <- function(X, y) {
   beta <- solve(t(X) %*% X) %*% t(X) %*% y
   residuals <- (y - X %*% beta)[, 1]
   n <- dim(X)[1]
@@ -66,18 +66,22 @@ unrestricted <- function(X, y) {
 
 #' Extract Model Fitted Values
 #'
-#' \code{fitted} is a generic function which extracts fitted values from objects
-#'  returned by modeling functions. \code{fitted.values} is an alias for it.
+#' Fitted values based on object \code{unrestrcited}.
 #'
 #' @param object An object of class \code{unrestricted}.
 #' @param ... Other arguments.
-#' @seealso#'
-#' \code{\link{fitted.restricted}},
-#' \code{\link{fitted.preliminaryTest}},
-#' \code{\link{fitted.improvedpreliminaryTest}},
-#' \code{\link{fitted.stein}},
-#' \code{\link{fitted.positivestein}}.
+#'
+#' @return A vector of fitted values.
+#'
+#' @seealso
+#' \code{\link{fitted.res}},
+#' \code{\link{fitted.pt}},
+#' \code{\link{fitted.ipt}},
+#' \code{\link{fitted.st}},
+#' \code{\link{fitted.pst}}.
+#'
 #' @importFrom stats fitted
+#'
 #' @examples
 #' n_obs <- 100
 #' p_vars <- 5
@@ -93,21 +97,23 @@ fitted.unrestricted <- function(object, ...) {
   return(object$fitted.value)
 }
 
-#' Model Predictions
+#' Extract Model Predictions Values
 #'
-#' \code{predict} is a generic function for predictions from the results of various
-#' model fitting functions.
+#' Predicted values based on object \code{unrestrcited}.
 #'
 #' @param object An object of class \code{unrestricted}.
 #' @param newdata An optional data frame in which to look for variables with which to predict.
 #'  If omitted, the fitted values are used.
 #' @param ... Other arguments.
+#'
+#' @return A vector of predictions.
+#'
 #' @seealso
-#' \code{\link{predict.restricted}},
-#' \code{\link{predict.preliminaryTest}},
-#' \code{\link{predict.improvedpreliminaryTest}},
-#' \code{\link{predict.stein}},
-#' \code{\link{predict.positivestein}}.
+#' \code{\link{predict.res}},
+#' \code{\link{predict.pt}},
+#' \code{\link{predict.ipt}},
+#' \code{\link{predict.st}},
+#' \code{\link{predict.pst}}.
 #'
 #' @importFrom stats predict
 #' @examples
@@ -117,26 +123,29 @@ fitted.unrestricted <- function(object, ...) {
 #' simulated_data <- simdata(n = n_obs, p = p_vars, beta)
 #' X <- simulated_data$X
 #' y <- simulated_data$y
-#' model <- unrestricted(X, y)
+#' model <- unres(X, y)
 #' predict(model, X)
 #' @export
 #'
-predict.unrestricted <- function(object, newdata, ...) {
+predict.unres <- function(object, newdata, ...) {
   return((newdata %*% object$coef)[, 1])
 }
 
-#' residuals method for Model Fits
+#' Extract Model Residuals
 #'
-#' residuals values based on model object.
+#' Residuals values based on model object \code{unrestrcited}.
 #'
 #' @param object An object of class \code{unrestricted}.
 #' @param ... Other arguments.
+#'
+#' @retrun A vector of residuals.
+#'
 #' @seealso
-#' \code{\link{residuals.restricted}},
-#' \code{\link{residuals.preliminaryTest}},
-#' \code{\link{residuals.improvedpreliminaryTest}}
-#' \code{\link{residuals.stein}},
-#' \code{\link{residuals.positivestein}}.
+#' \code{\link{residuals.res}},
+#' \code{\link{residuals.pt}},
+#' \code{\link{residuals.ipt}}
+#' \code{\link{residuals.st}},
+#' \code{\link{residuals.pst}}.
 #' @importFrom stats residuals
 #' @examples
 #' n_obs <- 100
@@ -145,33 +154,34 @@ predict.unrestricted <- function(object, newdata, ...) {
 #' simulated_data <- simdata(n = n_obs, p = p_vars, beta)
 #' X <- simulated_data$X
 #' y <- simulated_data$y
-#' model <- unrestricted(X, y)
+#' model <- unres(X, y)
 #' residuals(model)
 #' @export
 
-residuals.unrestricted <- function(object, ...) {
+residuals.unres <- function(object, ...) {
   return(object$residuals)
 }
 
 #' Extract Model Coefficients
 #'
-#' \code{coef} is a generic function which extracts model
-#' coefficients from objects returned by modeling \code{functions.coefficients}
-#' is an alias for it.
+#' Coefficients extracted from the model object \code{unrestrcited}.
 #'
 #' @param object An object of class \code{unrestricted}.
 #' @param ... Other arguments.
+#'
+#' @return A vector of coefficients.
+#'
 #' @seealso
-#' \code{\link{coefficients.restricted}},
-#' \code{\link{coefficients.preliminaryTest}},
-#' \code{\link{coefficients.improvedpreliminaryTest}},
-#' \code{\link{coefficients.stein}},
-#' \code{\link{coefficients.positivestein}},
-#' \code{\link{coef.restricted}},
-#' \code{\link{coef.preliminaryTest}},
-#' \code{\link{coef.improvedpreliminaryTest}}
-#' \code{\link{coef.stein}},
-#' \code{\link{coef.positivestein}}.
+#' \code{\link{coefficients.res}},
+#' \code{\link{coefficients.pt}},
+#' \code{\link{coefficients.ipt}},
+#' \code{\link{coefficients.st}},
+#' \code{\link{coefficients.pst}},
+#' \code{\link{coef.res}},
+#' \code{\link{coef.pt}},
+#' \code{\link{coef.ipt}}
+#' \code{\link{coef.st}},
+#' \code{\link{coef.pst}}.
 #' @importFrom stats coefficients
 #' @examples
 #' n_obs <- 100
@@ -180,19 +190,19 @@ residuals.unrestricted <- function(object, ...) {
 #' simulated_data <- simdata(n = n_obs, p = p_vars, beta)
 #' X <- simulated_data$X
 #' y <- simulated_data$y
-#' model <- unrestricted(X, y)
+#' model <- unres(X, y)
 #' coefficients(model)
 #' @export
 
-coefficients.unrestricted <- function(object, ...) {
+coefficients.unres <- function(object, ...) {
   return(object$coef)
 }
 
-#' @rdname coefficients.unrestricted
+#' @rdname coefficients.unres
 #' @importFrom stats coef
 #' @export
 #' @examples
-#' coefficients(model)
-coef.unrestricted <- function(object, ...) {
+#' coef(model)
+coef.unres <- function(object, ...) {
   return(object$coef)
 }
