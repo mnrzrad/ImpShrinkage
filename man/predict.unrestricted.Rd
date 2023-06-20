@@ -7,12 +7,12 @@
 \method{predict}{unrestricted}(object, newdata, ...)
 }
 \arguments{
-\item{object}{An object of class "\code{unrestricted}".}
+\item{object}{An object of class \code{unrestricted}.}
 
 \item{newdata}{An optional data frame in which to look for variables with which to predict.
 If omitted, the fitted values are used.}
 
-\item{...}{Other.}
+\item{...}{Other arguments.}
 }
 \description{
 \code{predict} is a generic function for predictions from the results of various

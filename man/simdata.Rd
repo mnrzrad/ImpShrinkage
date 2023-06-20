@@ -13,13 +13,13 @@ simdata(n, p, beta, seed = NULL)
 
 \item{beta}{Regression parameter.}
 
-\item{seed}{(Optional) The random seed for reproducibility. Default is NULL.}
+\item{seed}{(Optional) The random seed for reproducibility. Default is \code{NULL}.}
 }
 \value{
 A list containing the following components:
 \describe{
-  \item{X}{a matrix of dimensions \code{n x p}}
-  \item{y}{a numeric vector of length \code{n}}
+  \item{X}{a matrix of dimensions \code{n x p}.}
+  \item{y}{a numeric vector of length \code{n}.}
 }
 }
 \description{

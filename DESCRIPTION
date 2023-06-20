@@ -8,7 +8,7 @@ Authors@R: c(
     person("Ricardo", "Moura", email = "rp.moura@fct.unl.pt", role = "aut", comment = c(ORCID = "0000-0002-3003-9235")),
     person("'FCT, I.P.", role = "fnd", comment = c("under the scope of the projects UIDB/00297/2020 and UIDP/00297/2020 (NovaMath)")))
 Maintainer: Mina Norouzirad <mina.norouzirad@gmail.com>
-Description: This package provides a collection of functions that may be used to compute a variety of improved shrinkage estimators in the area of statistical analysis. The package includes the following estimators: unrestricted; restricted; preliminary test; improved preliminary test; Stein; and positive-rule Stein. This package is based on the work found in chapter 7 of Saleh, A. K. Md. E. (2006). Theory of Preliminary Test and Stein‐Type Estimation With Applications, Wiley.
+Description: A variety of improved shrinkage estimators in the area of statistical analysis: unrestricted; restricted; preliminary test; improved preliminary test; Stein; and positive-rule Stein. More details can be found in chapter 7 of Saleh, A. K. Md. E. (2006) <ISBN: 978-0-471-56375-4>
 License: GPL (>= 2)
 URL: https://github.com/mnrzrad/ImpShrinkage
 Encoding: UTF-8

@@ -7,9 +7,9 @@
 \method{residuals}{unrestricted}(object, ...)
 }
 \arguments{
-\item{object}{An object of class "\code{unrestricted}".}
+\item{object}{An object of class \code{unrestricted}.}
 
-\item{...}{Other.}
+\item{...}{Other arguments.}
 }
 \description{
 residuals values based on model object.

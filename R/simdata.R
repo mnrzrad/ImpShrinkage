@@ -14,12 +14,12 @@
 #'
 #' @param beta Regression parameter.
 #'
-#' @param seed (Optional) The random seed for reproducibility. Default is NULL.
+#' @param seed (Optional) The random seed for reproducibility. Default is \code{NULL}.
 #'
 #' @return A list containing the following components:
 #' \describe{
-#'   \item{X}{a matrix of dimensions \code{n x p}}
-#'   \item{y}{a numeric vector of length \code{n}}
+#'   \item{X}{a matrix of dimensions \code{n x p}.}
+#'   \item{y}{a numeric vector of length \code{n}.}
 #' }
 #'
 #' @references

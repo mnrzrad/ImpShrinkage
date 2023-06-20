@@ -4,6 +4,7 @@
 #'
 #'
 #' @name cement
+#'
 #' @format
 #' A data.frame with 13 observations on the following 5 variables.
 #' \describe{

@@ -69,8 +69,8 @@ unrestricted <- function(X, y) {
 #' \code{fitted} is a generic function which extracts fitted values from objects
 #'  returned by modeling functions. \code{fitted.values} is an alias for it.
 #'
-#' @param object An object of class "\code{unrestricted}".
-#' @param ... Other.
+#' @param object An object of class \code{unrestricted}.
+#' @param ... Other arguments.
 #' @seealso#'
 #' \code{\link{fitted.restricted}},
 #' \code{\link{fitted.preliminaryTest}},
@@ -98,10 +98,10 @@ fitted.unrestricted <- function(object, ...) {
 #' \code{predict} is a generic function for predictions from the results of various
 #' model fitting functions.
 #'
-#' @param object An object of class "\code{unrestricted}".
+#' @param object An object of class \code{unrestricted}.
 #' @param newdata An optional data frame in which to look for variables with which to predict.
 #'  If omitted, the fitted values are used.
-#' @param ... Other.
+#' @param ... Other arguments.
 #' @seealso
 #' \code{\link{predict.restricted}},
 #' \code{\link{predict.preliminaryTest}},
@@ -129,8 +129,8 @@ predict.unrestricted <- function(object, newdata, ...) {
 #'
 #' residuals values based on model object.
 #'
-#' @param object An object of class "\code{unrestricted}".
-#' @param ... Other.
+#' @param object An object of class \code{unrestricted}.
+#' @param ... Other arguments.
 #' @seealso
 #' \code{\link{residuals.restricted}},
 #' \code{\link{residuals.preliminaryTest}},
@@ -159,8 +159,8 @@ residuals.unrestricted <- function(object, ...) {
 #' coefficients from objects returned by modeling \code{functions.coefficients}
 #' is an alias for it.
 #'
-#' @param object An object of class "\code{unrestricted}".
-#' @param ... Other.
+#' @param object An object of class \code{unrestricted}.
+#' @param ... Other arguments.
 #' @seealso
 #' \code{\link{coefficients.restricted}},
 #' \code{\link{coefficients.preliminaryTest}},

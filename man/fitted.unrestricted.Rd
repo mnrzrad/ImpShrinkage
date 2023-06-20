@@ -7,9 +7,9 @@
 \method{fitted}{unrestricted}(object, ...)
 }
 \arguments{
-\item{object}{An object of class "\code{unrestricted}".}
+\item{object}{An object of class \code{unrestricted}.}
 
-\item{...}{Other.}
+\item{...}{Other arguments.}
 }
 \description{
 \code{fitted} is a generic function which extracts fitted values from objects

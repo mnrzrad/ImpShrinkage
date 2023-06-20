@@ -10,9 +10,9 @@
 \method{coef}{unrestricted}(object, ...)
 }
 \arguments{
-\item{object}{An object of class "\code{unrestricted}".}
+\item{object}{An object of class \code{unrestricted}.}
 
-\item{...}{Other.}
+\item{...}{Other arguments.}
 }
 \description{
 \code{coef} is a generic function which extracts model
