@@ -30,5 +30,7 @@ jobs:
         run: cd $GITHUB_WORKSPACE && R CMD check ./DESCRIPTION
 
       - name: Build R package
-        run: R CMD build ./ImpShrinkgae/
+        run: |
+          cd $GITHUB_WORKSPACE
+          R CMD build ImpShrinkage
 
