@@ -16,10 +16,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Set up R
-        uses: r-lib/actions/setup-r@v1
-        with:
-          r-version: '4.x'
+      - name: Install R
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install -y r-base
 
       - name: Install system dependencies
         run: |
