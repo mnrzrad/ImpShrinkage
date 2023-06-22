@@ -34,7 +34,7 @@ A BibTeX entry for LaTeX users is
     author = {Mina Norouzirad and Danial Mazarei and Ricardo Moura},
     year = {2023},
     note = {R package version 1.0.0},
-    url = {https://github.com/mnrzrad/ImpShrinkage},
+    url = {https://github.com/mnrzrad/ImpShrinkage}
   }
 
 
