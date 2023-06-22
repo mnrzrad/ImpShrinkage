@@ -24,15 +24,12 @@ jobs:
       - name: Install system dependencies
         run: |
           sudo apt-get install -y qpdf pkg-config
-
-      - name: Install LaTeX
-        run: |
-          sudo apt-get install -y texlive-latex-base
+          sudo apt-get install -y qpdf pkg-config texlive-latex-base
 
       - name: Check R package
-        run: cd $GITHUB_WORKSPACE && R CMD check ./DESCRIPTION
+        working-directory: ${{ github.workspace }}
+        run: R CMD check .
 
       - name: Build R package
-        run: |
-          cd $GITHUB_WORKSPACE
-          R CMD build .
+        working-directory: ${{ github.workspace }}
+        run: R CMD build .
