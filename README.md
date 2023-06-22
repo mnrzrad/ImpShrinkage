@@ -29,11 +29,12 @@ remotes::install_github("mnrzrad/ImpShrinkage")
 
 A BibTeX entry for LaTeX users is
 
-  @Manual{,
+  @Manual{ImpShrinkage,
     title = {ImpShrinkage: Improved Shrinkage Estimations for Multiple Linear Regression},
     author = {Mina Norouzirad and Danial Mazarei and Ricardo Moura},
+    year = {2023},
     note = {R package version 1.0.0},
-    url = {https://github.com/mnrzrad/ImpShrinkage},
+    url = {https://github.com/mnrzrad/ImpShrinkage}
   }
 
 
