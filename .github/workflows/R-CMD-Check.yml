@@ -31,8 +31,12 @@ jobs:
           sudo apt-get install -y qpdf pkg-config
 
       - name: Check R package
-        run: R CMD check .
+        run: |
+          cd ..
+          R CMD check .
 
       - name: Build R package
-        run: R CMD build .
+        run: |
+          cd ..
+          R CMD build .
 
