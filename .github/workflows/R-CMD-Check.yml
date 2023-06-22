@@ -21,6 +21,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
       - name: Install R
         run: |
           sudo apt-get update -y
@@ -32,11 +35,10 @@ jobs:
 
       - name: Check R package
         run: |
-          cd ..
           R CMD check .
 
       - name: Build R package
         run: |
-          cd ..
           R CMD build .
+
 
