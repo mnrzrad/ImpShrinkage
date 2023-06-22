@@ -4,6 +4,7 @@ ImpShrinkage <img src="man/figures/logo.png" align="right" />
 
 The R package *ImpShrinkage* provides A variety of improved shrinkage estimators in the area of statistical analysis: unrestricted; restricted; preliminary test; improved preliminary test; Stein; and positive-rule Stein. More details can be found in chapter 7 of Saleh, A. K. Md. E. (2006).
 
+This work is funded by national funds through the FCT - Fundação para a Ciência e a Tecnologia, I.P., under the scope of the projects UIDB/00297/2020 and UIDP/00297/2020 (Center for Mathematics and Applications)".
 
 ## Installation
 You can install the **stable** version from
