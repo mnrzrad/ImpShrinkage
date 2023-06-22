@@ -32,5 +32,4 @@ jobs:
       - name: Build R package
         run: |
           cd $GITHUB_WORKSPACE
-          R CMD build ImpShrinkage
-
+          R CMD build .
