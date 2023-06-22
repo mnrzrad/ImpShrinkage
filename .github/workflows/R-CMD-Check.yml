@@ -27,7 +27,9 @@ jobs:
           sudo apt-get install -y texlive-latex-base
 
       - name: Check R package
-        run: R CMD check .
+        run:
+          cd ..
+          R CMD check .
 
       - name: Build R package
         run: R CMD build .
