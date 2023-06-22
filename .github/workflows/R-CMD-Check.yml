@@ -30,4 +30,5 @@ jobs:
         run: cd $GITHUB_WORKSPACE && R CMD check ./DESCRIPTION
 
       - name: Build R package
-        run: R CMD build .
+        run: R CMD build ./path/to/DESCRIPTION
+
