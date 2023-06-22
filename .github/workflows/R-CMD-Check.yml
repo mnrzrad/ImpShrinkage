@@ -25,10 +25,10 @@ jobs:
         run: |
           sudo apt-get install -y qpdf pkg-config
           sudo apt-get install -y qpdf pkg-config texlive-latex-base
-
+        
       - name: Check R package
         working-directory: ${{ github.workspace }}
-        run: R CMD check .
+        run: R CMD check ./DESCRIPTION
 
       - name: Build R package
         working-directory: ${{ github.workspace }}
