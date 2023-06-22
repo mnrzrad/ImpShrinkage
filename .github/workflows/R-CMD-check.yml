@@ -9,7 +9,6 @@
 # Workflow derived from https://github.com/r-lib/actions/tree/master/examples
 # Need help debugging build failures? Start at https://github.com/r-lib/actions#where-to-find-help
 name: R-CMD-CHECK
-
 on:
   push:
     branches:
@@ -24,7 +23,9 @@ jobs:
 
     steps:
       - name: Set up R
-        uses: r-setup/actions/setup-r@v1
+        uses: actions/setup-r@v1
+        with:
+          r-version: '4.3'
 
       - name: Install system dependencies
         run: |
