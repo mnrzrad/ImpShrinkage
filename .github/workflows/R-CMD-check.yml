@@ -9,6 +9,7 @@
 # Workflow derived from https://github.com/r-lib/actions/tree/master/examples
 # Need help debugging build failures? Start at https://github.com/r-lib/actions#where-to-find-help
 name: R-CMD-CHECK
+
 on:
   push:
     branches:
@@ -22,14 +23,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Set up R
-        uses: actions/setup-r@v1
-        with:
-          r-version: '4.3'
+      - name: Install R
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install -y r-base
 
       - name: Install system dependencies
         run: |
-          sudo apt-get update -y
           sudo apt-get install -y qpdf pkg-config checkbashisms
 
       - name: Check R package
@@ -37,3 +37,4 @@ jobs:
 
       - name: Build R package
         run: R CMD build .
+
