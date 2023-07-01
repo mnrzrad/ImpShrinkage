@@ -28,7 +28,7 @@ remotes::install_github("mnrzrad/ImpShrinkage")
 ## To cite package `ImpShrinkage` in publications use:
   Norouzirad M, Mazarei D, Moura R (2023). _ImpShrinkage: Improved Shrinkage
   Estimations for Multiple Linear Regression_. R package version 1.0.0,
-  <https://github.com/mnrzrad/ImpShrinkage>.
+  <https://cran.r-project.org/package=ImpShrinkage>.
 
 A BibTeX entry for LaTeX users is
 
@@ -37,7 +37,7 @@ A BibTeX entry for LaTeX users is
     author = {Mina Norouzirad and Danial Mazarei and Ricardo Moura},
     year = {2023},
     note = {R package version 1.0.0},
-    url = {https://github.com/mnrzrad/ImpShrinkage}
+    url = {https://cran.r-project.org/package=ImpShrinkage}
   }
 
 
