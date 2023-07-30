@@ -2,6 +2,7 @@ ImpShrinkage <img src="man/figures/logo.png" align="right" />
 ======================
 [![R-CMD-check](https://github.com/mnrzrad/ImpShrinkage/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/mnrzrad/ImpShrinkage/actions/workflows/R-CMD-check.yaml)
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/ImpShrinkage)](https://cran.r-project.org/package=ImpShrinkage)
+[![Last week Downloads](https://cranlogs.r-pkg.org/badges/last-week/ollg)](https://cran.r-project.org/package=ollg)
 [![Downloads per month](https://cranlogs.r-pkg.org/badges/ImpShrinkage)](https://cran.r-project.org/package=ImpShrinkage)
 [![Total Downloads](https://cranlogs.r-pkg.org/badges/grand-total/ImpShrinkage)](https://cran.r-project.org/package=ImpShrinkage)
 [![Licence](https://img.shields.io/badge/licence-GPL--3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
